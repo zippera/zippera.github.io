@@ -1,0 +1,491 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>中文分词（三） | Zippera&#39;s blog</title>
+  <meta name="author" content="zippera">
+  
+  <meta name="description" content="Walk steps step by step">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="中文分词（三）"/>
+  <meta property="og:site_name" content="Zippera&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="http://zipperary.com/atom.xml" title="Zippera&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Zippera&#39;s blog</a></h1>
+  <h2><a href="/">Walk steps step by step</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-12-27T14:43:57.000Z"><a href="/2013/12/27/chinese-segmentation-3/">12月 27 2013</a></time>
+      
+      
+  
+    <h1 class="title">中文分词（三）</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <ul>
+<li><a href="http://zipperary.com/2013/12/25/chinese-segmentation/">《中文分词（一）》</a></li>
+<li><a href="http://zipperary.com/2013/12/27/chinese-segmentation-2/">《中文分词（二）》</a></li>
+<li><a href="http://zipperary.com/2013/12/27/chinese-segmentation-3/">《中文分词（三）》</a></li>
+</ul>
+<p>承接上文<a href="http://zipperary.com/2013/12/27/chinese-segmentation-2/">《中文分词（二）》</a>，本篇是最后一篇，介绍使用基于 HMM 的 Viterbi 算法做中文分词。</p>
+<h3 id="Viterbi_算法">Viterbi 算法</h3>
+<p>了解 HMM（隐马尔可夫模型）的朋友都知道 HMM 这个模型可以用五元组表示：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>（states，<span class="comment">//状态空间</span>
+observations，<span class="comment">//观察空间</span>
+start_probability，<span class="comment">//状态的初始分布</span>
+transition_probability，<span class="comment">//状态的转移概率矩阵</span>
+emission_probability）<span class="comment">//状态产生观察的概率</span>
+</pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>举个例子：</p>
+<p>『想象一个乡村诊所。村民有着非常理想化的特性，要么健康要么发烧。他们只有问诊所的医生的才能知道是否发烧。 聪明的医生通过询问病人的感觉诊断他们是否发烧。村民只回答他们感觉正常、头晕或冷。</p>
+<p>假设一个病人每天来到诊所并告诉医生他的感觉。医生相信病人的健康状况如同一个离散马尔可夫链。病人的状态有两种“健康”和“发烧”，但医生不能直接观察到，这意味着状态对他是“隐含”的。每天病人会告诉医生自己有以下几种由他的健康状态决定的感觉的一种：正常、冷或头晕。这些是观察结果。 整个系统为一个隐马尔可夫模型(HMM)。</p>
+<p>医生知道村民的总体健康状况，还知道发烧和没发烧的病人通常会抱怨什么症状。 换句话说，医生知道隐马尔可夫模型的参数。 』</p>
+<p>这里给出该 HMM 的五元组值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre>states = (<span class="string">'Healthy'</span>, <span class="string">'Fever'</span>)
+ 
+observations = (<span class="string">'normal'</span>, <span class="string">'cold'</span>, <span class="string">'dizzy'</span>)
+ 
+start_probability = {<span class="string">'Healthy'</span>: <span class="number">0.6</span>, <span class="string">'Fever'</span>: <span class="number">0.4</span>}
+ 
+transition_probability = {
+   <span class="string">'Healthy'</span> : {<span class="string">'Healthy'</span>: <span class="number">0.7</span>, <span class="string">'Fever'</span>: <span class="number">0.3</span>},
+   <span class="string">'Fever'</span> : {<span class="string">'Healthy'</span>: <span class="number">0.4</span>, <span class="string">'Fever'</span>: <span class="number">0.6</span>},
+   }
+ 
+emission_probability = {
+   <span class="string">'Healthy'</span> : {<span class="string">'normal'</span>: <span class="number">0.5</span>, <span class="string">'cold'</span>: <span class="number">0.4</span>, <span class="string">'dizzy'</span>: <span class="number">0.1</span>},
+   <span class="string">'Fever'</span> : {<span class="string">'normal'</span>: <span class="number">0.1</span>, <span class="string">'cold'</span>: <span class="number">0.3</span>, <span class="string">'dizzy'</span>: <span class="number">0.6</span>},
+   }
+</pre></td></tr></table></figure>
+
+<p>上述五元组及其含义，可以用下图形象表示：</p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1ebynhgilr0j20de0e5js4.jpg" alt=""></p>
+<p>模型已经建立，那么问题来了：『病人连续三天看医生，医生发现第一天他感觉正常，第二天感觉冷，第三天感觉头晕。 于是医生产生了一个问题：怎样的健康状态序列最能够解释这些观察结果？』</p>
+<p>实际上，在我之前的文章<a href="http://zipperary.com/2013/10/17/3-problems-in-hmm/">《隐马尔可夫模型三个问题的求解(一)》</a>中就做过介绍，刚才提出的那个问题，正是 HMM 三大基本问题之一：根据观察序列，求隐藏状态序列。</p>
+<p><strong>我们总结一下目前的已知条件和待求解问题：</strong></p>
+<p>已知：观察结果 [‘normal’, ‘cold’, ‘dizzy’]  + 如图三个参数。</p>
+<p><img src="http://ww4.sinaimg.cn/large/5e8cb366jw1ebynmdilkcj20cn04lgm1.jpg" alt=""></p>
+<p>求：最有可能由状态序列？ （如[‘Healthy’, ‘Healthy’, ‘Fever’]）</p>
+<p>求解就用到了 Viterbi 算法，具体的过程请参考52NLP 的<a href="http://www.52nlp.cn/hmm-learn-best-practices-six-viterbi-algorithm-2" target="_blank">文章</a>，讲的非常好。另外，刚才上面的例子，我借用的是<a href="http://zh.wikipedia.org/wiki/%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95" target="_blank">维基百科</a>。</p>
+<p>到此，Viterbi 算法就能把隐藏状态序列求解出来了。</p>
+<p>那么，怎样把这厮应用到中文分词呢？</p>
+<h3 id="用_Viterbi_算法做中文分词">用 Viterbi 算法做中文分词</h3>
+<p>一切的算法应用问题，都是把现实问题抽象化，并向算法要解决的问题模型靠拢。</p>
+<p>问题模型是什么？HMM。HMM有上面讲过的五个参数，我们要一一对应。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>（states，<span class="comment">//状态空间：{B,E,M,S}，稍后介绍</span>
+observations，<span class="comment">//观察空间：所有汉字组成的集合。</span>
+start_probability，<span class="comment">//状态的初始分布</span>
+transition_probability，<span class="comment">//状态的转移概率矩阵</span>
+emission_probability）<span class="comment">//状态产生观察的概率</span>
+</pre></td></tr></table></figure>
+
+<p><strong>介绍下{B,E,M,S}：</strong></p>
+<p>汉字按照BEMS四个状态来标记，分别代表 Begin End Middle 和 Single，比如：</p>
+<p>北京（BE），中华民族（BMME），有意见分歧（SBEBE）</p>
+<p>用这四个状态符号依次标记输入句子中的字，便可轻松得到分词方案。 如：</p>
+<p>观察序列：我是一个中国人<br>状态序列：SSBEBME</p>
+<p>对于上面的状态序列，根据简单的固定的规则进行组合划分，得到 S/S/BE/BEM/</p>
+<p>对应于观察序列：我/是/一个/中国人/</p>
+<p>分词任务就完成了。</p>
+<p>而后面的三个参数，也可以通过对语料库的统计得到，比如结巴分词中给出的是：</p>
+<p><img src="http://ww2.sinaimg.cn/large/5e8cb366jw1ebyo4y4cv1j20jo06nq3t.jpg" alt=""></p>
+<p>已知：观察序列S，初始状态概率prob_start，状态观察发射概率prob_emit，状态转换概率prob_trans。 求状态序列W。</p>
+<p>用上面提到的 Viterbi 算法，可以求出 W，也就得到分词方案了。</p>
+<p>至此，关于中文分词就介绍完了。有兴趣的同学欢迎交流。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/机器学习/">机器学习</a>
+  </div>
+
+        
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=3326447" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    <a href="/2013/12/29/summary-of-2013/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2013/12/27/chinese-segmentation-2/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"zippera"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:zipperary.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/English/">English</a><small>2</small></li>
+  
+    <li><a href="/categories/IT杂谈/">IT杂谈</a><small>25</small></li>
+  
+    <li><a href="/categories/Mac/">Mac</a><small>5</small></li>
+  
+    <li><a href="/categories/Ruby/">Ruby</a><small>2</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>19</small></li>
+  
+    <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>15</small></li>
+  
+    <li><a href="/categories/人物/">人物</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>4</small></li>
+  
+    <li><a href="/categories/思维记忆/">思维记忆</a><small>1</small></li>
+  
+    <li><a href="/categories/推荐/">推荐</a><small>1</small></li>
+  
+    <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
+  
+    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+  
+    <li><a href="/categories/电影/">电影</a><small>27</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>32</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">简介</h3>
+<ul class="entry">
+<li>本体：赵伟</li>
+<li>二次元：zippera | moxie</li>
+<li>现状：帝都CS在读研究生</li>
+<li>想交友的朋友请<a href="http://zipperary.com/about">联系我</a>！</li>
+<li>QQ 号：763987114</li>
+<font color="red">Hexo 交流群：287306637</font>
+</ul>
+</div>
+
+
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1586279270&verifier=0c2cdcf8&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><section>
+Theme of <a href="https://github.com/hexojs/hexo-theme-light">Light</a>, Improved by <a href="/">zippera</a> 
+</section>
+<div class="clearfix"></div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
+
+
+<a href="https://github.com/zippera" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png" alt="Fork me on GitHub"></a>

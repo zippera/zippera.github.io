@@ -1,0 +1,454 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Principal Componential Algorithm (PCA) | Zippera&#39;s blog</title>
+  <meta name="author" content="zippera">
+  
+  <meta name="description" content="Walk steps step by step">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Principal Componential Algorithm (PCA)"/>
+  <meta property="og:site_name" content="Zippera&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="http://zipperary.com/atom.xml" title="Zippera&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Zippera&#39;s blog</a></h1>
+  <h2><a href="/">Walk steps step by step</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-12T10:59:47.000Z"><a href="/2013/06/12/pca/">6月 12 2013</a></time>
+      
+      
+  
+    <h1 class="title">Principal Componential Algorithm (PCA)</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>今天学习的是<strong>无监督学习</strong>中的第二类算法：<strong>Dimentionality Reduction</strong>，即维度降低。我们所研究的数据集合，每个数据通常都有一个<strong>特征向量</strong>，在真实的问题中，维度往往很高，数量级可以达到上万或者更高。有时候就需要进行降维，<strong>好处</strong>有这几点：</p>
+<ul>
+<li>Data Compression。数据压缩，大量的数据，每个数据都有很高的特征维度，存储所需要的空间就会很大，对硬件的配置要求也会很高。</li>
+<li>Speed up learning。加速学习、提高训练的速度。</li>
+<li>Visualization。视觉化是处理问题一个很好的手段，形成图形后可以直观地观察、更好地理解我们的问题。当特征向量超过三维后，就无法用图形表示了，所以这类降维往往需要降到三维以下。</li>
+</ul>
+<p><strong>数据降维的原理：</strong> 特征向量不同分量之间，往往有一定**的相关性。<br>最简单的例子，我们要表示一根指挥棒，纵坐标为用inch表示其长度，横坐标用cm表示其长度，这样可以形成用二维特征向量表示的特征值。所有的数据都落在一条直线上，事实上也就是一维图形了。<br>假如相关度不如上个例子那么高，我们还是可以找出一条直线进行拟合，然后将所有数据投射到这条直线上，用这些投射点作为降维之后的数据。同理，对于维度为3的特征向量，可以投射到一个平面（plane）上，降为二维。</p>
+<a id="more"></a>
+
+<p><strong>PCA：</strong> 全称是Principal Componential Algorithm，是目前使用最广泛、最常用的数据降维算法。我们来通过下图说明一下PCA要做什么：</p>
+<p><img src="/img/pca1.jpg" alt=""></p>
+<p>上图中，x1和x2为特征向量的两个分量，坐标系中分布着我们的数据。我们的目的就是寻找这样一条直线（一个一维的向量），使得每个数据点到直线的平均距离最小。同样的，要把n为特征向量降为k维，需要找到k个向量，每个向量用u(i)表示。</p>
+<h3 id="PCA与linear_regression（线性回归）的关系">PCA与linear regression（线性回归）的关系</h3>
+<p>二者都是在坐标系中寻找一个拟合surface，但有以下区别：</p>
+<ol>
+<li>linear regression的坐标系中有y，pca中没有。</li>
+<li>linear regression中的距离，所有x点对应的真实值y=g(x)与估计值f(x)之间的vertical distance距离。</li>
+</ol>
+<h3 id="PCA流程">PCA流程</h3>
+<p>首先要对数据进行预处理，以使得后面的计算更方便。预处理方法有两个：</p>
+<ol>
+<li>mean normalization。 计算各特征的平均值，记为μj ，（Xj(i)表示第i个样本的第j维特征的value） <code>μj = Σm Xj(i)/m</code>，然后令<code>Xj(i)= (Xj(i)-μj)</code>。使得各特征的平均值为0.</li>
+<li>feature scaling。不同的特征分量，其取值范围不同，比如0-1000、0-1000000，feature scaling的目的就是要使所有特征分量的取值范围相同。方法是：令<code>Xj(i)= (Xj(i)-μj)/sj</code>。</li>
+</ol>
+<p>下面进入PCA核心部分。</p>
+<ol>
+<li><p>计算n*n的协方差矩阵Σ。</p>
+<p><img src="/img/pca2.jpg" alt=""></p>
+</li>
+<li><p>计算Σ的<strong>eigenvectors</strong>。<code>[U,S,V]=SVD（Σ）</code>。这是octave中的计算式。SVD为奇异值分解（singular value decomposition），) 。 其中U为n*n的矩阵，取前k列，就得到我们需要的k个向量，这k个向量构成的矩阵我们记为Ureduce。</p>
+</li>
+<li><p>计算每个数据降维后的特征向量表示。</p>
+<p><img src="/img/pca3.png" alt=""></p>
+</li>
+</ol>
+<p>现在讨论几个相关的问题。</p>
+<h3 id="K值大小的确定">K值大小的确定</h3>
+<p>首先给出下式：</p>
+<p><img src="/img/pca4.png" alt=""></p>
+<p>分子叫做：average squared projection error.</p>
+<p>分母叫做：total variance.</p>
+<p>分式叫做：error ratio. 由于降维后肯定会有信息量的损失，error ratio就是衡量损失的大小。我们需要确定一个threshold，使得当我们使用这k个主成分时，error ratio &lt; threshold，否则信息量损失太大。例如，error ratio&lt;0.01，我们也说，99% of variance is retained。</p>
+<p>从上面<code>[U,S,V] = SVD（Σ）</code>返回值中有一个S。S是一个对角阵。可以证明：</p>
+<p><img src="/img/pca5.png" alt=""></p>
+<p>这样，只要返回一个S，我们就可以按照上式进行计算，将k从1逐渐增大，直到符合要求。</p>
+<h3 id="Reconstruction_from_compressed_representation">Reconstruction from compressed representation</h3>
+<p>特征向量从n维降到k维后，我们需要再恢复到n维怎么办？</p>
+<p><code>xapprox = (U&#39;)-1×z = (U-1)-1×z = Uz</code></p>
+<p>这里的xapprox是x的近似值。</p>
+<h3 id="PCA的错误使用">PCA的错误使用</h3>
+<p>既然PCA可以降维，可不可以用来prevent overfitting呢？不能！因为降维时没有考虑到y。应该首选regularization来解决overfitting。</p>
+<p>不要盲目用PCA。能用原始数据的尽量用原始数据，当存储量不够、学习缓慢时，可以考虑使用PCA。</p>
+<h3 id="遗留问题">遗留问题</h3>
+<p>这个课程里并没有详细讲解PCA算法细节，只是给了octave中用到的公式。算法细节需要另外找资料学习。</p>
+<hr>
+<p>爱打卡-100days-第16天-0111</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/机器学习/">机器学习</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/PCA/">PCA</a>, <a href="/tags/coursera/">coursera</a>
+  </div>
+
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=3326447" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    <a href="/2013/06/13/anomaly-detection/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2013/06/11/bian-cheng-lang-zi/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"zippera"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:zipperary.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/English/">English</a><small>2</small></li>
+  
+    <li><a href="/categories/IT杂谈/">IT杂谈</a><small>25</small></li>
+  
+    <li><a href="/categories/Mac/">Mac</a><small>5</small></li>
+  
+    <li><a href="/categories/Ruby/">Ruby</a><small>2</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>19</small></li>
+  
+    <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>15</small></li>
+  
+    <li><a href="/categories/人物/">人物</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>4</small></li>
+  
+    <li><a href="/categories/思维记忆/">思维记忆</a><small>1</small></li>
+  
+    <li><a href="/categories/推荐/">推荐</a><small>1</small></li>
+  
+    <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
+  
+    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+  
+    <li><a href="/categories/电影/">电影</a><small>27</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>32</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">简介</h3>
+<ul class="entry">
+<li>本体：赵伟</li>
+<li>二次元：zippera | moxie</li>
+<li>现状：帝都CS在读研究生</li>
+<li>想交友的朋友请<a href="http://zipperary.com/about">联系我</a>！</li>
+<li>QQ 号：763987114</li>
+<font color="red">Hexo 交流群：287306637</font>
+</ul>
+</div>
+
+
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1586279270&verifier=0c2cdcf8&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><section>
+Theme of <a href="https://github.com/hexojs/hexo-theme-light">Light</a>, Improved by <a href="/">zippera</a> 
+</section>
+<div class="clearfix"></div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
+
+
+<a href="https://github.com/zippera" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png" alt="Fork me on GitHub"></a>

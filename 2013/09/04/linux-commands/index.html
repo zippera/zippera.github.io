@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>linux下常用命令 | Zippera&#39;s blog</title>
+  <meta name="author" content="zippera">
+  
+  <meta name="description" content="Walk steps step by step">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="linux下常用命令"/>
+  <meta property="og:site_name" content="Zippera&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="http://zipperary.com/atom.xml" title="Zippera&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Zippera&#39;s blog</a></h1>
+  <h2><a href="/">Walk steps step by step</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-04T01:04:36.000Z"><a href="/2013/09/04/linux-commands/">9月 4 2013</a></time>
+      
+      
+  
+    <h1 class="title">linux下常用命令</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://ww3.sinaimg.cn/large/5e8cb366jw1e8bd5xw20jj20mm0gwgmy.jpg" alt=""></p>
+<p>linux的强大之处，很大程度上在于其丰富灵活的shell命令，但这一点恰恰也是阻碍初学者的老大难问题。这里是我学习linux命令时的笔记，不求全面，但求有用。先学会最基本最常用的命令，在使用中再逐渐积累。</p>
+<h3 id="shell命令行格式">shell命令行格式</h3>
+<p><code>命令 -l(选项) 参数</code>   </p>
+<p>没有参数的选项可以合并；命令之间用<code>;</code>隔开，依次执行；长选项用<code>--</code>;管道<code>|</code>可以串联执行。</p>
+<a id="more"></a>
+
+<h3 id="系统">系统</h3>
+<p>md5sum+文件：    检验签名</p>
+<p>uname：    机器名    -a详细</p>
+<p>history：    命令历史 ；   +10执行第十个</p>
+<p>sudo+命令： 超级权限</p>
+<p>su moxie： 进入超级用户moxie</p>
+<p>passwd：    改密码</p>
+<p>alias l=’ls -l’：    命令别名  ；  unalias l可以取消</p>
+<p>man bla：    帮助</p>
+<p>bla —help</p>
+<p>whereis ls：   ls 二进制文件的路径</p>
+<p>ps：    列出进程</p>
+<p>top：    显示cpu信息</p>
+<p>free ：   跟踪内存的使用信息    b以B显示    k以KB显示    h易读的格式</p>
+<p>kill 5721 ：   杀掉该进程</p>
+<p>service bla start：    启动服务    restart、stop</p>
+<p>apt-get install bla：    包管理类似pip    update升级</p>
+<p>mkpasswd  20：    生成随机密码，长度为20 ???</p>
+<p>cal：    日历    02 2000</p>
+<p>date：    日期    —set设置</p>
+<h3 id="文件">文件</h3>
+<p>ls：    列出文件夹、文件    -l  -a</p>
+<p>lsof：    显示打开的文件</p>
+<p>lsblk：    列出块设备  -l列表形式</p>
+<p>df：    磁盘使用情况</p>
+<p>mount 分配名 目录 ：   将设备挂在到指定目录</p>
+<p>pwd：    print working directory</p>
+<p>cd /foo：    改变当前路径    ~    .. . -</p>
+<p>mkdir bla：    文件夹</p>
+<p>touch bla：    更新时间戳，如果没有，创建</p>
+<p>cat a b &gt;&gt;c：    连接ab成c，如果没有c会创建。如果只有a，则显示。    -n行号    cat &gt;&gt;c然后可以输入内容</p>
+<p>paste a b &gt;&gt;c：    另一种方式连接</p>
+<p>cp bla /foo：    复制</p>
+<p>mv……………：    移动，也可以单文件重命名</p>
+<p>rm bla foo：    删除    -rf删除目录</p>
+<p>rename a b *sh：    多文件重命名，所有sh后缀的文件中的a换成b</p>
+<p>cmp foo bar：    比较两个文件</p>
+<p>chmod 777 bla：    改权限</p>
+<p>chown a:b bla：    改用户和组</p>
+<p>find -iname *.sh：    搜索目录和子目录下的文件，i为忽略大小写</p>
+<p>grep bla /foobar：    搜索文件中包含bla的行    i忽略大小写    r递归搜索    c统计    color着色</p>
+<h3 id="网络">网络</h3>
+<p>wget url：    下载</p>
+<p>ifconfig：    检查活动路由器    a所有    eth0 down停用    up启用  </p>
+<p>netstat：    各种网络相关信息    a所有    t为tcp    s为连接的    c动态输出</p>
+<p>dig 某域名：    查询。。。</p>
+<p>uptime：    服务器无人值守时发生了什么</p>
+<p>w：    uptime和who的组合命令</p>
+<p>wall “bla”：    发送一条消息到登录端    类似的还有mesg write talk</p>
+<h3 id="源代码安装">源代码安装</h3>
+<ol>
+<li><p>tar文件解压</p>
+</li>
+<li><p><code>./configure --prefix=/usr</code>    设置安装到bla，生成makefile</p>
+</li>
+<li><p><code>make</code>    编译</p>
+</li>
+<li><p><code>make install</code>    安装</p>
+</li>
+</ol>
+<hr>
+<p>爱打卡-100days-第99天-0001</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/linux/">linux</a>
+  </div>
+
+        
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=3326447" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    <a href="/2013/09/05/100-days-completed/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2013/09/03/vim-commands/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"zippera"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:zipperary.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/English/">English</a><small>2</small></li>
+  
+    <li><a href="/categories/IT杂谈/">IT杂谈</a><small>25</small></li>
+  
+    <li><a href="/categories/Mac/">Mac</a><small>5</small></li>
+  
+    <li><a href="/categories/Ruby/">Ruby</a><small>2</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>19</small></li>
+  
+    <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>15</small></li>
+  
+    <li><a href="/categories/人物/">人物</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>4</small></li>
+  
+    <li><a href="/categories/思维记忆/">思维记忆</a><small>1</small></li>
+  
+    <li><a href="/categories/推荐/">推荐</a><small>1</small></li>
+  
+    <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
+  
+    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+  
+    <li><a href="/categories/电影/">电影</a><small>27</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>32</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">简介</h3>
+<ul class="entry">
+<li>本体：赵伟</li>
+<li>二次元：zippera | moxie</li>
+<li>现状：帝都CS在读研究生</li>
+<li>想交友的朋友请<a href="http://zipperary.com/about">联系我</a>！</li>
+<li>QQ 号：763987114</li>
+<font color="red">Hexo 交流群：287306637</font>
+</ul>
+</div>
+
+
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1586279270&verifier=0c2cdcf8&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><section>
+Theme of <a href="https://github.com/hexojs/hexo-theme-light">Light</a>, Improved by <a href="/">zippera</a> 
+</section>
+<div class="clearfix"></div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
+
+
+<a href="https://github.com/zippera" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png" alt="Fork me on GitHub"></a>

@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>初识Sublime Text | Zippera&#39;s blog</title>
+  <meta name="author" content="zippera">
+  
+  <meta name="description" content="Walk steps step by step">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="初识Sublime Text"/>
+  <meta property="og:site_name" content="Zippera&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="http://zipperary.com/atom.xml" title="Zippera&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Zippera&#39;s blog</a></h1>
+  <h2><a href="/">Walk steps step by step</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-08-25T11:40:23.000Z"><a href="/2013/08/25/go-to-sublime-text/">8月 25 2013</a></time>
+      
+      
+  
+    <h1 class="title">初识Sublime Text</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1e7z6jqyv1hj211y0kqwi1.jpg" alt=""></p>
+<p>看到很多人推荐神器<strong>Sublime Text</strong>，我今天也来玩玩。</p>
+<p>官网的一句话广告：</p>
+<blockquote>
+<p>Sublime Text is a sophisticated text editor for code, markup and prose.</p>
+</blockquote>
+<p>维基百科的一句话简介：</p>
+<blockquote>
+<p>Sublime Text 是一套基于 Python 的跨平台文字编辑器。最初设计为 Vim 编辑器的多功能扩充软件。</p>
+</blockquote>
+<p>注意Sublime Text和<strong>python、vim</strong>的渊源，后面我们就会看到了。</p>
+<p><em>声明：以下均为windows下操作，其他系统未测试。</em></p>
+<a id="more"></a>
+
+<h3 id="安装">安装</h3>
+<p>去<a href="http://www.sublimetext.com/" target="_blank">官网</a>下载和安装相应的版本。对于windows用户，有<em>安装版</em>和<em>绿色版</em>可选。推荐使用<strong>安装版</strong>。</p>
+<p><em>注意：最新版本为3测试版，推荐下载2！</em></p>
+<p>软件安装好了之后不需要任何配置就可以使用了。最常用的设置Sublime Text已经帮我们做好了，打开直接享用！</p>
+<h3 id="插件管理">插件管理</h3>
+<p>一个NB的编辑器之所以NB，插件支持是一个重要的元素。Sublime Text有一个插件管理器是必装的。</p>
+<p><code>ctrl+</code>打开<strong>Console</strong>，把下面的代码复制进去：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>import urllib2,os; pf=<span class="string">'Package Control.sublime-package'</span>; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) <span class="keyword">if</span> <span class="keyword">not</span> os.path.<span class="keyword">exists</span>(ipp) <span class="keyword">else</span> None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); <span class="keyword">open</span>( os.path.<span class="keyword">join</span>( ipp, pf), <span class="string">'wb'</span> ).<span class="keyword">write</span>( urllib2.urlopen( <span class="string">'http://sublime.wbond.net/'</span> +pf.replace( <span class="string">' '</span>,<span class="string">'%20'</span> )).<span class="keyword">read</span>()); <span class="keyword">print</span>( <span class="string">'Please restart Sublime Text to finish installation'</span>)
+</pre></td></tr></table></figure>
+
+<p>回车键。</p>
+<p>重启，如果看到<code>Preferences &gt; Package Control</code>就说明成功了。</p>
+<p>如果上面的方法安装失败，使用下面这个办法：</p>
+<ol>
+<li>Click <code>the Preferences &gt; Browse Packages…</code>menu</li>
+<li>Browse up a folder and then into the <code>Installed Packages/</code> folder</li>
+<li>Download <a href="https://sublime.wbond.net/Package%20Control.sublime-package" target="_blank">Package Control.sublime-package</a> and copy it into the <code>Installed Packages/</code> directory</li>
+<li>Restart Sublime Text</li>
+</ol>
+<p>插件管理器搞定之后，就可以随意安装插件了。方法很简单：</p>
+<p><code>ctrl+shift+p</code>，输入<code>ip</code>，看到「Install Package」，回车键。然后出现插件列表，在里面输入要找的插件，比如<strong>tag</strong>，选中并回车即可自动安装好。</p>
+<h3 id="常用插件">常用插件</h3>
+<p>我今天才开始用，安装的插件很少。下面是网友推荐的几个，我只安装了一部分。</p>
+<ul>
+<li><p>tag：Html格式化，右键Auto-Format Tags on Ducument。</p>
+</li>
+<li><p>ZenCoding：不得不用的一款前端开发方面的插件，Write less , show more.安装后可直接使用，Tab键触发，Alt+Shift+W是个代码机器。</p>
+</li>
+<li><p>SideBarEnhancements：侧栏右键功能增强，非常实用。</p>
+</li>
+<li><p>Theme–Soda：完美的编码主题，用过的都说好，Setting user里面添加”theme”: “Soda Dark.sublime-theme”。</p>
+</li>
+<li><p>SublimeLinter：这是用来在写代码时做代码检查的。可以在包管理器中安装。写Python程序的话，它还会帮你查代码是否符合PEP8的要求。有问题有代码会出现白框，点击时底下的状态栏会提示出什么问题。</p>
+</li>
+<li><p>Python PEP8 Autoformat：这是用来按PEP8自动格式化代码的。可以在包管理器中安装。如果以前写程序不留意的话，用SublimeLinter一查，满屏都是白框框，只要装上这个包，按ctrl+shift+r，代码就会按PEP8要求自动格式化了，一屏的白框几乎都消失了。</p>
+</li>
+<li><p>Alignment：代码对齐，如写几个变量，选中这几行，Ctrl+Alt+A，哇，齐了。</p>
+</li>
+</ul>
+<h3 id="快捷键">快捷键</h3>
+<p>前面说过，Sublime Text跟Vim渊源极深，软件安装好之后也是默认支持Vim模式的。所以很多vimer熟悉的快捷键和操作方式在这里同样使用，甚至也分为普通模式和插入模式，但命令模式有很多不同。</p>
+<p>这里只列举最有用且不同于vim的一些快捷键，以后发现更多好用的后会再行补充。</p>
+<ul>
+<li><code>ctrl+shift+p</code> 打开命令提示窗口，你所要的，这里都有:)</li>
+<li><code>ctrl+` </code> 打开console</li>
+<li><code>ctrl+r</code> 查找函数和块，非常有用</li>
+<li><code>ctrl+/</code> 注释和解注释</li>
+<li><code>ctrl+p</code> 切换打开的文件</li>
+<li><code>ctrl+w</code> 关闭当前标签页</li>
+<li><code>ctrl+shift+w</code> 关闭所有打开的标签页</li>
+<li><code>ctrl+m</code> 跳转到该位置前后的括号</li>
+<li><code>ctrl+k+b</code> 开关侧边栏</li>
+<li><code>alt+n</code> 快速切换到第n个打开的标签页</li>
+<li><code>F11</code> 全屏模式</li>
+<li><code>shift+F11</code> 防打扰模式</li>
+</ul>
+<h3 id="赞许">赞许</h3>
+<p>好看。</p>
+<p>方便好用。</p>
+<h3 id="抱怨">抱怨</h3>
+<p>markdown的高亮支持惨不忍睹，也没有好用的插件可以替代。</p>
+<hr>
+<p>爱打卡-100days-第89天-0111</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/IT杂谈/">IT杂谈</a>
+  </div>
+
+        
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=3326447" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    <a href="/2013/08/26/smartisan-share/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2013/08/24/vim-tips/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"zippera"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:zipperary.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/English/">English</a><small>2</small></li>
+  
+    <li><a href="/categories/IT杂谈/">IT杂谈</a><small>25</small></li>
+  
+    <li><a href="/categories/Mac/">Mac</a><small>5</small></li>
+  
+    <li><a href="/categories/Ruby/">Ruby</a><small>2</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>19</small></li>
+  
+    <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>15</small></li>
+  
+    <li><a href="/categories/人物/">人物</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>4</small></li>
+  
+    <li><a href="/categories/思维记忆/">思维记忆</a><small>1</small></li>
+  
+    <li><a href="/categories/推荐/">推荐</a><small>1</small></li>
+  
+    <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
+  
+    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+  
+    <li><a href="/categories/电影/">电影</a><small>27</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>32</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">简介</h3>
+<ul class="entry">
+<li>本体：赵伟</li>
+<li>二次元：zippera | moxie</li>
+<li>现状：帝都CS在读研究生</li>
+<li>想交友的朋友请<a href="http://zipperary.com/about">联系我</a>！</li>
+<li>QQ 号：763987114</li>
+<font color="red">Hexo 交流群：287306637</font>
+</ul>
+</div>
+
+
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1586279270&verifier=0c2cdcf8&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><section>
+Theme of <a href="https://github.com/hexojs/hexo-theme-light">Light</a>, Improved by <a href="/">zippera</a> 
+</section>
+<div class="clearfix"></div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
+
+
+<a href="https://github.com/zippera" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png" alt="Fork me on GitHub"></a>

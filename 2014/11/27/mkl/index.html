@@ -1,0 +1,408 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>从 SVM 到多核学习 MKL | Zippera&#39;s blog</title>
+  <meta name="author" content="zippera">
+  
+  <meta name="description" content="Walk steps step by step">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="从 SVM 到多核学习 MKL"/>
+  <meta property="og:site_name" content="Zippera&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="http://zipperary.com/atom.xml" title="Zippera&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Zippera&#39;s blog</a></h1>
+  <h2><a href="/">Walk steps step by step</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-27T15:17:11.000Z"><a href="/2014/11/27/mkl/">11月 27 2014</a></time>
+      
+      
+  
+    <h1 class="title">从 SVM 到多核学习 MKL</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>SVM是机器学习里面最强大最好用的工具之一，它试图在特征空间里寻找一个超平面，以最小的错分率把正负样本分开。它的强大之处还在于，当样本在原特征空间中线性不可分，即找不到一个足够好的超平面时，可以利用核（kernel）函数，将特征映射到希尔伯特（Hilbert）空间。后者一般维度更高，通过这样的映射之后，样本在新的特征空间中便是线性可分的了。</p>
+<p>记得刚刚学习SVM的时候，对“核”这个词很恐惧，一直理解不了它究竟是什么。在看MKL的时候，又经常会遇到“核矩阵”（kernel matrices）这个词。现在说一下我的理解。</p>
+<p>刚才说过，我们通过核把特征从低维空间映射到高维空间。举例来说，我们看下面的多项式核函数：</p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1empcb3e8s0j20g209kjs1.jpg" alt=""></p>
+<p>其中x,y是两个样本，他们的特征分别是(x1,x2)，(y1,y2)，通过这个核函数，可以看到二维特征被映射到了六维特征。而且我们也可以理解，这个映射其实就是用一个矩阵A乘以原来的特征(x1,x2)得到的。矩阵A也就是核矩阵了。一个核函数对应一个核矩阵。</p>
+<p>我们学过的SVM都是单核（single kernel）的，在使用的时候，需要我们根据经验或试验来选择用哪种核函数、怎样指定它的参数，这样很不方便。另一方面，实际应用当中，特征往往不是single domain的，而是异构的。拿图像分类来说，我们可能用到颜色相关的特征、纹理相关的特征、空间相关的特征，这几类特征对应的最佳的核函数未必相同，让他们共用同一个核函数，未必能得到最优的映射。对这些问题的思考，就引出了MKL。</p>
+<a id="more"></a>
+
+<p>简单地说，我们给定一些base kernels，比如linear,Polynomial,RBF,Sigmoid，对于每一个，可以指定多组参数，也就是一共有M个base kernels，我们想用它们的线性组合来作为最终的核函数。通过training，得到这个线性组合中每个kernel的权重d（weight）。由于融合了各种kernel，可以照顾到异构的特征；由于自动学习权重，我们就不需要费脑子想究竟用哪一个核哪一种参数，把可能的核、参数都拿过来，组合着来用就可以了。</p>
+<p>与传统的单核SVM的不同，就是除了要学习w、b之外，还要学习上面提到的权重d。这样的话，decision function, cost function都会有些变化，棘手的是，cost function 的求解不再是一个convex problem，传统的优化方法就不适用了。近年来MKL比较热，很多论文都是在优化方法上面下功夫，企图达到更快的收敛速度、更好的解。具体的优化方法就比较复杂了，略去。</p>
+<p>多核线性组合，最经典的是simpleMKL，也被作为MKL的具体实现，应用在了计算机各领域。为了使MKL应用地更广，应对各种特征组合、各种样本量级，后来又有人提出了GMKL，G即Generalized，最优化方法用的是PGD（Projected Gradient Descend）。为了改进收敛效果，Vishwanathan又提出SPG-GMKL(Spectral Projected Gradient)，同时提出了多核的product组合。SPG-GMKL也被后来者视作state-of-art。</p>
+<p>除了MKL，还有一个MKB(Multiple Kernel Boosting)，大连理工大学的卢湖川有几篇论文就是用MKB做跟踪。论文生成MKB是基于MKL的，我觉得不然。请看MKB的框架图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1empccpsn9uj20n80930u8.jpg" alt=""></p>
+<p>这里的确用到多核，但每一个SVM都是单核的，根本没有用到多核训练的东西。本质上就是训练出M * N个single-kernel SVM，然后用boosting的方法，把这些弱分类器ensemble为一个强分类器。用到的就是传统的SVM加传统的boosting，只是名字新，实质并无新意。</p>
+<p>TKDE12 有一篇 MKBoost论文，这应该是正宗的MKB，它提出了一个框架，并提供了几个formulation，然后与MKL做了比较。论文中全是公式，没有看，以后需要的时候再研究吧。</p>
+<p>MKL的经典实现有SimpleMKL，Shogun，SPG-GMKL，SMO-MKL，Google一下就可以找到。</p>
+<p>如果只是要使用MKL，可以不看论文中的推导，更多的是看看上述几种实现附带的例子；可以看看MKL在跟踪、图像分类中的使用，输入输出是什么；可以看看<a href="http://www.cse.iitd.ac.in/~ee5070403/Tutorial.pdf" target="_blank">这个</a>和<a href="http://www.cse.msu.edu/~cse902/S14/ppt/MKL_Feb2014.pdf" target="_blank">这个</a>教程，简单易懂。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/机器学习/">机器学习</a>
+  </div>
+
+        
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=3326447" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    
+    <a href="/2014/11/15/interstellar/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"zippera"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:zipperary.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/English/">English</a><small>2</small></li>
+  
+    <li><a href="/categories/IT杂谈/">IT杂谈</a><small>25</small></li>
+  
+    <li><a href="/categories/Mac/">Mac</a><small>5</small></li>
+  
+    <li><a href="/categories/Ruby/">Ruby</a><small>2</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>19</small></li>
+  
+    <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>15</small></li>
+  
+    <li><a href="/categories/人物/">人物</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>4</small></li>
+  
+    <li><a href="/categories/思维记忆/">思维记忆</a><small>1</small></li>
+  
+    <li><a href="/categories/推荐/">推荐</a><small>1</small></li>
+  
+    <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
+  
+    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+  
+    <li><a href="/categories/电影/">电影</a><small>27</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>32</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">简介</h3>
+<ul class="entry">
+<li>本体：赵伟</li>
+<li>二次元：zippera | moxie</li>
+<li>现状：帝都CS在读研究生</li>
+<li>想交友的朋友请<a href="http://zipperary.com/about">联系我</a>！</li>
+<li>QQ 号：763987114</li>
+<font color="red">Hexo 交流群：287306637</font>
+</ul>
+</div>
+
+
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1586279270&verifier=0c2cdcf8&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><section>
+Theme of <a href="https://github.com/hexojs/hexo-theme-light">Light</a>, Improved by <a href="/">zippera</a> 
+</section>
+<div class="clearfix"></div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
+
+
+<a href="https://github.com/zippera" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png" alt="Fork me on GitHub"></a>

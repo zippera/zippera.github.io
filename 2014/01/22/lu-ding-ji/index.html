@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>鹿鼎记：一个小人物的成长史 | Zippera&#39;s blog</title>
+  <meta name="author" content="zippera">
+  
+  <meta name="description" content="Walk steps step by step">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="鹿鼎记：一个小人物的成长史"/>
+  <meta property="og:site_name" content="Zippera&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="http://zipperary.com/atom.xml" title="Zippera&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Zippera&#39;s blog</a></h1>
+  <h2><a href="/">Walk steps step by step</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-01-22T10:19:44.000Z"><a href="/2014/01/22/lu-ding-ji/">1月 22 2014</a></time>
+      
+      
+  
+    <h1 class="title">鹿鼎记：一个小人物的成长史</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>进入2014年后主要精力放在期末考试了，kindle 只是断断续续地看看《鹿鼎记》，这本书比较长，可以作为这场持久战的粮草源源不断地供应。考完后这几天赋闲，但也没有要花所有时间把它看完，昨天回家，这两天加紧了些，今日上午终于看完了。</p>
+<p>《鹿鼎记》是我最不愿意碰的，因为他不武侠，反而多了很多历史的东西；读完其他经典武侠之后，金庸老爷子的书也只剩这本最有可读性了，无论是作者还是读者口中，这本书的价值恐怕在金庸小说中要数一数二。冲着这样的口碑，冲着金庸，我便来读他一读。</p>
+<p>本书较长，情节繁琐，不像大多武侠读本那样一条粗粗的线索抱紧了就能清晰读完全书，又加我读时断断续续，记忆栈区太小，不得不把每章的主要情节记录在纸上。读罢全书，A4正反已经几乎写满了。</p>
+<a id="more"></a>
+
+<p>先述故事：</p>
+<p>小宝偶遇茅十八，二人同赴北京，并为海大富所擒。小宝杀小桂子，自己摇身一变成为太监小贵子，海大富教他偷《四十二章经》。偶然识得小玄子，遂成好友，斗武，后来合力擒得鳌拜，小宝抄家时得到匕首和宝衣。海大富与太后打斗，述说顺治所在，小宝听到，海大富死。小宝在康亲王处看望鳌拜，被天地会擒得，加入天地会，成青木堂堂主，陈近南徒弟。天地会与沐王府起误会，小宝宫中藏沐剑屏和方怡。（1-10）</p>
+<p>天地会与沐王府误会解开。小宝救沐王府刺客出宫。小宝向康熙说明真实身份，述说顺治之事，康熙派小宝去五台山见顺治。路过鬼屋，方怡、沐剑屏被神龙教掳去，三少奶奶（鳌拜因文字狱杀她全家）赠双儿给小宝。五台山清凉寺助顺治脱困。回京被神龙教擒到神龙岛，教中大乱，小宝帮忙摆平，升白龙使，服药，回京找书。（11-20）</p>
+<p>康熙派小宝到少林寺出家，法号慧明，方丈慧聪的师弟。初遇阿珂，结下梁子，与澄观大师论武，企图自己制服阿珂。蒙藏歹徒骚扰少林，小宝解围，然后领旨去清凉寺做主持。清凉寺遇三千喇嘛围攻，小宝换衣大法解围，康熙与顺治相见。结识白衣尼（崇祯之女），与阿珂、郑克爽同行，一面讨好阿珂，一面巧计收拾了喇嘛。康熙派小宝护送公主嫁去云南平西王之子吴应熊，二人路上 SM+ML。（21-30）</p>
+<p>在云南救杨溢之，得四方联合反叛的情报。公主阉割吴应熊，平西王假伤骗小宝。解围陈圆圆、李自成、吴三桂、白衣尼之斗。与施琅攻打神龙岛，被方怡骗入，被双儿救出，遇苏菲亚公主，跟去俄罗斯，帮公主夺权。锦衣还乡，搞定王屋山，好事丽春院（与七女子ML）。吴三桂反，小宝回京。（31-40）</p>
+<p>归辛树刺杀康熙，小宝救驾。康熙揭穿小宝天地会身份，要炮轰伯爵府，小宝救出众人。逃亡途中遇神龙教，擒去神龙岛，教中内乱，洪教主死，苏荃怀孕，跟随小宝。通吃岛上陈近南被郑克爽背后刺死。忠义不得两全，小宝与七夫人隐居于此。康熙派人到处寻访，在此找到，密折感人。小宝通过施琅离开通吃岛到台湾，康熙召回，派去对付罗刹国。小宝用计打败罗刹兵，达成《尼布楚条约》。康熙圣旨诏告天下，说小宝杀了陈近南，意在让他勿再淌这浑水，天地会劝小宝做总舵主带头反清，顾炎武劝小宝自己称帝，忠义恨难两全，船烧，假死，带母亲与七个夫人去云南隐居。康熙多次下江南寻访，无果。（41-50）</p>
+<p>可以看到，这部小说的情节是非常丰富的，抛却武侠的成分，还算很有看头的。回头想想，小说的线索大概有这几条：八部《四十二章经》凑足可找到龙脉；七个老婆齐全；天地会韦香主、神龙教白龙使、n 等伯爵等身份地位；小宝的功劳。</p>
+<p>说道功劳，大概有：擒杀鳌拜，揭穿假太后，清凉寺救顺治，对付吴三桂，炮轰神龙岛，搞定罗刹国。嗯，这也正是小说的枝干情节。</p>
+<p>说说韦小宝这个人。</p>
+<p>有人说《鹿鼎记》是一本《厚黑学》，我看是很有道理的。韦小宝从一个妓女的杂种，目不识丁，左右逢源、奇遇不断，最后成为一人之下万人之上的伯爵，不只靠的 RP，这人是真的有能耐。他的成功靠什么？讲义气、拍马屁，脑子活。在古板的江湖、古板的朝廷，韦小宝凭借他一声不响的马屁功夫处处得人喜欢。冒险解救朋友、慷慨收买人心，更是在江湖和朝廷备受尊敬。危急之中，总能施展拿手的撒谎好戏（所谓重细节、大真小假）成功脱困。再加上四宝——匕首削铁如泥，宝衣刀枪不入，神行百变无迹可寻，双儿贴身服侍保卫，这样的小宝怎么能不平步青云呢。</p>
+<p>小宝从未读书，出身低贱，但遇事总有奇招巧计，这些 idea 是哪里来的呢？说书的和唱戏的。全仗小宝脑筋灵活，能够融会贯通。</p>
+<p>再来说说小宝的劣迹：心狠手辣，为了自己的目的可以随意杀人，甚至杀害对他照顾有加的多隆；好色淫乱，在丽春院奸污被迷倒和点倒的七女子；自私，不要觉得小宝大义凛然，他一切的前提都是自己不吃亏；好赌成性，不过幸亏自己会使骗，否则定会坏事。</p>
+<p>《鹿鼎记》的一大主题是满汉之争，或明清之争。天地会、沐王府一干江湖人士，总觉得满族清兵赶走汉人皇帝夺了江山是罪不可恕的，须要杀了皇帝恢复明朝统治，这是狭隘的民族主义。事实是，明末朝廷腐败不堪，百姓生活贫苦，一副末世的景象。清兵入关夺了天下，烧杀抢夺犯下大错，但到了康熙之时，政治清明、百姓富足、天下太平，人人都不得不承认康熙是个好皇帝。这样的皇帝还要反他嘛？反了之后找个汉人做皇帝百姓就能生活的更好嘛？</p>
+<p>小宝最后忠义难以两全，不得不隐居，其实是天地会这帮不明事理的人害的。康熙深明大义，只要小宝与天地会扯清关系便没事了，小宝也赞同。但天地会一众仍是逼他造反、做皇帝云云，小宝怎肯去害小玄子。要知道，小宝从《四十二章经》拼出的地图已经找到宝藏，却不肯断了龙脉，全是为小玄子考虑。没办法，只有躲起来了。想想康熙与韦小宝的友情，想想康熙派人到处寻访，只想再对韦小宝说声「他妈的」，真让人惋惜。</p>
+<p>龙脉所在是鹿鼎山，小宝最后的晋封是鹿鼎公。鹿是天下百姓，鼎是烹食鹿肉的器皿，是权力。</p>
+<p>最后要说，这本书少了武侠，依然很有趣味，大家起码可以学学韦小宝怎样左右逢源嘛！</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/读书笔记/">读书笔记</a>
+  </div>
+
+        
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=3326447" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    <a href="/2014/01/24/bloom-filter/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2014/01/20/lotr-2-and-3/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"zippera"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:zipperary.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/English/">English</a><small>2</small></li>
+  
+    <li><a href="/categories/IT杂谈/">IT杂谈</a><small>25</small></li>
+  
+    <li><a href="/categories/Mac/">Mac</a><small>5</small></li>
+  
+    <li><a href="/categories/Ruby/">Ruby</a><small>2</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>19</small></li>
+  
+    <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>15</small></li>
+  
+    <li><a href="/categories/人物/">人物</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>4</small></li>
+  
+    <li><a href="/categories/思维记忆/">思维记忆</a><small>1</small></li>
+  
+    <li><a href="/categories/推荐/">推荐</a><small>1</small></li>
+  
+    <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
+  
+    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+  
+    <li><a href="/categories/电影/">电影</a><small>27</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>32</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">简介</h3>
+<ul class="entry">
+<li>本体：赵伟</li>
+<li>二次元：zippera | moxie</li>
+<li>现状：帝都CS在读研究生</li>
+<li>想交友的朋友请<a href="http://zipperary.com/about">联系我</a>！</li>
+<li>QQ 号：763987114</li>
+<font color="red">Hexo 交流群：287306637</font>
+</ul>
+</div>
+
+
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1586279270&verifier=0c2cdcf8&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><section>
+Theme of <a href="https://github.com/hexojs/hexo-theme-light">Light</a>, Improved by <a href="/">zippera</a> 
+</section>
+<div class="clearfix"></div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
+
+
+<a href="https://github.com/zippera" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png" alt="Fork me on GitHub"></a>

@@ -1,0 +1,936 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Zippera's blog]]></title>
+  <subtitle><![CDATA[Walk steps step by step]]></subtitle>
+  <link href="http://zipperary.com/atom.xml" rel="self"/>
+  <link href="http://zipperary.com"/>
+  <updated>2014-12-18T10:19:00.628Z</updated>
+  <id>http://zipperary.com/</id>
+  <author>
+    <name><![CDATA[zippera]]></name>
+    <email><![CDATA[sovey198@gmail.com]]></email>
+  </author>
+  <generator uri="http://zespia.tw/hexo">Hexo</generator>
+  <entry>
+    <title type="html"><![CDATA[从 SVM 到多核学习 MKL]]></title>
+    <link href="http://zipperary.com/2014/11/27/mkl/"/>
+    <id>http://zipperary.com/2014/11/27/mkl/</id>
+    <published>2014-11-27T15:17:11.000Z</published>
+    <updated>2014-11-27T15:18:32.000Z</updated>
+    <content type="html"><![CDATA[<p>SVM是机器学习里面最强大最好用的工具之一，它试图在特征空间里寻找一个超平面，以最小的错分率把正负样本分开。它的强大之处还在于，当样本在原特征空间中线性不可分，即找不到一个足够好的超平面时，可以利用核（kernel）函数，将特征映射到希尔伯特（Hilbert）空间。后者一般维度更高，通过这样的映射之后，样本在新的特征空间中便是线性可分的了。</p>
+<p>记得刚刚学习SVM的时候，对“核”这个词很恐惧，一直理解不了它究竟是什么。在看MKL的时候，又经常会遇到“核矩阵”（kernel matrices）这个词。现在说一下我的理解。</p>
+<p>刚才说过，我们通过核把特征从低维空间映射到高维空间。举例来说，我们看下面的多项式核函数：</p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1empcb3e8s0j20g209kjs1.jpg" alt=""></p>
+<p>其中x,y是两个样本，他们的特征分别是(x1,x2)，(y1,y2)，通过这个核函数，可以看到二维特征被映射到了六维特征。而且我们也可以理解，这个映射其实就是用一个矩阵A乘以原来的特征(x1,x2)得到的。矩阵A也就是核矩阵了。一个核函数对应一个核矩阵。</p>
+<p>我们学过的SVM都是单核（single kernel）的，在使用的时候，需要我们根据经验或试验来选择用哪种核函数、怎样指定它的参数，这样很不方便。另一方面，实际应用当中，特征往往不是single domain的，而是异构的。拿图像分类来说，我们可能用到颜色相关的特征、纹理相关的特征、空间相关的特征，这几类特征对应的最佳的核函数未必相同，让他们共用同一个核函数，未必能得到最优的映射。对这些问题的思考，就引出了MKL。</p>
+<a id="more"></a>
+
+<p>简单地说，我们给定一些base kernels，比如linear,Polynomial,RBF,Sigmoid，对于每一个，可以指定多组参数，也就是一共有M个base kernels，我们想用它们的线性组合来作为最终的核函数。通过training，得到这个线性组合中每个kernel的权重d（weight）。由于融合了各种kernel，可以照顾到异构的特征；由于自动学习权重，我们就不需要费脑子想究竟用哪一个核哪一种参数，把可能的核、参数都拿过来，组合着来用就可以了。</p>
+<p>与传统的单核SVM的不同，就是除了要学习w、b之外，还要学习上面提到的权重d。这样的话，decision function, cost function都会有些变化，棘手的是，cost function 的求解不再是一个convex problem，传统的优化方法就不适用了。近年来MKL比较热，很多论文都是在优化方法上面下功夫，企图达到更快的收敛速度、更好的解。具体的优化方法就比较复杂了，略去。</p>
+<p>多核线性组合，最经典的是simpleMKL，也被作为MKL的具体实现，应用在了计算机各领域。为了使MKL应用地更广，应对各种特征组合、各种样本量级，后来又有人提出了GMKL，G即Generalized，最优化方法用的是PGD（Projected Gradient Descend）。为了改进收敛效果，Vishwanathan又提出SPG-GMKL(Spectral Projected Gradient)，同时提出了多核的product组合。SPG-GMKL也被后来者视作state-of-art。</p>
+<p>除了MKL，还有一个MKB(Multiple Kernel Boosting)，大连理工大学的卢湖川有几篇论文就是用MKB做跟踪。论文生成MKB是基于MKL的，我觉得不然。请看MKB的框架图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1empccpsn9uj20n80930u8.jpg" alt=""></p>
+<p>这里的确用到多核，但每一个SVM都是单核的，根本没有用到多核训练的东西。本质上就是训练出M * N个single-kernel SVM，然后用boosting的方法，把这些弱分类器ensemble为一个强分类器。用到的就是传统的SVM加传统的boosting，只是名字新，实质并无新意。</p>
+<p>TKDE12 有一篇 MKBoost论文，这应该是正宗的MKB，它提出了一个框架，并提供了几个formulation，然后与MKL做了比较。论文中全是公式，没有看，以后需要的时候再研究吧。</p>
+<p>MKL的经典实现有SimpleMKL，Shogun，SPG-GMKL，SMO-MKL，Google一下就可以找到。</p>
+<p>如果只是要使用MKL，可以不看论文中的推导，更多的是看看上述几种实现附带的例子；可以看看MKL在跟踪、图像分类中的使用，输入输出是什么；可以看看<a href="http://www.cse.iitd.ac.in/~ee5070403/Tutorial.pdf" target="_blank">这个</a>和<a href="http://www.cse.msu.edu/~cse902/S14/ppt/MKL_Feb2014.pdf" target="_blank">这个</a>教程，简单易懂。</p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/机器学习/" term="机器学习"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[壮哉！星际穿越！]]></title>
+    <link href="http://zipperary.com/2014/11/15/interstellar/"/>
+    <id>http://zipperary.com/2014/11/15/interstellar/</id>
+    <published>2014-11-15T14:31:08.000Z</published>
+    <updated>2014-11-15T15:42:31.000Z</updated>
+    <content type="html"><![CDATA[<p>在一片赞誉声中，终于也禁不起诱惑，去影院观看了《星际穿越》。</p>
+<p>需要提醒的是，现在糯米网正在搞活动，14.9起看电影。我们就是以这个价格在中影国际千禧店观影的。活动地址<a href="http://dianying.baidu.com/info/operation/operation_topic?bdmovie_type=cinema&amp;bdmovie_from=pc&amp;act_id=71&amp;sfrom=newnuomi&amp;sub_channel=nuomi_banner_pc" target="_blank">在此</a>。貌似明天是最后一天，大家抓紧了！</p>
+<h3 id="观前感">观前感</h3>
+<p>感受自然是来自影片的宣传和观众的口碑传播。</p>
+<p>这个片子还是很有卖点的：执导过《盗梦空间》、《黑暗骑士》的大导演诺兰，奥斯卡影帝马修，奥斯卡最佳女配角、美丽的安妮海瑟薇，最后一部胶片拍摄的科幻大片，天体物理、量子物理的学界翘楚做顾问，号称最严肃的科幻电影，号称此片的制作可以获得图形学、物理学的两篇论文云云。</p>
+<p>观众的反馈也很好，尤其一些名人的正反馈起到的影响，知乎等社区的热烈讨论起到的影响都很大。一方面是研究讨论片中涉及的物理知识、科学漏洞，一方面是赞叹它在电影层面优良的制作和人文关怀。</p>
+<p>还有，豆瓣评分9.3.</p>
+<p>这是一部好片子几乎无疑了，现在问题来了：How much?</p>
+<p>老规矩，中影国际千禧店一直是最便宜的、观影效果很好、距离很近，综合第一的影院。去糯米一看，哟，居然15块一张！好吧，不看对不起这天时地利人和。</p>
+<a id="more"></a>
+
+<h3 id="严重剧透，慎重下拉！">严重剧透，慎重下拉！</h3>
+<p>好吧，这里要说剧情了。</p>
+<p>故事发生在未来的美国。植物相继得了枯萎病，食物越来越短缺。沙尘暴肆虐，直接威胁人们的生存。总之，地球是没救了，人类如何自救呢？前飞行员、工程师库伯在全职种地，但枯萎病导致收成不好，他也自知地球的命运堪忧。</p>
+<p>偶然的机会，他进入了 NASA 的一个基地，得知 NASA 正在实施一项太空移民计划，目前的阶段是探索可移居的星球。前期，十年前，已经派出了一批勇敢的飞行员去各可能的星系探索，目前有几个地方持续发来积极的信号。布兰德教授说服库伯做驾驶员，带着包括教授的女儿布兰德博士在内的三个人，去那几个 promising 星球考察，确定要移居的星球，并开始开发。与此同时，教授在地球上继续解他的方程，以期未来能把人类大举迁移的其他星球。</p>
+<p>土星的附近，不知道被谁安放了一个虫洞，可以从这里以超光速穿越到某一个星系，这就是人类的希望。否则人类是几乎不可能走出太阳系的。</p>
+<p>从虫洞穿越过去之后，有三个最有希望的星球。A 在黑洞附近，靠近黑洞的地方时间被扭曲，这里的一小时相当于宇宙中的七年。不幸的是，这里的飞行员已经罹难，他们只取回了记录仪，又因为海浪事故，多耽搁了不少时间，于是等在外太空的同伴在那儿足足等了二十三年。</p>
+<p>B 星球的探索者是所有这些探索者中最牛掰的博士，他持续发送积极信号，貌似很有希望。去了之后，云是冻云，地表上也是冰。该博士骗人了，根本没有适宜人类居住的环境。他是想骗他们过来，自己好得救。最终在对接飞行器时鲁莽行动，导致飞行器爆炸。</p>
+<p>剩下的资源，已经不够探索 C 并返回地球了。C 也在黑洞附近。库伯把萌萌的机器人甩掉了，自己也主动脱离堕入黑洞，把生存和继续任务的机会留给布兰德博士。库伯进入黑洞后，发现了这里已经被改造为三维感官的五位世界，他把某一个探索者在黑洞中探索得到的消息，通过引力影响，传递给了女儿，女儿已经是布兰德教授的学生。女儿利用这些信息，解决了方程中的所有难题，得到了迁移人类的方法。库伯氧气几乎耗尽，被飞船救回去，这一会的功夫，地球上的女儿已经一百二十多岁。而布兰德，成功登录 C 星球，发现 C 星球适宜人类居住，并开始开发。</p>
+<p>上面只是说了主要的剧情，电影的精彩，不是这个框架能道尽的。</p>
+<h3 id="观后感">观后感</h3>
+<p>泪点：</p>
+<ul>
+<li>库伯告别女儿，开车去 NASA 准备星际穿越，在路上，掀开副驾驶的毛毯，女儿没在下面。当时我就泪奔了。</li>
+<li>库伯从 A 返回空间站后，地球已过了二十三年，他一一观看这些年儿子女儿发来的 video，几个小时间，至亲的人居然发生这么大变化：毕业、结婚、生子、丧子，他看的眼泪盈盈，我们这些观众也受不了了。</li>
+<li>在黑洞中，他看着过去的自己的愚蠢，无能为力。</li>
+<li>被救回来，女儿行将就木，父亲依然是三四十岁的容貌，坐在白发苍苍皮肤皱皱的女儿病床边，他们的对话。</li>
+</ul>
+<p>等等。</p>
+<p>作为科幻电影，居然如此打动观众，哎，我的头疼你负责！</p>
+<p>名词：墨菲定律、虫洞、黑洞、奇点、引力弹弓效应、五维空间、相对论等等，观影前请自去豆瓣科普。</p>
+<p>人性：布兰德教授的 A 计划是太空移民，B 计划是带生殖细胞过去进行星球殖民。后者容易，但太不人性了，意味着放弃地球上的人们。但 A 需要解决一个问题，问题需要黑洞中探测器发现的信息，但黑洞中的东西是出不来的，等于无解。布兰德教授只好骗了所有人，说我的方程快解完了，等你们确定好星球回来我正好解完，然后咱们就可以把人类迁移过去了。众人抱着拯救人类的使命感，奋发而去。而实际上，等待他们的是 B 计划。教授只能骗他们，这就是人性，你带着拯救人类的使命就会去拼死去做。如果告诉你，哪怕你们成功了，地球上的人们还是全部会死，你的贡献仅仅是延续了人类这个物种，你还有那么大的动力去献身嘛。</p>
+<p>Connection：女儿书房里发生的奇异现象，正是未来的父亲在黑洞中做的。而虫洞之类，是未来拥有高度文明的人类放置的。他们设置这个提示和帮助，让人类自救。</p>
+<p>机器人真的很萌很强大！</p>
+<p>槽点：黑洞不是只进不出嘛，库伯怎么出来的！（豆瓣得知，黑洞塌缩了）</p>
+<p>总的来说，这部电影真正做到了科幻，甚至科普了。加上震撼的视听效果、动人的情节，真的不失为优秀的电影。强烈推荐之。</p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/电影/" term="电影"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[袁氏当国]]></title>
+    <link href="http://zipperary.com/2014/11/13/yuan-shi-dang-guo/"/>
+    <id>http://zipperary.com/2014/11/13/yuan-shi-dang-guo/</id>
+    <published>2014-11-13T14:58:48.000Z</published>
+    <updated>2014-11-13T16:08:02.000Z</updated>
+    <content type="html"><![CDATA[<p>最近这一阵子，看了一部六十多集的《走向共和》，读了一本二百来页的《袁氏当国》，看的时候津津有味，简直是美餐，难能可贵的是，它们居然刷新了我二十来年对清末民初那段混乱历史的混乱认识，那段可歌可泣可书可传的历史，竟然变得逐渐清晰起来。这也从一个方面说明我们国家的正史写的多么失败！其实也不难理解，梁启超所谓正史为皇帝立传，在我国自然是为统治者立传了。而民间对清末民初历史的研究，一来史料越加丰富，二来时代越加遥远，政治逐渐脱敏，学者可说的真话越来越多，三来今年掀起的民国热也起了推波之用，因此研究的成果越加丰富，人们也有机会在走出校园后，重新修学这段历史。</p>
+<p>《走向共和》讲述清末李鸿章张之洞洋务运动至民国袁世凯死张勋复辟之间的事情，真真是一部神剧：作为电视剧，它有足够的戏剧性和观赏性，作为历史剧，它又做到了近乎史实，可谓严肃又好看的作品。各角色的刻画尤其逼真。而且首次对素来遗臭的历史人物一个公平的展示，让我们看到他们人才、英雄、进步的一面。看知乎，关于历史的问题很多人都引用这部剧，也说明其历史严肃性的一面。</p>
+<p>《袁氏当国》是我喜欢的唐德刚先生的一本小书，仅仅二百来页，把孙文创国到袁氏驾崩之间的值得书写的事情都写了。唐先生写的书都很好看，他是一个有独立思想的人，恐怕比他的老师胡适更甚。在他的《胡适口述自传》中就可以看到，哪怕对老师，该批评讽刺的地方他也绝不含糊。他的书一般夹叙夹议，而且根据自己老道的治史经验，挑选值得书写的内容奉献给读者，再加上自己一针见血的评价。其实，只述历史的书未必是好书，很多事件之间都是有关联的，唐先生史书的特点就是他能告诉读者不同历史事件之间的联系。臧否人物，述其毁誉，唐先生也尽量公正而全面。书中唐先生的用语风格也是半古半白，用他的话说『以浅显的文言加生动的白话这种文体，最有说服力』，同时也能缩短篇幅。</p>
+<p>这本书，很适合在《走向共和》之后读。后者交待了袁氏早年跟着李鸿章，被派去朝鲜，功勋卓著，得到李鸿章、荣禄的赏识，官拜直隶总督、北洋大臣。他小站练兵带出来的北洋六镇唯袁氏之命是从。慈溪、光绪西狩归来，袁世凯尽心办事受到太后赏识，往后平步青云，直到军机大臣，可谓位极人臣了。</p>
+<p>后面的故事，《走向共和》与《袁氏当国》都讲了，可以互相佐证。</p>
+<a id="more"></a>
+
+<p>孙文搞革命，声势浩大。清廷摇摇欲坠，是个扶不起的阿斗。袁氏携北洋六镇，养敌、逼宫，真是一出精彩的好戏。在帝国体制下，袁世凯是一位一流的政客，乱世之枭雄。袁氏能不动兵马不流血，和平结束两千年的封建体制，这个贡献不可抹杀。</p>
+<p>袁氏的盛名、才能都担得起开国总统，他也欣然接受了这个中国华盛顿的历史机遇。让他没料想到的是，总统根本不是皇帝那回事，处处受限制，只是个名而已。他大手一挥，这个一流政客，很快就做上了可以世袭的独裁大总统。然而皇帝美梦寻常百姓都在做，龙椅在身边，袁氏岂能禁得住诱惑？但他毕竟老练，知道兹事体大，不可轻率。唐先生说他这叫『以喜以惧』。袁世凯大能，所以为后世唾骂，很大的功劳要归于杨度这个幕僚和袁克定这个残废儿子。杨度之才，可与梁启超煮酒论英雄，但对现代政治比较无知，为了政治信仰，或许也为了一己私利，想方设法让袁世凯做皇帝，他好推行君主立宪。袁克定这个全国都讽为笨蛋的蠢才，揣测老爹的心意，所谓承旨，私心想着老爹死了自己就是皇帝了，于是假印《奉天时报》，每天送给袁世凯读阅。不必说，上面全是说袁世凯应该做皇帝这种劝进的话。袁世凯最中日本的态度，这家报纸又是最能代表日本政府的态度，袁氏一看，日本这么支持我做皇帝啊。在纷纷劝进、各种哄骗之后，加上私欲作祟，袁世凯真的就登基了。然而民治时代来了，这是谁都挡不住的，袁做皇帝后，天下骂之，天下反之，孤家寡人，何其悲凉。袁世凯知道袁克定假造报纸的事后，用鞭子不要命的抽打这个不争气的儿子，一遍遍地喊着『欺父误国』。袁氏在凄凉的心境下病重而死，没想到晚年落得这样结局。</p>
+<p>上面简述了袁世凯的事迹。其实袁世凯时代那些名士无不与袁氏有些关联或交往，比如梁启超、张謇、严复都是他的幕僚。又比如段祺瑞、冯玉祥、蔡锷、张勋、张作霖都是他的手下。以袁世凯为主线，《走向共和》、《袁氏当国》中这些人物都有出场，实在值得一看啊！</p>
+<p>两个作品都以袁世凯死结束，后面的历史，希望有同样好的作品来继续展示。有谁知道，敬请推荐！</p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/读书笔记/" term="读书笔记"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[Multi-Object Tracking]]></title>
+    <link href="http://zipperary.com/2014/11/08/mot/"/>
+    <id>http://zipperary.com/2014/11/08/mot/</id>
+    <published>2014-11-08T04:17:06.000Z</published>
+    <updated>2014-11-08T05:20:19.000Z</updated>
+    <content type="html"><![CDATA[<p>目前参与的一个项目是『足球事件检索』。事件是一个 high-level 概念，需要基于一些 low-level 信息来做。后者主要就是一些图像处理的东西了。两个 level 之间，会有一些中间层的信息，比如足球的走向。根据师兄的建议，可以考虑对足球场上的运动员进行多目标跟踪，在跟踪轨迹的基础上抽取一些有用的信息。一来这个项目可能用到 MOT 作为中间的一个处理环节，另一方面有发论文的压力，MOT 或许是一个不错的方向。之前也看过许多单目标跟踪的文献，这样再看 MOT 会容易些。</p>
+<h3 id="MOT">MOT</h3>
+<p>多目标跟踪的问题是这样的：有一段视频，视频是由 N 个 连续帧构成的。从第一帧到最后一帧，里面有多个目标，不断地有出有进，不断地运动。我们的目的是对每个目标，能跟其他目标区分开，能跟踪它在不同帧中的轨迹。最经典的应用就是路口监控中看到的行人了。</p>
+<p>Input: detection responses。现在拿来一段视频，我们先用 state-of-art detectors 把各帧中的人检测出来，包括位置、大小。当然，这个检测是有 noise 的，否则也就没必要用各种 MOT 方法来处理了。每个 detection 产生的结果就是 response，它还有一个可信度，比如80%可信，20%可信。</p>
+<p>Output: Tracklets. 就是最终得到每个 target 的轨迹。</p>
+<p>Challenges: Occlusions,similar appearance,complex motion,false alarms.这些问题基本上是每篇论文都在努力解决的。</p>
+<p>Occlusions：有三种，被场景中的物体遮挡，被其他 target 遮挡，被自己遮挡（如变形，无法检测到），遮挡之后，本来应该检测到的 target 就检测不到了。解决的方法如根据 temporal 信息，估计出某一帧的某个位置有 target 被遮挡了。</p>
+<p>Appearance：一是怎么把 target 与背景分开；二是怎么把不同的 target 分开。一般需要设计一个很好的外观模型，比如用 HOG、color histogram 等等。</p>
+<p>Motion: 最简单的情况是匀速直线运动，这样我们很好预测下一帧中这个 target 在哪，但实际情况往往并不如此。比如可能来了个急转弯，可能突然转身往回走。解决之道，一般要设计更灵活、更复杂的运动模型。</p>
+<p>False Alarms: detector 给出了 response，但实际上那个地方并没有 target，误检。这就要根据可信度，以及多种 refinement 方法来甄别了。</p>
+<a id="more"></a>
+
+<h3 id="Approaches">Approaches</h3>
+<p>目前比较有代表性的有两种：</p>
+<ol>
+<li>Detection-based data association. 多目标跟踪，可以看作一个数据关联问题，连续两帧之间的tracklets or detections 做 link，形成 Longer tracklets。最经典的框架是Nevatia 他们在2008年 ECCV 发表的论文 <em>Robust Object Tracking by Hierarchical Association of Detection Responses</em> 中提出的多层跟踪框架。<strong>low-level:</strong> 把连续帧中的 detection responses 连起来成为 short tracklets，并用阈值去掉 unsafe 的，剩下 reliable tracklets。<strong>mid-level:</strong> 对 low-level 得到的 tracklets，对每对tracklet 计算一算一个 link probability 或 affinity score，然后用 Hungarian 算法做 global optimal assignment，得到 longer tracklets.<strong>high-level:</strong>这里就是对 mid-level 得到的 tracklets 做 refine 了，比如做一个 entry-exit map，估计tracklets 的 start 和 end，对于没有 reach entry-exit points 的，做一个 completion；又如，寻找 moving group，并据此完善 group 中的 targets 的 tracklets。这是一个基础性的、开放的框架，人们可以在每个层次中不断添加使用新的方法，可以看到，此后的许多论文都是构建在这个框架上的。</li>
+<li>Energy minimization. 很多问题都可以转化为一个能量最小化的问题：在解空间中，每个解都对应一个 cost或者说是 energy，我们要做的就是把这个 cost function 表示出来，并找到一个合适的方法求最优解。MOT 大神 Anton Milan 在2014年 PAMI 发表的 <em>Continuous Energy Minimization for Multi-Target Tracking</em> 就是一个典型。已知的是所有 detection responses，解空间就是这些个 responses 构成的所有可能的 tracklets 组合。每个组合都有一个 cost ，寻找一个最优的组合。本文清晰的阐述了 cost function 的构成，以及 minimization。它的牛掰之处是构造了一个连续的 cost function，这样容易求解；它用了 jump move,跳出局部最优，寻找全局最优。</li>
+</ol>
+<h3 id="Overview">Overview</h3>
+<p>目前，MOT 的研究中，大家都是直接使用目前最好用的 HOG or DPM detector，或者直接使用带有 detection 标记的 dataset，在 detection 方面不下功夫。</p>
+<p>low-level 方面，可用的特征就那些，没什么改进的余地。</p>
+<p>因此，目前的研究重点放在 mid-level, high-level 上，比如 ICIP14 的 <em>AN ONLINE LEARNED HOUGH FOREST MODEL FOR MULTI-TARGET TRACKING</em> 就是用 Hough Forest 来计算 tracklets 的 affinity score。又如，CVPR 12年的 <em>Multi-Target Tracking by Online Learning of Non-linear Motion Patterns and Robust Appearance Models</em> ，在 motion model、entry/exit map、moving groups 方面给出了很好的方法。</p>
+<p>对于足球场上的运动员跟踪，运动员与球场容易区分，不同队伍中的运动员容易区分，运动员之间也不太会发生 occlusion；但是，同一队伍中的运动员相似度就比行人大多了，这可能是个挑战。  </p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/机器学习/" term="机器学习"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[iPad 使用经验]]></title>
+    <link href="http://zipperary.com/2014/11/06/ipad-usage/"/>
+    <id>http://zipperary.com/2014/11/06/ipad-usage/</id>
+    <published>2014-11-06T12:25:12.000Z</published>
+    <updated>2014-11-06T13:39:08.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1em1lkxlvbrj20p00gomxs.jpg" alt=""></p>
+<p>上一篇博客还是写的 mini2 的购买记，这一篇就用来记录 iPad 的使用经验和心得吧。慢慢写，慢慢加。</p>
+<p>我的 iPad 没有越狱，目前也没有打算购买付费应用。所以下面提到的都是可以免费获得的。</p>
+<a id="more"></a>
+
+<h3 id="Apps">Apps</h3>
+<p><strong>Documents:</strong> 免费。神器，几乎可以打开所有类型的文件，包括音频、视频、pdf、txt、word 等等，所有文件都支持用 iPad 中的其他应用打开。可以与 dropbox 等绑定设置同步盘，可以通过 ftp 访问文件，可以管理 iCloud 文件。我现在主要用这个来看 PDF。</p>
+<p><strong>PDF Expert:</strong> 付费/免费。它是 Documents 的一个插件，安装后在 Documents 看 PDF 就有完整的功能了，有各种标记功能，使用手写笔时可以防止腕部干扰屏幕，方便的导出功能。在 AppStore 是付费的，在91助手可以免费地一键安装。</p>
+<p><strong>nPlayer:</strong> 付费/免费。无敌视频播放器，目前发现的最好用的。其实一个 mkv 播放就能把大部分播放器排除掉，剩下的免费 App 中，AVPlayer HD 最好，但在我的 iPad 上，播放《走向共和》时，每一集播到中间都会出现视频音频不同步的问题，必须切换到软件解码，而清晰度又不如硬解码，很烦人。后来看到很多人推荐 nPlayer，在91里一找，居然有，于是就免费拿下来了。这么说吧，AVPlayer 有的，它基本都有，它有的更多，还更好用，干嘛不用。</p>
+<p><strong>网易云阅读：</strong> 免费。一个可以离线的阅读器就让我破费周折，它只能说是我目前找到的最不坏的，但仍然不满意。由于我的 iPad 只能用 wifi，而我在的地方、去的地方没有 wifi 很正常，所以离线功能对我很重要，Flippboard 就 game over 了。剩下的基本就鲜果、Zaker、网易云阅读了。鲜果我一直在用安卓版的，源丰富、订阅方便，但 iPad 版的离线下载的时候，每个订阅最少也要下载最近的20条，订阅多了自然就会下载很慢很慢，除此，它的下载也有 bug，没法用。网易云阅读，UI 非常好，离线下载也很快，它最大的缺点是源少很多、自主订阅中的 rss 订阅也难用的很。Zaker 离线下载不如网易，源不如鲜果，UI 也超不过网易。最厚只能用网易了。这几天用下来，还是很顺手的。</p>
+<p><strong>印象笔记：</strong> 免费。属于必备级别的了。但说实话，在 iPad 打字怎么也不方便，所以我基本只用来看笔记，很少会用来添加新的笔记。补充一句，这货在下拉通知中也有插件，快速拍照添加笔记，这是相当有用的。要知道，印象笔记是可以搜索图片中的文字的，很强大！</p>
+<p><strong>Shadowsocks:</strong> 免费。无需配置打开就能科学上网，遗憾的是只能使用它自带的浏览器，不支持其他 app 的翻墙。需要全局的时候，我还是需要用1024找来的免费 vpn。</p>
+<p><strong>百度输入法：</strong> 免费。同安卓一样，在 iOS 平台，百度依然是最好用的输入法。搜狗试过，弃用。自带的也太浪费生命了。</p>
+<p><strong>百度云 HD：</strong> 免费。不要再拿 dropbox 鄙视百度云了，就像不要再拿 google 鄙视百度了，前者是快不快的问题，后者直接就是能不能的问题了。百度云很快很好用啊，我 windows、mac、安卓、ipad 各平台共享文件，这是最便捷的方式了。</p>
+<p><strong>Yahoo 天气：</strong> 免费。安卓上就用过，简洁漂亮好用，在 iOS 上也被 store 推荐为精品应用。唯一的缺点似乎就是在 iPad 的下拉通知插件有时候会有 bug。</p>
+<p><strong>WPS Office:</strong> 免费。之前在知乎上看到 wps ios 团队开发者的回答，自己下载使用，真是良心产品，这么好的产品还是免费的。用来看 ppt 很好。</p>
+<p><strong>MyScript Caculator:</strong> 免费。iPad 居然不带计算器！安卓上我就用这货，手写，识别率极高。iPad 还用它！</p>
+<p><strong>欧路词典：</strong> 免费。中国人出的。可以下载各种离线词典，强大到暴啊。不过已经很少用词典了。。</p>
+<p><strong>Quora、Alien Blue:</strong> 免费。分别是 Quora 和 Reddit 的客户端，涨知识用的。</p>
+<p><strong>网易云音乐：</strong> 免费。安卓上就用。之前在微博上多次推荐了，这里 iPad 版还是要推荐。不多说了，下载就是了！</p>
+<p><strong>网易公开课：</strong> 免费。其实还有 Coursera、iTunes U、TED 这些优秀的应用。但网易贵在快、离线。我一般会离线几个视频，没网的时候看。</p>
+<p><strong>多看阅读：</strong> 免费。好东西，但我不用。文字版的书我会用 Kindle，PDF 我会用 Documents，杂志我会用网易云阅读。不用 Kindle 的，那就强烈推荐下这个。</p>
+<p><strong>自带：</strong> 免费。播客、日历、Safari、闹钟等等，这些自带的应用都很不错。邮件好像是无法推送，每次都要刷新才能看到我 gmail 的来信。</p>
+<h3 id="Games">Games</h3>
+<p>我基本不玩游戏。我说的是基本。。</p>
+<p><strong>Candy Crush:</strong> 免费。AppStore 没找到，在91下的。周围很多人在玩。钻石迷城这一类。腾讯出了个糖果传奇，基本上一样，但后者可以用 QQ 帐号，可以跟朋友们比赛。</p>
+<p><strong>Star Walk2:</strong> 付费/免费。在91下的免费的。可以看天上的星座，而且可以指示方向。比如你对着北边，那么它就显示那个方向的星座。</p>
+<p><strong>开心消消乐：</strong>  Aka 的最爱。</p>
+<h3 id="System">System</h3>
+<ul>
+<li>iOS8中，有了类似 Mac 中的多任务手势，再也不需要 Assistive Touch 了。</li>
+</ul>
+<h3 id="其他">其他</h3>
+<ul>
+<li><p>我们一般都用不到 iCloud 备份和电脑备份，所以自己主动去把 iPad 上的 iCloud 备份，电脑上的 iCloud 和电脑备份关掉。否则会出很多问题的，比如你用91下载的应用或放进去的歌曲，一同步全没了。</p>
+</li>
+<li><p>传输文件： 试过用 iTools 或91，没有方便多少。现在基本上都是用 iTunes 的应用分享，把文件直接拖拽到相应的应用中去。</p>
+</li>
+<li><p>下载安装应用： 还是用 iPad 在 AppStore 下载，需要付费的应用，就去91的『不越狱安装』中看看，有的话就连91一键安装。</p>
+</li>
+</ul>
+]]></content>
+    <category scheme="http://zipperary.com/categories/生活/" term="生活"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[iPad mini2 购买记]]></title>
+    <link href="http://zipperary.com/2014/10/29/ipad-mini2/"/>
+    <id>http://zipperary.com/2014/10/29/ipad-mini2/</id>
+    <published>2014-10-29T02:31:22.000Z</published>
+    <updated>2014-10-29T06:55:18.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://ww2.sinaimg.cn/large/5e8cb366jw1elrur7gnvfj20p00go0tt.jpg" alt=""></p>
+<p>去年入手 Macbook Air，开始第一次使用苹果的产品。一年过去了，对 Air 爱不释手，一直向朋友们大力推荐。前几天苹果的秋季发布会刚刚结束，发布了 iPad Air2 和 iPad mini3，与此同时上一代产品全部降价，大概是700的幅度。其中升级变化最小的产品是 mini3，几乎只增加了指纹识别，价格却骤降700，性价比一下就提升了许多。初尝苹果产品的美味后，在 OSX 之后，很想体验下 iOS，iPhone6太贵，就只能琢磨着入手 iPad 了。</p>
+<a id="more"></a>
+
+<h3 id="Air_or_mini2?">Air or mini2?</h3>
+<p>这两款产品的选择纠结了很久。</p>
+<p>Air 的好：</p>
+<ul>
+<li>大屏，看东西爽，无论是视频还是 pdf。</li>
+<li>rgb 色域满，颜色呈现比 mini2漂亮很多。</li>
+</ul>
+<p>mini2 的好：</p>
+<ul>
+<li>便宜，差800，不是小数目。</li>
+<li>轻便，随身拿着不招眼，床上使用更方便。</li>
+</ul>
+<p>购买之前特意去西单零售店实际体验了下，感觉 mini2 的尺寸还是够用的，色彩呈现也不差，毕竟是苹果的产品嘛。再考虑到没有收入，综合权衡下要了 mini2.</p>
+<h3 id="16G_or_32G？">16G or 32G？</h3>
+<p>都知道越大越好，但大意味着贵啊。32G 的比16G 的贵400.根据使用需求，估计了一下需要的空间，音乐3G + 视频若干 G + 应用，12G 的可用空间就所剩无几了。我要 wifi 版，所以应用中的数据一般离线，这就对空间有比较大的需求。以后是 retina 的时代，应用可能越来越大，这个mini2我还想多用几年，为防止空间上的捉襟见肘，咬牙选择了32G。</p>
+<h3 id="港版_or_行货？">港版 or 行货？</h3>
+<p>港版的好处是少了三百多的税，便宜很多，在保修方面也没有不方便的地方。我选择行货，唯一的原因就是分期付款了。一下子拿出两千多实在困难。</p>
+<h3 id="购买">购买</h3>
+<p>最终确定的方案是：</p>
+<ul>
+<li>iPad mini2，32G，wifi。</li>
+<li>苹果官网，招行12期无息分期付款。</li>
+<li>教育优惠价。</li>
+<li>2448元，12期付清，每期200左右。</li>
+</ul>
+<p>tips：</p>
+<ul>
+<li>招行教育优惠价的链接：<a href="">http://store.apple.com/cn_cmb_edu</a></li>
+<li>招行分期是有活动的，比如积分、送背包，购买之前一定要打电话跟客服问清楚。我分期之后发现送背包的资格没给我，打电话才知道需要电话办理分期才行，坑爹。</li>
+</ul>
+<h3 id="等待">等待</h3>
+<p>在苹果官网查看<a href="https://secure1.store.apple.com/cn_cmb_edu/order/list?hist=90" target="_blank">订单状态</a>，发现它有好几种状态，具体我就不列举了。值得注意的是，教育优惠价购买的，可能会抽查学生证，要注意查看邮箱，如果自己没注意，没回复，它就一直显示『正在处理产品』。我比较走运，没有被抽中。</p>
+<p>产品下单后，用了两天多点的时间送到的，上海出发，顺丰。发票是 EMS 一周才收到。</p>
+<h3 id="捧在手心里的挚爱">捧在手心里的挚爱</h3>
+<p>尽管已经在店里体验过了，现在手中拿着自己的 mini2，还是惊叹于它的美。视网膜屏可不是盖的，细腻精美。不过还有很多游戏并没有很好地视频 mini2这么大的 ppi，所以游戏的界面粗糙不好看。到货快一周了，探索有些收获，找个时间再写篇文章分享。</p>
+<h3 id="题外话">题外话</h3>
+<p>上周五买了辆全新自行车，周末去慕田峪玩了两天，回来自行车就丢了。才骑了两次，太可惜了。</p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/生活/" term="生活"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[慕田峪游记]]></title>
+    <link href="http://zipperary.com/2014/10/28/mu-tian-yu-you-ji/"/>
+    <id>http://zipperary.com/2014/10/28/mu-tian-yu-you-ji/</id>
+    <published>2014-10-28T10:07:30.000Z</published>
+    <updated>2014-10-28T10:08:35.000Z</updated>
+    <content type="html"><![CDATA[<p>来北京不到长城，怎么能称得上好汉呢？每念及此，常隐隐心痛。这次有诸友号召响应，才终成此行。北京的长城最有名的就是八达岭了，但几乎所有人都给我推荐慕田峪。后者虽然更远些，但人少点，景色也更美，去那儿游玩的外国人比较多；而且彼处有箭扣这样的野长城，更有趣味。时不我待，再等就只能深秋了，叶子落尽、冬寒凛凛，不好。因此尽管周六雾霾严重，却毅然成行。</p>
+<h3 id="魏公村到慕田峪农家院">魏公村到慕田峪农家院</h3>
+<p>早上11点出发，从魏公村地铁站上车，4号线到西直门转乘2号线到达东直门，一共花费半个小时左右的时间。中午在东直门地铁站D口附近的来福士商场地下一层吃了午饭，摊摊面家的摊摊面和凉皮相当不错。饭后去地铁站E口旁边的东直门枢纽站，进去里面，816快的队伍已经长的吓人了。好在816快特别多，一车也能装不少人，排队时间并不长。由于路途遥远，要从市里坐到怀柔北大街，几乎没人愿意站着，况且这里是首战，等一会就能坐上车。若是赶时间，不妨站着，不用等。既是公交，价格也便宜的很，全程12元，刷卡就是不到5块。路上拿iPad看《驯龙高手2》，看了一半多就到了，也就是说用了大概一个多小时。下车后并没有找到传说中的h24，簇拥上来的黑车司机一堆一堆的，最后找了个面包车，我们一共5人，每人5块钱送到了慕田峪售票处。周天返回的时候才知道，原来h24已经改成936，在怀柔北大街坐936就能到，不过5块钱很便宜了，速度也更快，半个小时左右或者不到。下车的那个辛营公交站那儿有三条路，往回走几步是慕田峪售票处，往前走就离开慕田峪了，另外那个路通向长城脚下的北沟村，我们就是去那里。路很简单，沿着走就行，花了一个多小时，悠闲地走到北沟村，进了第一个看到的农家院“好再来农家院”的门。慕田峪本来人就少些，又赶上雾霾，北沟村离慕田峪的官方入口又很远，所以这里很冷清，农家院少，游客更是少见。凭这一点，我们把一间房的价格从150讲到了80，主要是aka的功劳。其实这里很清静，视野也不错，从窗户就可以看到长城，步行到长城非官方入口也不远，房间新装修也挺干净，这个价格还是值得的。放下背包，下午时间还多，我们索性往长城那边走走。上坡的路很缓，是车路，有车就好了。走到前面的一个转弯处开始回返，此时已经山下灯火了。在路过的小卖部买了一袋子零食。回到住处阿姨正在找我们吃晚饭。这顿晚饭真是家常啊，五个素材，主食米饭，除了花生都不怎么好吃。阿姨居然要35元每位，我们吃惊之后就是呵呵了。经过aka的努力，杀到了20每位，吃吧，还能饿着咋地。在阿姨家的客厅吃的，正吃着她的家人也回来了，一边看电视一边随便聊聊，气氛不错。饭后回到房间，我们把一个标准间的两个床拼起来，大家五个人坐上去开始玩斗地主。我一向对扑克兴趣不大，这次却玩的很尽兴，为啥？赢牌了！没网、电视信号也差，正好促进我们几个交流。女生回到他们的房间，我三人躺在这个拼凑的大大床上，听歌、听相声、畅谈…</p>
+<h3 id="慕田峪！">慕田峪！</h3>
+<p>早上七点多醒来，雾霾尽散！从窗户看到外面的山和山上的长城，真是天公作美。洗漱整理完毕，出发！走到昨天路过的小卖部，一人四块钱吃的煮挂面，一人带一个鸡蛋，虽然没油没盐面不熟，但暖和管饱啊。沿着昨天探索的路往上走，中途遇到几个驴友。走到第三个磨盘的时候路分叉了，一条还是这个路，继续走，另外旁边还分出一条小路，算是独辟蹊径的那种，我们选择了这个。虽然不是政府开发的，但这条路看来已经很成熟了，鞋印子很多，也很好走。走了半小时左右到了长城16号敌楼，这里便可以上去。路上下来的驴友就提醒我们上面有大爷查票，要小心，没想到还真碰上了。但我们已经做好了套票的准备，要跟他理论。小于负责上去讲理。大爷并没有政府给的权力，应该是村子里的，肩膀上带上红布就站在那儿收钱，什么凭证都没有，干嘛给他！但大爷也很犟，两个人理论的还挺激烈，最后谈成每人5元。给钱的时候又发现没零钱，大爷也找不开，一气之下大爷把我们放行了。。</p>
+<p>站在长城上，晴空万里，和煦的阳光打在脸上，无风。举目四望，长城绵延不绝，群山层林尽染，大好河山，无限感慨。还犹豫啥，拍照！拍了一会开始爬，一边是慕田峪景区，一边是野长城方向，我们选择了后者。一路爬一路拍，游人也渐渐多起来。这次去，带了保暖内衣，幸好早上没穿上，爬了一段后把外套也脱了，只穿一个细线毛衣；还看见了几个光膀子的男士呢。顺着这条路可以走很多，走到远处就是箭扣，但从那边过来的驴友告诉我们那儿十分险要，还死过不少人。从入口沿着箭扣的方向走，一路上人很多，最后走到了一片坍塌的城墙，虽然也可以过去，但听声音对面人比较少，而且此时已经午后，为了赶车，不再往前了。沿着原路返回，回到入口处再继续向前，就是慕田峪景区了。可以看到非诚勿扰在长城取经的那个地方，看到铁炮，看到界碑，看到单程80双程100的缆车，我们选择从10号敌楼下去。</p>
+<h3 id="回家">回家</h3>
+<p>这里是景区了，路也就更好走，不一会就到了售票处。此处距离来时的辛营公交站还挺远的，有摆渡车把游客送过去，10元每位。我们选择步行，长城都爬了，这几公里还怕什么。一路上都是农家院，原来这里才是游客的住处。中间路过一个很别致的农家院，没有围墙，院子里有秋千、摇椅，几棵大树下有桌子，一地落叶，很有感觉。应小于的号召，我们进去吃了久闻大名的虹鳟鱼，味道十分鲜美。饭后走了没多久就到辛营了，一堆的乘客在等，刚刚过去查看公交站牌上的信息，车就来了，真赶巧！车很快到了怀柔北大街，考虑到人很多，我们又乘坐随即赶来的816快去总站怀柔汽车站。一下车就看到弯成了回字形的队伍，像来时那样排队候车，等待也不算太久。回城的路上车辆拥堵，用时比来时多很多，路上看《走向共和》看了至少两集，又跟他们聊天说笑，总共用时得有两小时吧。到东直门在旁边的美食城吃上了庆丰包子，感觉味道不错。随后乘坐地铁回家，回到宿舍已经是差不多十点了，洗澡，玩pad，睡觉…</p>
+<p>总体来说，这次的游玩很顺利：赶上了好天气，等车没太久，住宿吃饭也没被宰，小伙伴们很happy，长城也把它最美的一面展示给了我们。现在腰腿酸痛着，记录下这次美好的旅程。</p>
+<p><img src="http://ww3.sinaimg.cn/large/5e8cb366jw1elr15ljm1mj21kw16o1kx.jpg" alt=""></p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/生活/" term="生活"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[《素媛》：一个需要得到更多关注的群体]]></title>
+    <link href="http://zipperary.com/2014/10/04/suyuan/"/>
+    <id>http://zipperary.com/2014/10/04/suyuan/</id>
+    <published>2014-10-04T13:11:05.000Z</published>
+    <updated>2014-10-04T14:09:10.000Z</updated>
+    <content type="html"><![CDATA[<p>韩国有很多现实主义题材的电影近来得到了国人的关注，比如关于民主的《辩护人》，关于儿童虐待和性侵害的《熔炉》，以及这部同样有关儿童性侵害的《素媛》。这样的电影使得更多人关注相关的社会问题，甚至推动了某些问题的解决，这是电影人社会关怀的体现和实现。我国的电影市场目前还不够争气，没能拍出这类影片，所以国人看到韩国类似的电影纷纷拍手叫好，同时怒国内影人的不争和广电总局的无耻。不过，今天我去影院看的《亲爱的》算是一个进步了，这部电影反映的是拐卖儿童现象，我推荐大家都去看一下，同时关注一下这个现象。还是说说《素媛》吧。</p>
+<p>故事很简单，小女孩素媛在上学途中被禽兽大叔实施暴力和性侵害，造成了很严重的人身和心理伤害，父母一方面要正义得到伸张、坏人得到惩罚，一方面帮助孩子恢复身体，尤其是心理。</p>
+<p>关于这部电影，有几点观影感受：</p>
+<ul>
+<li>小孩是社会的弱势群体，不仅需要父母的严加保护，也需要社会力所能及地帮忙保护和照顾。《素媛》中，小素媛的爸妈太忙没时间护送小孩去上学，上学途中的这段时间就给了坏人以可乘之机。社会中的坏分子总是存在的，千万不能掉以轻心。此外，社会也有责任也有必要帮忙，比如《亲爱的》中鹏鹏被坏人抱走，在路上在车上一直挣扎哭喊，鹏鹏的穿着也跟坏人显然不属一个群体，周围的人理应觉查到异常并通知附近的民警注意一下。</li>
+<li>犯罪嫌疑人是酒后实施侵害的，这就关涉一个问题：醉酒实施的犯罪是否应该轻判？在判决时是否应该跟精神病者享受同样的优待？在影片中的韩国，答案是肯定的。站在受害者家人的角度，肯定是不同意；站在犯罪嫌疑人的角度，他们大多也会后悔酒后的不理智行为，而且并非存心作恶。这个争议长久存在，在没有妥善解决之前，我们能做的，也许就是离醉酒的人远一点。我见过亲戚醉酒后的情绪敏感，见过同学醉酒后的满口胡话，见过醉酒后拼命打架的人，也知道无数醉酒做出不理智行为的事件，所以，我的策略就是离他们远点，或者挂笑附和。对于孩子，也要教育他们远离有酒气的地方。</li>
+<li>电影中小素媛的事件发生后，新闻媒体和记者大肆报道，一点不顾及受害人的隐私，令人非常气愤。我相信现实中也是如此，不仅韩国，中国也是如此。新闻媒体要有职业道德，对于需要保护隐私的群体，就不能只顾着赚取观众的眼球了。类似强奸、性侵这种社会认为很『丢人』的事，媒体有没有良心就看他怎么报道了。我想起央视新闻播出名人嫖娼、吸毒被抓之后在镜头前忏悔的节目，先不论疑罪从无这条法律原则，嫌疑人涉嫌违法本来就是不光彩的事情，还要在受众最广的央视播出自己的违法行为，还要对着镜头忏悔，镜头另一侧就是自己的亲人、朋友、13亿观众啊！如果是他们自己提出这样做的那就无可厚非了，但我认为不会有人喜欢这样做吧。</li>
+<li>同《熔炉》一样，这种案件需要受害人指认犯罪嫌疑人，但受害者在收到侵害后身体心理本来就很脆弱，还要回忆犯罪经过，太不人道。在父母和老师对小素媛进行长期的心理治疗，本来已经逐渐恢复的情况下，还要让她出庭指认犯罪嫌疑人，这是多么的无情啊！也许这就是法律的规定。可这样的案件并不是个案，立法者有必要针对这种特殊情况修改适用法律了。另外，这种罪行居然还用强奸罪判处，显然太轻了。儿童是需要特别保护的群体，对他们的侵害，危害要远大于对成年人的类似侵害，是不是应该有专门的法律条款来规定这样的刑罚标准？</li>
+<li>电影用了大量的篇幅着重讲了父母、心理医生对素媛心理的治疗过程，这也是最容易被忽略的，但心理伤害觉不亚于身体的伤害。素媛不愿说话，不敢见男人甚至爸爸，觉得自己做错了时，觉得人们看自己的眼光怪怪的。爸爸穿上卡通衣，把素媛带入童话的世界，在这里跟她交流。爸爸在工作间隙不休息，穿卡通衣到学校操场让女儿看。女儿感受到了慈爱，放弃了对父亲的戒备，重新拥抱爸爸。由于肛门切除，素媛可能一辈子都要带着便袋，但心里面的阳光，给了她希望，让她继续去上学，继续折飞机给小弟弟。</li>
+<li>面对灾难，受害者总是要问「为什么是我？」 「为什么是我的家人？」厂长说就把它想象成事故，像车祸一样，谁都可能遭遇。我企图在这里总结一个温暖的答案，现在我放弃了，我也没有答案。谁能回答，请留言。</li>
+</ul>
+]]></content>
+    <category scheme="http://zipperary.com/categories/电影/" term="电影"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[理解 iOS 的 MVC 架构]]></title>
+    <link href="http://zipperary.com/2014/09/07/mvc-of-ios/"/>
+    <id>http://zipperary.com/2014/09/07/mvc-of-ios/</id>
+    <published>2014-09-07T07:06:20.000Z</published>
+    <updated>2014-09-07T08:28:17.000Z</updated>
+    <content type="html"><![CDATA[<p>MVC 架构在 web 开发、软件开发和 App 开发中都是推荐的一种模式，它能让程序结构清晰、松耦合，其思想也非常的 instinct。本文就结合 iOS App 的开发来谈谈对 MVC 架构的理解。</p>
+<p>iOS 对 MVC 的支持是默认的，它提供了一系列的机制保证我们可以让程序更好的 MVC 化。首先借用一下斯坦福 cs193p 《Developing Applications for iOS》中这张经典的图片来说明，然后结合我写的一个 Demo 做解释。</p>
+<p><img src="http://ww2.sinaimg.cn/large/5e8cb366jw1ek3xj7k67cj21400p0qaa.jpg" alt=""></p>
+<p>Controller 是总指挥，当它需要数据的时候就告诉 Model，你帮我获取某某数据；当它需要 UI 展示和更新的时候就告诉 View，你帮我生成一个 UI 显示某某数据。Controller 可以直接发送消息给 Model 和 View，对于 nib （xib 或 storyboard）方式创建的 view，使用 outlet 来联系 View。</p>
+<a id="more"></a>
+
+<p>Model 可不可以给 Controller 发送消息呢？一个场景是数据改变了，需要通知 Controller，UI 需要 update 了。可以，通过 radio 机制，也就是图片中的 Notification &amp; KVO。iOS 中有一个 NotificationCenter，Model 在这里注册一个广播，它可以选择自己在什么时候发送这个广播，广播中带有消息。而 Controller 中要注册一个 Observer，也就是一个听众，随时关注着 Model 的广播，当收听到 Model 发送的广播后，可以接收消息，也可以做出相应的动作。当然，除了 KVO，也可以直接把 Model 的某些操作放在 Controller 中做，这样就不需要这么复杂了，但这会破坏 MVC 清晰的分工，破坏其松耦合。我Demo中先是用了后一种方法，后来改成了 KVO 方式。</p>
+<p>View 可不可以向 Controller 发送消息呢？一个场景是用户对 View 产生了  event， 如 touch。可以，对于 nib 是用 IBAction，对于 code 是用 addTarget，这个消息是当某某事件发生的时候告诉 Contoller 你可以做出某些相应的动作了。</p>
+<p>还有一种场景是对于某些 View，一般会有一些相应的操作，iOS 自动提供了这样的消息，允许我们重写其方法。比如对于 table view 就有<code>didSelectRowAtIndexPath</code>，我们可以实现这个方法，当用户选择某一个 cell 的时候，就会调用这个里面定义的一些操作，这个定义就是在 Controller 中实现的。这就是图片中的 delegate，也是一种设计模式，其方法前面通常有 will, should, did。对于 delegate 我以后应该会专门介绍自己的理解。</p>
+<p>此外还有一种场景：当我的 UI 需要数据的时候怎么办呢？比如 table view 中的 cell 就是用来展示数据的，table view 应该放几个 cell，每个 cell 里面是什么？从图中可以看到，我们一般是严禁 Model 和 View 之间的联系的，因为我们希望 data 和 representation 是分离的，所以不能直接跟 Model 要数据啊。iOS 提供了 datasource 这种机制来让 View 向 Controller 要数据。</p>
+<p>为了练习 MVC，我写了一个小 demo，放在 github，地址是：<a href="https://github.com/zippera/MVCDemo" target="_blank">https://github.com/zippera/MVCDemo</a> 。</p>
+<p>功能很简单，2个 scene，一个展示新闻列表，一个展示新闻详情，这里用到的是网友提供的 Startup News 的 API。</p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1ek3rdafgivj20hs0qoq7p.jpg" alt=""></p>
+<p><img src="http://ww3.sinaimg.cn/large/5e8cb366jw1ek3rgtlthaj20hs0qojtm.jpg" alt=""></p>
+<p>用到了一个第三方库，AFNetwork，异步访问网络，并自动把 json 转换为 dict。当然也可以用 iOS 自带的 request，我这里顺便练习了一下 AFNetwork。</p>
+<p>程序的内容有点多，不方便在这里展开一一来谈，但还是想就前面提到的几种 communication 用代码做一下注解。</p>
+<p>先看 KVO：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre>+ (void)SNPosts:(NSString *)url
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:url parameters:<span class="keyword">nil</span> success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@<span class="string">"success"</span>);
+        <span class="keyword">if</span> (responseObject) {
+            <span class="string">[[NSNotificationCenter defaultCenter]postNotificationName:@"dataLoaded" object:self userInfo:[NSDictionary dictionaryWithObject:responseObject forKey:@"json"]]</span>;
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *<span class="built_in">error</span>) {
+        NSLog(@<span class="string">"fails"</span>);
+    }];
+}
+</pre></td></tr></table></figure>
+
+<p>注意<code>NSNotificationCenter</code>这里。前面我异步访问一个网址，如果访问成功，并返回了数据，即<code>if (responseObject)</code>成立，我就需要告诉 Controller 该更新 UI 了。这句是注册一个广播，广播的频道是<code>dataLoaded</code>，发送者是这个 Model 类，要传递的参数就是访问网址返回的数据。</p>
+<p>相应地，在 Controller 中注册了一个听众，收听<code>dataLoaded</code>频道，当收到消息时，做出动作<code>updateUI:</code>，即更新 UI。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="attr_selector">[[NSNotificationCenter defaultCenter]</span><span class="tag">addObserver</span><span class="pseudo">:self</span> <span class="tag">selector</span>:<span class="at_rule">@<span class="keyword">selector(updateUI:)</span> name:@<span class="string">"dataLoaded"</span> object:nil]</span>;
+</pre></td></tr></table></figure>
+
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>- (<span class="keyword">void</span>)updateUI:(<span class="built_in">NSNotification</span> *)notification
+{
+    posts = [notification<span class="variable">.userInfo</span> objectForKey:@<span class="string">"json"</span>];
+    [<span class="keyword">self</span><span class="variable">.tableView</span> reloadData];
+}
+</pre></td></tr></table></figure>
+
+<p>哎呀，篇幅太大，其他不说了，再说一个 KVC（Key-Value-Coding） 相关的吧。AFNetwork 获取 json 数据后返回的默认是 NSCFDictionary，怎么把这个类型跟 Model 这个类型对应起来呢？笨的办法是对应元素分别赋值，简单的方式如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>- (<span class="keyword">id</span>)initWithDictionary:(<span class="built_in">NSMutableDictionary</span> *)json
+{
+    <span class="comment">// json -&gt; DemoPost</span>
+    <span class="keyword">if</span>(<span class="keyword">self</span> = [<span class="keyword">super</span> init])
+    {
+        [<span class="keyword">self</span> setValuesForKeysWithDictionary:json];
+    }
+    <span class="keyword">return</span>  <span class="keyword">self</span>;
+}
+</pre></td></tr></table></figure>
+
+<p>前提是 json 的 key 跟 DemoPost 这个 Model 的 property 的名字都是相同的。</p>
+<p>MVC 是相对的，只能说程序很 MVC，不很 MVC，希望随着我的学习和理解，能让这个程序更加 MVC 化。 </p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/iOS/" term="iOS"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[十渡小记]]></title>
+    <link href="http://zipperary.com/2014/08/25/shi-du-xiao-ji/"/>
+    <id>http://zipperary.com/2014/08/25/shi-du-xiao-ji/</id>
+    <published>2014-08-25T14:49:00.000Z</published>
+    <updated>2014-08-25T14:50:09.000Z</updated>
+    <content type="html"><![CDATA[<p>每年至少去一个地方旅行，这是一个长久的、不错的想法，但一直未动身过。这次万事俱备，该行动了。</p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1ejoyb485lej21kw16o7v5.jpg" alt=""></p>
+<a id="more"></a>
+
+<p>十渡位于房山区的最西边，已经接壤河北的西柏坡风景区。我虽在西三环，但首先要坐车到位于皇城南边的天桥，那里有去十渡直达的唯一一路公交，也是起点，周天去，三四个小时的路程，从起点坐车稍微保险一点。</p>
+<p>早上六点多起床，从学校坐车去天桥，等着9点的整点车，将近下午一点才到达十渡站，若没有堵车其实12点便可以到。找到提前在去哪儿网预定的农家院，休息一下，吃了点东西，已经是下午两点了。</p>
+<p><img src="http://ww2.sinaimg.cn/large/5e8cb366jw1ejoy3wgv9pj21kw16oe5g.jpg" alt=""></p>
+<p>第一站是十一渡的漂流和竹筏。玩竹筏的那片水并不大，但好在是周天，人不多，我们踏上竹筏的时候甚至还没有其他游客。游泳还没学好，安全起见跟人家要救生衣，老板一脸不屑的说“放心，掉不下去”。好吧，再坚持会被鄙视的。我们两个人各自撑了一根竹竿。水的确很浅，而且清澈可以见底。把竹竿竖直捅下去触底，然后向后方用力推动竹竿，竹筏就会向前走，感觉比在颐和园划船桨时快多了。水的一边紧靠高山，四周远处同样是山脉，凉风悠闲地吹着，好不惬意。竹筏撑累了，停下来掏出包里带的零食，坐在竹筏上一遍欣赏着山水之美，一遍关照一下饥肠辘辘的肚子，不远处已经有一群叔叔阿姨在一只大竹筏上齐声唱起了山歌，可惜这样的时光如此短暂啊。</p>
+<p><img src="http://ww2.sinaimg.cn/large/5e8cb366jw1ejoy5yv0hkj21kw16oe81.jpg" alt=""></p>
+<p><img src="http://ww3.sinaimg.cn/large/5e8cb366jw1ejoy3fwu30j21kw16o1kx.jpg" alt=""></p>
+<p>漂流和竹筏是套票，两个项目属于一家，紧挨着。传说中周六会有几百个人排队的漂流项目，现在也仅有几十个人罢了。穿上提前带来的一次性雨衣（只能保证上衣不湿），外面套上救生衣（漂流水急），用塑料袋把书包包裹起来（带包包是个失误），穿着拖鞋，排了一小会的队就上了充气艇。座位是湿的，一坐下我的短裤就交代了。漂流开始的地方水流特别急，打着转就漂下去了，前前后后的小艇杂乱地撞击，水花溅起很高，相当刺激。中间的水流虽然也挺急，但可以暂停下来玩耍了。有一些成群来玩的游客甚至下了水，拿着水枪互相喷，玩的很尽兴，我们两个人玩不起来，看着他们玩也是很欢乐的。Aka不小心把船桨脱手了，水流载着它急速地冲走了。Aka凉鞋进了泥土，拿下来放到水里冲洗一下，再次脱手，一只鞋孤单地开始了自己的旅行。鞋子漂到了一个人多的地方，大家围追堵截，终于帮Aka夺回了鞋子。漂流的长度还可以，玩了大概四十分钟。上了岸，打开包，发现她的小米已经自动关机，我的三星后盖快泡烂了，移动电源也浸了水，钱包什么的都遭了殃。哎，带包就是个错误！</p>
+<p><img src="http://ww3.sinaimg.cn/large/5e8cb366jw1ejoy86smdgj21kw16o1kx.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1ejoy8yzy2yj21kw16ob29.jpg" alt=""></p>
+<p>第二天玩的是孤山寨，据说是十渡风景最美的地方。这里有瀑布、一线天、悬索桥，还有滑翔、竹筏等游玩项目。由于带着沉重的背包，爬山无望，只能遥遥望着远处的瀑布群，并在眼前的瀑布、龙潭旁吃东西休息。一线天是另外一条路，只能不见而别了。悬索桥还不错，下面就是玩竹筏的水域，有调皮孩子在左右摇晃，胆小者在尖叫，我们走在悬索桥最中间，这里容易保持平衡，然后脱手往前走，走到中间欣赏水光山色，美不胜收。</p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1ejoy9wljnvj21kw16o7wh.jpg" alt=""></p>
+<p><img src="http://ww2.sinaimg.cn/large/5e8cb366jw1ejoycisg7qj21kw16okjl.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1ejoydikjzcj21kw16ohat.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1ejoyf0x061j21kw16o4qp.jpg" alt=""></p>
+<p>游玩到此结束。总结一下经验教训：</p>
+<ol>
+<li>千万不要周五、周六去，住宿贵很多、景点排队的人特别多、坐车还极有可能没座位。我们是周日去，周一回的，不会有上述问题。</li>
+<li>农家院不要在团购网上买了就没事了，最好提前打个电话问问位置、价格、能提供多便宜的门票、是否接送等等。我们去的时候都没问，到后这家农家院居然不承认去哪儿买的门票，而且其他服务也不怎么地。</li>
+<li>北京过去除了傍晚的那趟火车就是从天桥出发的836路了，整点出发，要至少提前半个小时到吧，还需排队，进去晚了可能就要站着了。刷卡4折，学生2折。</li>
+<li>景区的门票在团购网上看好价格后最好跟农家院或黑车司机买，能提供同样的门票价，接送费用也要低不少。</li>
+<li>吃饭呢，最好多带点吃的过去，农家院的菜还是挺贵的，不过味道还可以，人多的话倒可以点一桌来吃。</li>
+<li>玩漂流要穿短裤、凉鞋（最好不要拖鞋，容易掉水里），不要带包，手机等贵重物品不要带上去或者用完整的塑料袋密封好，带上水枪、水瓢之类。</li>
+<li>乘车、等候的时间比较多，手机、pad、kindle里多放点货，移动电源带上，to kill time.</li>
+</ol>
+]]></content>
+    <category scheme="http://zipperary.com/categories/生活/" term="生活"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[自由之路]]></title>
+    <link href="http://zipperary.com/2014/08/01/the-road-to-freedom/"/>
+    <id>http://zipperary.com/2014/08/01/the-road-to-freedom/</id>
+    <published>2014-08-01T10:48:09.000Z</published>
+    <updated>2014-08-01T14:05:11.000Z</updated>
+    <content type="html"><![CDATA[<p>互联网最重要的精神是自由，在自由被强权限制的情况下，只有个人付出一点努力，争取一下各自的自由了。</p>
+<p>为了文章长存，就不用敏感词了。</p>
+<p>步骤：</p>
+<ol>
+<li>下载并安装<a href="https://www.google.com/intl/en/chrome/" target="_blank">Chrome</a>浏览器。</li>
+<li>Shadowsocks软件，根据自己是 Mac 还是 Windows 到<a href="https://sourceforge.net/projects/shadowsocksgui/" target="_blank">这里</a>下载并安装。进入<a href="https://www.shadowsocks.net/get" target="_blank">这里</a>选择一个100%的，点击『邮件』填写自己的邮件地址和验证码，然后去自己邮箱，会看到发过来的帐号。打开 shadowsocks 软件，把帐号填进去。</li>
+<li>SwitchySharp.crx，到这里来下载，链接: <a href="http://pan.baidu.com/s/1gdoYxYr" target="_blank">http://pan.baidu.com/s/1gdoYxYr</a> 密码: w3n2 。打开 chrome 浏览器，在地址栏输入 <code>chrome://extensions/</code>并回车，进入到『扩展程序』页面，把SwitchySharp.crx拖到这个页面中，就可以安装该插件到 chrome 了。</li>
+<li>右键点击 chrome 右上角的地球图标，『选项』-『情景模式』-『新建情景模式』，随便起个名字，比如”shadowsocks”，然后如图配置，保存。然后进入『切换规则』，三个框全勾选，『在线规则列表』中填写 <code>https://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt</code>，保存，立即更新列表。如下下图所示。</li>
+</ol>
+<p><img src="http://ww2.sinaimg.cn/large/5e8cb366jw1eixhaiv5jbj20hl0epmy9.jpg" alt=""></p>
+<p><img src="http://ww2.sinaimg.cn/large/5e8cb366jw1eixhdqrfaxj20ot04i74s.jpg" alt=""></p>
+<p>Okay，一切都配置好了。</p>
+<p>使用：</p>
+<ol>
+<li>打开 Shadowsocks 软件。</li>
+<li>chrome 浏览器右上角地球图标选择『自动切换模式』。</li>
+</ol>
+<p>自由了！</p>
+<p>Note:</p>
+<p>由于帐号是网友免费提供的，不保证服务质量，如果帐号某天不能用了，请如第二步获取新帐号。</p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/IT杂谈/" term="IT杂谈"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[挪威的森林]]></title>
+    <link href="http://zipperary.com/2014/07/19/nuo-wei-de-sen-lin/"/>
+    <id>http://zipperary.com/2014/07/19/nuo-wei-de-sen-lin/</id>
+    <published>2014-07-19T13:41:33.000Z</published>
+    <updated>2014-07-19T14:54:25.000Z</updated>
+    <content type="html"><![CDATA[<p>记得初读此书是在本科时，从小于同学那儿借来的，看的过程很快乐。前不久给同学荐书时强烈推荐了这本书，推荐理由大概是这样的：</p>
+<blockquote>
+<p>这本书的文字很好，村上春树写的固然好，林少华翻译的也很恰当，这本书无论从哪里看都很精彩。</p>
+</blockquote>
+<p>这是我已经模糊的记忆里所残留下来的印象。</p>
+<p>近日闲居在家，百无聊赖，索性打开 Kindle，重温几年前读此书时的体验和感受。</p>
+<p>记性不好，读过的书，看过的电影，经过的事，如果不稍作记录，情节都会模糊的失去痕迹。先把情节简单概括下：</p>
+<p>主人公渡边（第一人称，我）、木月是从小到大的好基友，而木月跟直子是从小青梅竹马的一对，三个人是最好的朋友，也是渡边、木月仅有的圈子。木月有一天在车库自杀，渡边失去了最好的朋友，直子失去了挚爱的恋人。</p>
+<p>为了排解伤心，高中后两人不约而同地都到了一个陌生的城市，东京，又偶然的相遇了。直子生日，渡边去直子的公寓为其庆生，两人 ML。直子由于木月的死，精神没缓过来，休学去京都的阿美寮疗养院。</p>
+<p>而在东京这边，渡边结交了永泽，一个个性鲜明的人物，后者带渡边去泡吧、钓妹子、ML.</p>
+<p>在餐馆，渡边与同修戏剧课的绿子相识，后来去绿子家吃饭、对着外面的火灾唱歌喝酒，接吻，此时绿子还有恋人。</p>
+<p>不久后渡边去京都的疗养院看望直子，并结识了直子的室友玲子，直子道出了救救和姐姐自杀的事情，玲子道出了弹钢琴手指出问题、结婚生子、和学钢琴的女学生之间的GL 之事。</p>
+<p>回东京后，绿子接渡边出来，一起聊性，去看色情电影，而后去绿子家，渡边哄绿子睡觉。绿子的父亲病重在医院，绿子、渡边去照顾，渡边还单独照顾了他几个小时，不久绿子父亲去世。</p>
+<p>永泽通过了外务省考试，永泽带上女友初美，叫上渡边去吃饭，而后渡边送初美回家，期间谈了永泽和初美的爱情。</p>
+<p>寒假去看望直子。</p>
+<p>回东京后，自己搬家，忘了告诉绿子，后者生气；和好后，绿子精心留好的长发渡边却没注意，绿子很伤心；这次和好后，两人已经爱的彻底，在绿子家。</p>
+<p>直子自杀。渡边悲痛欲绝，漫无目的的旅行，回东京后，玲子也来东京看望他，二人弹奏吉他悼念直子，叙说直子的死，ML。送走玲子，渡边只剩下绿子，像个孩子一样呼唤着绿子。</p>
+<a id="more"></a>
+
+<p>梗概归梗概，小说的动人之处常常不是情节，而是细节，这个我是无法展开的。从人物身上做点总结吧。</p>
+<p>渡边：对绝大多数事情都是一幅无所谓的态度，生活在自己的世界中，无比诚实，恋着直子，恋着绿子。</p>
+<p>直子：叔叔、姐姐、木月的死给她造成了无法挽回的创伤，一方面意识告诉她应该追随他们而去；但潜意识中她还是被渡边所代表的现实吸引，ML，半夜到渡边的床边，都说明潜意识里他渴望继续她的人生。然而最终意识获胜，她选择了同样的道路。</p>
+<p>绿子：我最喜欢的人物，像小鹿一样活泼有生气，她就代表生命力，她能生活在俗世，并懂得玩味俗世中的快乐。她拯救了渡边，把她从孤独的精神世界拉了回来。</p>
+<p>永泽：一个有目的、自觉努力又很聪明的奋斗者、成功者。浪漫而虚无的爱情不是他的追求。</p>
+<p>初美：追求理想的爱情，为人特别好，最后得不到理想，选择了自杀。</p>
+<p>玲子：她最后跟渡边 ML 是怎么回事！</p>
+<p>这本书有数不清的漂亮段落，比如：</p>
+<blockquote>
+<p>哪里会有人喜欢孤独，不过是不喜欢失望。  </p>
+</blockquote>
+<p>又如：</p>
+<blockquote>
+<p>“最最喜欢你，绿子。” “什么程度？” “像喜欢春天的熊一样。” “春天的熊？’绿子再次扬起脸，“什么春天的熊？” “春天的原野里，你正一个人走着，对面走来一只可爱的小熊，浑身的毛活像天鹅绒，眼睛圆鼓鼓的。它这么对你说道：‘你好，小姐，和我一块打滚玩好么？’接着你就和小熊抱在一起，顺着长满三叶草的山坡咕噜咕噜滚下去，整整玩了一大天。你说棒不棒？” “太棒了” “我就这么喜欢你” …  </p>
+</blockquote>
+<p>还有：</p>
+<blockquote>
+<p>“完美无缺的爱？”<br>“不不。就算我再怎么样也不敢那么追求。我所求的只是容许我任性，百分之百的任性。比方说，我现在对你说想吃酥饼，你就什么也不顾地跑去买，气喘吁吁地跑回来递给我，说：‘诺，绿子，这就是酥饼。’可我却说：‘我又懒得吃这玩艺儿了！’说着‘呼’的一声从窗口扔出。这就是我所追求的。”<br>“这和爱似乎不大相干啊！”我不无愕然地说。<br>“相干！你不知道罢了，”绿子说，“对女孩儿来说，这东西有时非常非常珍贵。”<br>“就是把酥饼扔出窗口？”<br>“是啊。我希望对方这样说：‘明白了，绿子。怪我不好，我本该估计到你又不想吃酥饼才是。我简直像驴粪蛋儿一样愚蠢透顶、麻木不仁。为了表示歉意，让我再去给你买点别的什么。什么好？巧克力饼，还是奶酪饼？’”<br>“然后怎么样呢？”<br>“那我就好好地爱他，报答他。”</p>
+</blockquote>
+]]></content>
+    <category scheme="http://zipperary.com/categories/读书笔记/" term="读书笔记"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[我不是归人，是个过客...]]></title>
+    <link href="http://zipperary.com/2014/07/16/visitor/"/>
+    <id>http://zipperary.com/2014/07/16/visitor/</id>
+    <published>2014-07-16T03:13:56.000Z</published>
+    <updated>2014-07-16T03:47:40.000Z</updated>
+    <content type="html"><![CDATA[<p>从高中起就离开家乡外出求学，到现在读研，这些年的时间几乎全在他乡度过。通常情况是半年回家一次，随着学位的提高，居家逗留的时间也越来越短。于我，他乡已成家，家乡反而似定期拜访的朋友之家。我不是归人，只是过客…</p>
+<p>实际上，连朋友之家都不及。</p>
+<p>逗留的短暂对我并没有什么杀伤力，最大的悲哀在于客居他乡反比在家生活更顺心意。都市的繁华丰富和小县城的破旧安静之比倒数次要，关键之处是寂寞，「无以言说」的寂寞。</p>
+<p>「无以言说」，即 “have nobody to talk with”。嗯，这才是最大的悲哀。</p>
+<p>父母都是初中学历，文化不高，几乎从未出过县城，眼界局宥于操着同样方言的地域。虽然经商多与人交流，但多是所谓的「庄稼人」，文化更低；虽然看电视上网，但多看家庭剧，关注点仍然没有扩散。父母的话题，丝网，我不认识的谁谁谁谁谁家，既听不懂又没兴趣。想陪伴父母看会电视，中央台的煽情、家庭剧的闹心都是我不能忍的。想陪老爸听歌，我俩的品位迥异，实难互相欣赏。过滤一下，能聊的话题几乎只有和老爸聊聊贪官和明星了。</p>
+<p>小学同学远在老家农村，初中同学由于特殊原因都已失联，高中同学在另一个城市，大学同学在另一个省，硕士同学在全国各地，哎，我这老家就几乎没有可以谈得上话的朋友。即使有，我们的话语体系、关注点都已经完全不同，鸡同鸭讲，没意思。</p>
+<p>可以聊天的没有了，电视节目已经不入我的「法眼」，朝夕相伴的，也许就只有 Mac and Kindle 了。可回家的目的是为了陪父母，沉浸于自己的世界是很说不过去的。</p>
+<p>那么出去看看自然风景、人文风景呢？在全国排名前十的污染城市，在这样一个重经济轻环保连面子（市容）都不要的地方，在这个文化普遍较低从未出过大家的地方，在这样炎热的夏天，又有哪里可以去呢？</p>
+<p>于是，我的假期伴随着寂寞、Mac and Kindle、无法陪伴父母的纠结，实际上家已经不是一个多么诱人的地方了。家在我的眼里，只剩下父母了，其他并没有什么留恋。</p>
+<p>家乡已经没有了「避风的港湾」的感觉，更像是一个不得不偶尔拜访的地方。而我也不像归人，倒似个过客了。</p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/生活/" term="生活"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[Simhash 的解释及实现]]></title>
+    <link href="http://zipperary.com/2014/06/30/simhash/"/>
+    <id>http://zipperary.com/2014/06/30/simhash/</id>
+    <published>2014-06-30T12:43:00.000Z</published>
+    <updated>2014-06-30T13:23:15.000Z</updated>
+    <content type="html"><![CDATA[<p>最近在看《数学之美》，读研之前约略看过一次，由于没有学科基础，未求甚解，但的确感受到了数学在解决实际问题时的神奇功用。研一即将结束，已经修过《模式识别》、《人工智能》、《机器学习》、《信息检索》、《自然语言处理》、《图像与视频处理》等专业课，虽然有些课水的侧漏，通过各种渠道，算是有了一些积累。而今再读这本书，不仅读起来比较轻松，趣味也有了。</p>
+<p>闲话休叙，且说这一日看到《信息指纹》这一章，看到一个 simhash 概念，中文可翻译成相似哈希。这东西对 Google 有很大帮助，在吴军的笔下却很简单易懂，其功能可以应用到很多地方，所以我决定关注一下。</p>
+<p><strong>问题的背景是：爬虫在抓去网页时，怎么判断一个网页的内容是否已经抓取过？</strong></p>
+<p>其实就是一个重复文档的检测问题。类似 Youtube 中的原版与拷贝视频侦测、论文抄袭等等其实也是这样的问题。</p>
+<p><strong>传统的哈希能不能用？</strong></p>
+<p>对于两篇文档 D1,D2，如果二者严格相等，通过哈希产生的信息指纹自然会一样。不过，如果两篇文档中只有一个词呢？信息指纹就不同了。所以传统的哈希只能判断是否严格相等。</p>
+<p>相似哈希就是要对两篇文档分别产生一个信息指纹，通过信息指纹的对比，我们还可以知道这两个文档的相似度有多大。</p>
+<p><strong>它是怎么做的呢？</strong></p>
+<p>对于一篇文档 D，它里面有词{t}，对应权重{w}，其中权重可以利用信息检索中常用的 TF-IDF。通过下图说明一下：</p>
+<p><img src="http://ww4.sinaimg.cn/large/5e8cb366jw1ehwfwuvlr7j20hs0byjtg.jpg" alt=""></p>
+<p>一个feature 就是一个词 t，右边对应其权重 w。首先分别对这些词做一个传统的哈希，比如可以用 hash 函数，假如生成6位，如图。</p>
+<p>接下来对于每个 feature 生成的 hash 序列，比如「100110」，如果是1，对应位+w，如果是0，对应位-w，处理完后就是「w -w -w w w -w」。其他的 feature 也做这个处理。</p>
+<p>n 个 feature,每个都有一个六维的向量，如刚才的「w -w -w w w -w」。现在，在这6个维度上，分别对 n 个值求和，也就是对图中最右边那个 w 矩阵求每列的和。得到一个6维的向量，即[13,108,…]。</p>
+<p>最后一步，对于上述向量的每一个元素，如果大于0就取1，小于0就取0.得到最后结果 fingerprint.</p>
+<a id="more"></a>
+
+<p><strong>Okay,D1,D2都产生了这样一个信息指纹，比如是 sh1, sh2.怎么比较相似性呢？</strong></p>
+<p>很简单，对于这样两个等长的二进制序列，对齐，比较不同的位数就行啦。比如1101和1001，不同的位是1，所以距离为1.</p>
+<p>这东西有个学名，叫汉明距离。实现同样简单，对两个序列进行异或，然后统计1的个数。</p>
+<p>介绍完毕！</p>
+<p><strong>下面看看实现。</strong></p>
+<p>找了一下，有不少人实现过，但为了好用，都封装起来了，所以一个本来很简单的问题，代码写了不少。我在<a href="https://searchcode.com/codesearch/view/25819508/" target="_blank">Searchcode</a> 扒拉了一个 python 的，很短，大家欣赏一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">def</span> <span class="title">simhash</span><span class="params">(features, hashbits=<span class="number">32</span>)</span>:</span>
+    <span class="keyword">if</span> hashbits == <span class="number">32</span>:
+        hashfn = hash
+    <span class="keyword">else</span>:
+        hashfn = <span class="keyword">lambda</span> s: _hash(s, hashbits)
+
+    vs = [<span class="number">0</span>] * hashbits
+    <span class="keyword">for</span> feature, weight <span class="keyword">in</span> features:
+        h = hashfn(feature)
+        <span class="keyword">for</span> i <span class="keyword">in</span> xrange(hashbits):
+            <span class="keyword">if</span> h & (<span class="number">1</span> &lt;&lt; i):
+                vs[i] += weight
+            <span class="keyword">else</span>:
+                vs[i] -= weight
+
+    out = <span class="number">0</span>
+    <span class="keyword">print</span> vs
+    <span class="keyword">for</span> i, v <span class="keyword">in</span> enumerate(vs):
+        <span class="keyword">if</span> v &gt; <span class="number">0</span>:
+            out |= <span class="number">1</span> &lt;&lt; i
+    <span class="keyword">return</span> out
+
+<span class="function"><span class="keyword">def</span> <span class="title">_hash</span><span class="params">(s, hashbits)</span>:</span>
+    <span class="comment"># A variable-length version of Python's builtin hash</span>
+    <span class="keyword">if</span> s == <span class="string">""</span>:
+        <span class="keyword">return</span> <span class="number">0</span>
+    <span class="keyword">else</span>:
+        x = ord(s[<span class="number">0</span>]) &lt;&lt; <span class="number">7</span>
+        m = <span class="number">1000003</span>
+        mask = <span class="number">2</span> ** hashbits - <span class="number">1</span>
+        <span class="keyword">for</span> c <span class="keyword">in</span> s:
+            x = ((x * m) ^ ord(c)) & mask
+        x ^= len(s)
+        <span class="keyword">if</span> x == -<span class="number">1</span>:
+            x = -<span class="number">2</span>
+        <span class="keyword">return</span> x
+
+<span class="function"><span class="keyword">def</span> <span class="title">hamming_distance</span><span class="params">(first_hash, other_hash, hashbits=<span class="number">32</span>)</span>:</span>
+    x = (first_hash ^ other_hash) & ((<span class="number">1</span> &lt;&lt; hashbits) - <span class="number">1</span>)
+    tot = <span class="number">0</span>
+    <span class="keyword">while</span> x:
+        tot += <span class="number">1</span>
+        x &= x - <span class="number">1</span>
+    <span class="keyword">return</span> tot
+
+f1 = {
+        <span class="string">'a'</span>: <span class="number">10</span>,
+        <span class="string">'b'</span>: <span class="number">3</span>,
+        <span class="string">'c'</span>: <span class="number">7</span>,
+        <span class="string">'d'</span>: <span class="number">4</span>,
+        }
+f2 = {
+        <span class="string">'a'</span>: <span class="number">10</span>,
+        <span class="string">'p'</span>: <span class="number">3</span>,
+        <span class="string">'c'</span>: <span class="number">7</span>,
+        <span class="string">'d'</span>: <span class="number">4</span>,
+        }
+sh1 = simhash(f1.items())
+sh2 = simhash(f2.items())
+dist = hamming_distance(sh1, sh2)
+<span class="keyword">print</span> bin(sh1),bin(sh2),dist
+</pre></td></tr></table></figure>
+
+<p>其中，simhash 就是实现函数了。如果用默认的32位信息指纹，里面直接用 Python 自带的 <code>hash</code> 函数，如果想用64位或者其他位数，<code>_hash</code>函数帮忙解决。<code>hamming_distance</code>自然就是求距离了。我给了两个测试文档 f1,f2.大家可以修改文档观察效果。权重大的项不同，距离很大；权重小的项不同，距离会小些。代码中用了10进制，为了方便观察，我用<code>bin</code>函数转换成了二进制。</p>
+<p>钦此。</p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/机器学习/" term="机器学习"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[从轮盘赌到采样]]></title>
+    <link href="http://zipperary.com/2014/06/27/lun-pan-du/"/>
+    <id>http://zipperary.com/2014/06/27/lun-pan-du/</id>
+    <published>2014-06-27T01:25:00.000Z</published>
+    <updated>2014-06-27T02:37:59.000Z</updated>
+    <content type="html"><![CDATA[<p>之前的博客写过<a href="http://zipperary.com/2014/02/22/sampling-methods/">常用采样方法</a>，简单介绍了拒绝采样、重要性采样和MCMC 采样，这些都是非常重要和常用的采样方法，但基本都是从连续分布中采样。而从离散的概率分布中进行采样，乍一看很直观很容易，实际在实现时并不是那么 intuitive。</p>
+<p>先来定义一下问题：假设有一个变量 x，它的取值空间为{x1, x2, x3, x4}，取相应值的概率依次是{w1, w2, w3, w4}。已知上述信息，欲从这个取值空间根据其概率进行采样，该怎么做？</p>
+<p>之所以关心这个问题，是在粒子滤波的重采样阶段，需要对带权重的粒子集进行有放回(with replacement)的重采样， 实质上就是上述这个问题。</p>
+<p>一个非常 intuitive 的思路是所谓的「轮盘赌算法」，或称为”Resampling Wheel”。轮盘赌是啥？看下图就明白了。</p>
+<p><img src="http://ww4.sinaimg.cn/large/5e8cb366jw1ehsevlctfkj20ge0cajsk.jpg" alt=""></p>
+<p>转盘上有n 个取值，每个取值所占的宽度就是其取值的概率，转动一次轮盘，最后指向的位置就是一次采样。</p>
+<a id="more"></a>
+
+<p>回到上面的问题，假设有8种取值，概率不一，轮盘如下：</p>
+<p><img src="http://ww4.sinaimg.cn/large/5e8cb366jw1ehsfacc0wqj206l070jrn.jpg" alt=""></p>
+<p>可以理解，概率大的取值，由于空间大，每次转动指向的概率就大。</p>
+<p>那么我们就可以用程序模拟这个轮盘赌，但具体怎么写呢？</p>
+<p>先看一个最简单的，只有2种取值，分别是0.6和0.4.由于写程序时实际上是用数组表示，<code>w=[0.6, 0.4]</code>，我们用下面的图来直观看一下：</p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1ehsfks0gp0j204j010mwy.jpg" alt=""></p>
+<p>怎么采样呢？</p>
+<p>很简单，用<code>rand()</code>函数，在[0-1]之间进行均匀随机采样，落在哪一块就采样哪一个取值。如果是0.4，就采样 x1， 如果是0.7，自然就采样x2.这实际上就是轮盘，只不过我们约定从 x1开始单向旋转，并且把多余的整圈都剔除掉。</p>
+<p>用 MATLAB 写一下就是：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre>w = <span class="matrix">[<span class="number">.6</span>, <span class="number">.4</span>]</span>;
+samples = <span class="matrix">[]</span>;
+<span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="number">10</span>
+    r = <span class="built_in">rand</span>();
+    <span class="keyword">if</span> r &lt; w(<span class="number">1</span>)
+        samples = <span class="matrix">[samples, <span class="number">1</span>]</span>;
+    <span class="keyword">else</span>
+        samples = <span class="matrix">[samples, <span class="number">2</span>]</span>;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="built_in">disp</span>(samples);
+</pre></td></tr></table></figure>
+
+<p>顺便提一下，我们平常所说的以概率 P 做某件事，其实就是这样的采样。取值2种，做，不做。概率分别是 P 和1-P。</p>
+<p>回到多取值的例子。</p>
+<p><img src="http://ww4.sinaimg.cn/large/5e8cb366jw1ehsga10qhqj207400ya9v.jpg" alt=""></p>
+<p>类似地，我们在[0-1]之间随机取一个数，看它落在哪一块中。比如0.5应该是 x3.应该注意到，我们这里用的是<code>0.5&gt;(0.1+0.3)</code>。就是说，在实际操作时，需要一个 accumulate。</p>
+<p>我写了一个 MATLAB 代码，可以直接运行观察效果：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+</pre></td><td class="code"><pre>clear;
+
+<span class="comment">% This program is to simulate the process of resampling, aka, given a set</span>
+<span class="comment">% of particles with weights, resample from them.</span>
+
+<span class="comment">% author: moxie</span>
+<span class="comment">% date: 2014.6.26</span>
+
+wparticles = <span class="matrix">[<span class="number">.1</span>, <span class="number">.3</span>, <span class="number">.2</span>, <span class="number">.4</span>]</span>;<span class="comment">% 4particles with weights</span>
+<span class="comment">%swparticles = sort(wparticles, 'descend');% sort at first</span>
+<span class="comment">%wparticles = swparticles;</span>
+lparticles = <span class="built_in">length</span>(wparticles);<span class="comment">% 4</span>
+nparticles = <span class="number">1000</span>;<span class="comment">% resample numbers</span>
+particles = <span class="matrix">[]</span>;
+freqs = <span class="matrix">[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]</span>;<span class="comment">% to count num of new particles from the correspondent old ones</span>
+tic
+<span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : nparticles
+    rnum = <span class="built_in">rand</span>();
+    weight_sum = <span class="number">0</span>;
+    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:lparticles
+        weight_sum = weight_sum + wparticles(<span class="built_in">j</span>);
+        <span class="keyword">if</span> weight_sum &gt;= rnum
+            <span class="keyword">break</span>;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    particles = <span class="matrix">[particles, j]</span>;
+    freqs(<span class="built_in">j</span>) = freqs(<span class="built_in">j</span>) + <span class="number">1</span>;
+<span class="keyword">end</span>
+toc
+<span class="built_in">disp</span>(freqs/nparticles);<span class="comment">% display the approximation</span>
+hist(particles, lparticles);<span class="comment">% display above in hist</span>
+</pre></td></tr></table></figure>
+
+<p>需要说明的一点，循环里面嵌套了循环，j 的那个循环每次都从 wparticles 的第一个逐渐 accumulate。很容易想到，如果事先对 wparticles 从大到小排序，那么 j 的循环次数势必会减小。对于我们例子中4个取值的来说改善不明显，但如果取值很多，应该能减少计算量。</p>
+<p>这两篇博客，分别介绍了对连续概率分布和离散概率分布进行采样的方法。前者难理解，好实现；后者好理解，实现有点 tricky.</p>
+<p>我主要是在粒子滤波之类的方法中使用到采样，有空再聊聊粒子滤波。</p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/机器学习/" term="机器学习"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[贝叶斯网络中的依赖关系]]></title>
+    <link href="http://zipperary.com/2014/06/24/dependence-in-bn/"/>
+    <id>http://zipperary.com/2014/06/24/dependence-in-bn/</id>
+    <published>2014-06-24T14:48:50.000Z</published>
+    <updated>2014-06-24T15:37:19.000Z</updated>
+    <content type="html"><![CDATA[<p>贝叶斯网络（Bayesian Network，简称 BN）是机器学习中最重要的工具之一，它以贝叶斯规则（Bayesian Rule）为基础，并为马尔可夫模型奠定了基础。</p>
+<p>简单来说，贝叶斯网络就是一个有向无环图。节点 node 表示变量，弧 arc 表示依赖关系。比如下图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1ehple2py1lj206u03kdft.jpg" alt=""></p>
+<p>「Sprinkler」是洒水器的意思。这三个变量代表三种事件。下雨和洒水器都能影响草地湿度，而下雨又可以影响洒水器是否洒水。三个变量的依赖关系如图所示。</p>
+<p>在 BN 中，有些 node 是可以观察到的observable，有些是无法观察到的 hidden。比如下雨和草地湿可以观察到，洒水器是否洒水了是无法观测得到的。对于一个 BN，我们可以求所有变量的联合概率，也可以求某个隐节点的后验概率。前提是我们已经得到了这个 BN 所需要的参数：每个 arc 所代表的条件概率。</p>
+<p>不过我今天要讲的东西并不是这些，而是条件依赖关系，这类概念让我颇费脑子。</p>
+<a id="more"></a>
+
+
+<p>下面通过两种结构来讨论四种依赖关系。</p>
+<h3 id="条件独立">条件独立</h3>
+<p>先看图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1ehpln4jn8yj203f03k0sl.jpg" alt=""></p>
+<p>C 表示 cancer，取值空间是{C,-C} ；T1 和 T2表示两个检测结果，取值空间是{+,-}。每个箭头代表的条件概率表已知。</p>
+<ol>
+<li>已知 C，那么 T1, T2是否独立？ 假如知道这个病人实际上患癌症，在估计 T2的时候，知道「T1是+」与否对这个估计有影响吗？其实是没有影响的。T1和 T2相当于对 C 做了两次独立观测。在 C 已知的情况下，T1,T2独立，因此属于条件独立。用全概率公式计算一下会更加的一目了然，会发现计算 P(T2)的过程中并没有涉及到 T1.</li>
+<li>若 C 未知，那么 T1,T2是否独立。假如 T1为+，那么我们会认为 C 很有可能也是+，进而认为 T2同样取+的概率会提升。因此 T1,T2不独立。如果有兴趣，可以计算一下 P(T2=+ | T1=+)和 P(T2=+)，可以看到分别是0.2301和0.207，前者大。如图：</li>
+</ol>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1ehpm233shmj20kp0bc0uf.jpg" alt=""></p>
+<h3 id="条件依赖">条件依赖</h3>
+<p>先看例子：</p>
+<p><img src="http://ww3.sinaimg.cn/large/5e8cb366jw1ehpm762vsoj204003mmx1.jpg" alt=""></p>
+<p>S: sunny; R: raise of salary; H: happiness.条件概率表已知。</p>
+<ol>
+<li>若 H 未知，则P(R | S) = P(R)，即两者独立。直白的解释就是：我朋友并不知道我是否高兴，只看到天气是晴朗的，他能推测我是否涨了工资吗？当然不能。</li>
+<li>若 H 已知，这时候出现一个有趣的现象，叫 explain away.朋友看到我很高兴，又看了看天，发现是个大晴天，他就会认为我的高兴应该是由于天晴的缘故，不大可能是由于涨工资的原因；朋友若看到我高兴，同时又看到天气很糟糕，那么他会认为我很可能是涨工资了。也就是说，在已知 H 的情况下，对 S 的观测影响到了对 R 的估计，说明 S 和 R 是条件依赖的。</li>
+</ol>
+<p>掌握了上述四种情况的依赖关系，那么整个 BN 中任意两个节点的依赖关系就可以知道了。</p>
+<p>好，主要内容讲完了，顺便说一下，BN 中最重要的 basics 是 chain rule, Bayesian Rule 和 total probability，在计算中会大量使用；最重要的参数是每个 arc 的条件概率表。BN 可以做分类器，node 为特征向量中的各分量，并有一个 node 表示label，学习的过程就是求得上述参数。BN 较其他分类器的优势在于考虑了各特征之间的依赖关系。</p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/机器学习/" term="机器学习"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[Of Late]]></title>
+    <link href="http://zipperary.com/2014/06/19/of-late/"/>
+    <id>http://zipperary.com/2014/06/19/of-late/</id>
+    <published>2014-06-19T08:36:15.000Z</published>
+    <updated>2014-06-19T09:11:10.000Z</updated>
+    <content type="html"><![CDATA[<p>几天前应博友的要求创办了一个 QQ 群，现在已经有五十多个成员了，有不少都是最新加入 hexo 并开始<strong>写博客</strong>的童鞋。作为使用 hexo 的一名「老兵」，回顾开始写博时一天一篇或两天一篇的那股劲头，对比现在半月都未必出一篇的萎靡，实在有愧。这两天 Ada, Fuka 也搭建了博客，准备共同维护更新这个技术博客，更加感觉自己有 resume 的必要了。</p>
+<p>最近其实并不忙，之所以不写，一是因为渐渐觉得技术博客的意义不大，尤其是二手信息，网上一堆，没必要再增加 Google 的负担，有价值又有新意的信息太少；二是最近过的不够云淡风轻，没有坐下来唠家常的闲情雅致。但再想一想，其实写博客的好处还在，就像刚开始写时那样。一个好处是对自己催稿产生的压力逼迫自己去学习新的东西，否则没有东西可写，逼迫自己整理思维，否则没法清晰地表达出来；另一个好处是坐下来写写东西本身就是很享受的一件事。</p>
+<p>虽然打算 resume，可究竟要写什么技术博文，现在依然没想清楚。反倒杂七乱八可写的还有不少，但不能只顾自己享受啊，还要照顾到博客的读者。所以还是先写起来，边写便摸索。</p>
+<p>聊聊 Of Late.</p>
+<p>这段时间的一个显著特点是，实验室这台 Windows 成了我的主力机，因为最近的 focus 是一个<strong>足球视频事件分析</strong>的项目，需要看论文，需要在 VS 中实现，借这个机会多看一看从 C++ 和 Opencv 的东西，尽管比较讨厌 C 语言的繁琐，但不得不重视它的霸主地位。</p>
+<p><strong>巴西世界杯</strong>已经进行到小组赛第二轮，看了大概五六场比赛了。在此之前我是不看足球的，也看不懂。现在认识了不少的球星，也能看出来怎样打的好怎样打的孬，对各种犯规、各种规则基本上也了解了，居然看的有些上瘾，不惜撑着疲惫的眼皮熬夜观看球赛。几年前看过一场球赛，知道了解说员贺炜，很喜欢他的解说风格。这次世界杯已经看了他的两场解说，段暄、刘建宏、申方剑的也都看了，依然最喜欢诗人贺炜。从他的解说中学到了不少关于足球和球星的知识。</p>
+<p><strong>生活作风上</strong>，有些放任自如，早上到实验室常常已经九点，下午则两三点，晚上睡觉一般都过十二点，大不风时间一个坐姿紧盯屏幕，运动、喝水都不勤快，真没把自己的健康当回事！</p>
+<p>在实验室拖拖拉拉，没有明确的计划，东一锤子西一棒头的，半天下来没什么收获。实际上目标也不够明确，没有重点。归根到底还是<strong>斗志</strong>下降了。</p>
+<p><strong>GOT</strong> 第四季 Over 了，一想到还要等到明年才出新的，着急的想看小说。不过最终说服了自己，把前四季下载下来，重看一遍。。</p>
+<p>这篇文章写的还是没啥重点，不过，开始写才是最重要的。<em>Now, Plan, Next, Act</em>.</p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/生活/" term="生活"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[聊聊 Google 被封锁这件事]]></title>
+    <link href="http://zipperary.com/2014/06/10/google-blocked/"/>
+    <id>http://zipperary.com/2014/06/10/google-blocked/</id>
+    <published>2014-06-10T01:11:58.000Z</published>
+    <updated>2014-06-10T02:16:04.000Z</updated>
+    <content type="html"><![CDATA[<p>老实说，Google 这次被封锁对我的影响不是特别大，它在中国的服务本来就已经被 ZF「政府，下同」 搞的支离破碎，早已不稳定，像我等 Google 重度用户几乎都常备科学上网工具的。不过区别还是挺明显的，之前的时候常常不必打开那些工具，直接使用 Google 即可，方便；现在却一点都不能用了。科学上网的工具由于其机制问题，对于某些服务如谷歌图片、谷歌学术，常常会有网址重定向的问题，很麻烦，这时候多么幻想 free Internet.</p>
+<h4 id="Google_为何被封？">Google 为何被封？</h4>
+<p>Google 的原则是几乎不对用户搜索的结果进行过滤，这是为保障网络信息自由。而我国由于特殊原因，有大量的信息是敏感的，ZF不愿让民众接触到；或者 ZF 不自信，怕民众接触到。这样的信息一般来说有政治、色情、恐怖暴力这几个方面。对于第一项，ZF 似乎忌惮着什么。对于第二项，我实在不理解「两性解放」为何还不到来。对于第三项，我支持。这次的封锁似乎比以往更彻底、更持久，据说是因为64才封锁的，可64已经过了，封锁还没有解除。私以为可能与近来国内严重的恐怖暴力事件有关。可能 ZF 现在的原则是「安全、维稳大于一切」，而 Google 是一个经常被恐怖分子利用的工具，如此看来，ZF 的因噎废食就可以理解了。在他们眼里，关键时期，以阻碍国家的经济社会发展为代价换取国家社会的安全是值得的。</p>
+<h4 id="Google_被封有何影响？">Google 被封有何影响？</h4>
+<p>据我所知，Google 应该是科技从业人士离不开的利器，尤其广大的 IT 人，使用的密度特别大。以我个人为例，Google 搜索是我知识的重要来源，Google 学术是读论文不可缺少的工具，Google 图片是我图片素材的重要来源，Gmail 是我的主邮箱，每天都会使用，Google calendar 是我计划日程不可或缺的工具，Youtube 有大量优质的公开课、教育视频。。。</p>
+<p>此外，全世界的网站大多在使用 Google 提供的 cdn 服务，比如 google font, jquery 等等，这次封锁导致很多网站打开缓慢，因为这些 cdn 被封锁了。</p>
+<p>不过，对于不同的人，影响的大小是不一样的。</p>
+<p>程序员：作为重度使用者，其实所受影响差不多最小，因为我们知道怎么 counter block，除了吐槽ZF几句，该怎么用 Google 还是怎么用。</p>
+<p>恐怖分子： 我想ZF 此次加大封锁力度主要是针对这些有碍国家安全的人吧。但他们是有组织、有科技、有训练的，科学上网都不会他们还怎么做恐怖分子，所以我觉得对他们的影响也很小。</p>
+<p>「政治爱好者」：这里特指通过国外信息了解国内政治的人，这样的人一直都有。我的观点是，当你的信息足够充分时，你就不太会一叶障目做出偏激的事情来。国外并不只有批评中国 ZF 的声音，其他声音也有，我想他们是不至于只看到一家之言就开始反 ZF 的。如果 ZF 的目的是防止他们接触西方的思想，防止走资，防止意识形态渗透，那你封就封吧。</p>
+<p>「色情爱好者」：从中国互联网诞生到现在，色情内容一直是被过滤的，这类人早就熟知怎么翻过去，所以影响很小。</p>
+<p>普通大众： 我认为中国大多数的人是不用 Google 的，一来 ZF 已经把它赶了出去，Google 服务很不稳定；二来 Google 的本土化做的没有百度好，在生活、娱乐这些受众面最大的服务上，Google 不如百度。那么对于他们的影响自然不大了。</p>
+<p>综上，ZF 封锁 Google 除了徒然浪费民众很多时间、精力外，其实并不能阻止人们做本打算做的事情。从这个意义上讲，这样一刀切式的封锁得不偿失。而且，我相信会有比一刀切更好的办法，ZF 这样做，显然是一种懒政。</p>
+<h4 id="怎么破？">怎么破？</h4>
+<p>据说 Goagent、免费 VPN 什么的都不好使了， 付费 VPN 一直很稳定，Shadowsocks 还可以。</p>
+<p>如果只需要使用 Google Search，那么最简单方便，甚至最好的办法是直接用 IP <a href="http://203.208.46.148/" target="_blank">http://203.208.46.148/</a>。当然，IP 不限这一个，有兴趣的同学可以通过下面的方式得到需要的 IP：</p>
+<p>在 shell 中输入<code>ping google.cn</code>。</p>
+<p>或在 cmd 中输入<code>ping -4 google.cn</code>。</p>
+<p>如果还需要使用其他的 Google 服务，那最好是学习一下科学上网。</p>
+<p>还有一种方式是在 Chrome://flag 中修改某些东西，我试过，挺慢的，不如 IP 的方式好。</p>
+<a id="more"></a>
+
+<h4 id="还需要做些什么？">还需要做些什么？</h4>
+<p>有人发起去工信部投诉 Google 上不去，就像当年的 Github 事件；有人反对，说没用。</p>
+<p>我支持投诉，从「认了」到「行动维权」本身就是一个进步，无论结果如何，都是值得鼓励和庆祝的事情。</p>
+<p>有人说支持和反对投诉的人在 v2ex 的辩论是「闲的蛋疼」，我认为这样的辩论恰恰也是进步。人们的观点尽管都是有逻辑的，但往往还是不同，为什么，一个原因是个人的信息和见识不充分。通过充分、坦率的讨论，正反双方把自己的观点和盘托出，如果能说服对方，说明自己的观点站住了脚，如果不能说服，起码对方已经理解了你。在他信息相对充分的情况下，无论是坚持己见还是倒戈，他的选择都是认真的，是值得尊重的。民智渐强需要广泛、深刻的讨论。</p>
+<p>我始终相信 ZF 也有很多有理想有担当的当权者，当然也有很多眼光狭隘、思想顽固、自私自利的绊脚石，因为党内民主或集体领导的原则，当权者不能利用自己的魄力或权力强迫大家意见一致，只能博弈、讨论、说服，虽然这个过程慢，但这不就是我们期待的「民主」嘛，虽然这民主目前只限于领导集团。我们眼前看到的，可能就是他们斗争博弈妥协的结果，我相信里面有人在为我们争取权益。</p>
+<p>我之前在微博发动好友关注 google 事件，企图通过民意影响政治。现在觉得不很现实，对 Google 最关注的是程序员，而程序员只是小众，他们的呼声够不成民意。只有像「招远事件」这种跨越了职业藩篱的共同意见，这种每个人都可以不费力地参与进来的讨论，才可能构成民意。</p>
+<p>结论是，该表达的表达，该争取的争取，要有希望，有信心，相信有人在为我们战斗。</p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/生活/" term="生活"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[Chrome Extensions I Use]]></title>
+    <link href="http://zipperary.com/2014/05/26/chrome-addons/"/>
+    <id>http://zipperary.com/2014/05/26/chrome-addons/</id>
+    <published>2014-05-26T03:23:36.000Z</published>
+    <updated>2014-05-26T06:57:23.000Z</updated>
+    <content type="html"><![CDATA[<p>Chrome 最强大的一个地方就是丰富的扩展插件了，在它的商店里寻找，只有你想不到的，很难有找不到的。Chrome 也是我的默认浏览器，一边使用一边优化体验，现在来说说我都用了哪些插件吧。</p>
+<p>首先介绍我平时一直在使用的：</p>
+<ol>
+<li>AdBlock。 还有一个叫 AdBlock Plus 也不错，但最近 Plus 这个插件导致我的 pdf 无法在浏览器打开，于是换成 AdBlock 了，没差。装上这个插件之后，浏览器里的整个世界都清爽了，那些恼人的 Flash 广告一一自动清除了。</li>
+<li>Copy as Markdown。用 Markdown 写作时经常需要一些图片或文字的链接，这个小插件使得 Markdown 中插入图片、链接轻而易举，一直在用。</li>
+<li>Flashcontrol。Chrome 的使用很容易导致 Mac 发烫，经了解，是 Flash 所致，而 Flash 大部分都是无用的广告。这个插件是的那些 Flash 无法自动加载，如果需要看 Flash 的视频，只需要点击一下就行了，非常方便。BTW,貌似 Safari 没有发热的问题，不过这货太难用了，我顺便安装了 Firefox 来做备用浏览器，装上一些好用的插件后，FF 也是相当不错的选择。</li>
+<li>Halo Word Dictionary。查字典用。</li>
+<li>Proxy SwitchySharp。科学上网，You know.</li>
+<li>Send to Kindle。有什么好文章了，用这个发到 Kindle 中看。这里面还有个小窍门，由于选中的文字可以编辑，我完全可以把任何文字、图片拷贝过去发到 Kindle。</li>
+<li>Session Buddy。查找某个问题时打开了一浏览器的 Tab，乱糟糟的，今天不想看了，改天再看这些东西，咋办？用这个。它可以把浏览器打开的 Tab 都保存下来。</li>
+<li>Vimium。神器，用 Vim 的方式操作 Chrome，效率的提升是惊人的，我现在已经离不开它了。</li>
+<li>印象笔记·剪藏。方便地把页面内容保存到 Evernote 中。</li>
+<li>围脖是个好图床。用 Markdown 写作必备的图床。</li>
+</ol>
+<p>下面要说的是挺不错，但偶尔才用用的：</p>
+<ol>
+<li>Chrome YouTube Downloader。安装好后，在 Youtube 的视频下边会出现一个下载按钮，可以选择下载哪种分辨率的视频或者下载音频。</li>
+<li>FaWave(发微)。如果有多个社交帐号，比如微博、人人、twitter、facebook，用这个可以将一条状态发送到所有这些 SNS 中。</li>
+<li>Pervasive GRE。显示当前页面所有的 GRE 词汇。</li>
+<li>Pocket。好用的收藏管理，如果不习惯用 Chrome 的 Bookmark，Pocket 将是一个绝佳的选择。</li>
+<li>隐藏帖自动回复 (AutoReply 纯净版)。很多BBS 的内容需要回复可见，这个插件就解决这个烦人的问题。</li>
+</ol>
+<p>至于主题，在 Mac 下，默认的主题最干净。</p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/IT杂谈/" term="IT杂谈"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[A Better Choice]]></title>
+    <link href="http://zipperary.com/2014/05/22/a-better-choice/"/>
+    <id>http://zipperary.com/2014/05/22/a-better-choice/</id>
+    <published>2014-05-22T07:52:49.000Z</published>
+    <updated>2014-05-22T08:21:26.000Z</updated>
+    <content type="html"><![CDATA[<p>我喜欢探索新奇好玩的东西，也喜欢不遗余力地向身边的人推荐自认为很好的东西，除非感觉到了对方鄙夷的眼神。我相信这个世界上总有一些更好的选择，得知是我幸，也希望能告知别人，一起追求更佳的生活方式。</p>
+<p>在所有物件中，手机和电脑是我接触最多，把玩最多的。每当在使用中遇到不便，时间充裕的话，总希望找到更好的解决方案，以改善体验。当我在「优雅」地使用某些 App 或物件时，看到有人在「笨拙」地使用类似的东西，便很想不厌其烦地推荐之。</p>
+<blockquote>
+<p>It’s good to choose a better choice.</p>
+</blockquote>
+<p>什么是我所说的<strong>Better Choice</strong>?</p>
+<p>比如，Mac 提供的用户体验比 Windows PC好，甚至也并不比后者贵，就看你有没有勇气改变习惯了。</p>
+<p>比如，网易云音乐比酷狗之类好，音质、UI、曲库、用户体验，都甩出后者几条街，你所需要的只是<em>Ready to change</em>。</p>
+<p>比如，查询非生活、娱乐的信息，Google 比百度好用。</p>
+<p>比如，安卓手机中可以卸载360等安全、助手类软件，并禁止很多提示信息，你会感到这个世界更美好了一些。</p>
+<p>比如，开始使用 Evernote 等电子笔记，信息时代，纸是不够用也不够好用的。</p>
+<p>比如，Sublime text 要比 Notepad++等很多文本编辑器好，你所需要的，还是改变习惯的勇气。</p>
+<p>比如，程序员们不要抱着一本「C++ Primer」就知足了，外面有很多优秀的语言 Python,Lua 等，起码应该试图了解一下吧。</p>
+<p>…</p>
+<p>…</p>
+<p>为什么很多人依然在抱残守缺？一是信息不足，不知道有更好的选择；一是拒绝改变，慵懒或怯懦。怎么解决？最主要的还是要有一个<em>Live A Better Life</em>的信念，如此，你就会有好奇心去探索<em>Better Choices</em>，有动力去<em>Make A Change</em>，甚至<em>Make A Difference</em>。</p>
+<p><strong>Go for it!</strong></p>
+]]></content>
+    <category scheme="http://zipperary.com/categories/生活/" term="生活"/>
+  </entry>
+</feed>

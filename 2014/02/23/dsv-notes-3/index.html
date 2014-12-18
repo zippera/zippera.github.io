@@ -1,0 +1,597 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据结构与算法笔记：三（大结局） | Zippera&#39;s blog</title>
+  <meta name="author" content="zippera">
+  
+  <meta name="description" content="Walk steps step by step">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="数据结构与算法笔记：三（大结局）"/>
+  <meta property="og:site_name" content="Zippera&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="http://zipperary.com/atom.xml" title="Zippera&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Zippera&#39;s blog</a></h1>
+  <h2><a href="/">Walk steps step by step</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-02-23T02:37:01.000Z"><a href="/2014/02/23/dsv-notes-3/">2月 23 2014</a></time>
+      
+      
+  
+    <h1 class="title">数据结构与算法笔记：三（大结局）</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="http://zipperary.com/2014/01/04/dsv-notes/">数据结构与算法笔记：一 | Zippera’s blog</a></p>
+<p><a href="http://zipperary.com/2014/01/06/dsv-notes-2/">数据结构与算法笔记：二 | Zippera’s blog</a></p>
+<p><a href="http://zipperary.com/2014/02/23/dsv-notes-3/">数据结构与算法笔记：三（大结局） | Zippera’s blog</a></p>
+<hr>
+<h1 id="Heap-like_Data_Structures">Heap-like Data Structures</h1>
+<ul>
+<li><p>Heaps：小顶堆（二叉树，完全树），每个节点都比它的左右子树小。按照层级从左到右插入节点，然后自下向上调整大小。删除最小值的时候，直接删除根节点（一直是最小的），然后把最后一个节点移到根节点，然后自顶向下调整大小。若给出一个已经建立好的完全树，想调整为堆，则需要自底向上、从右到左地逐层调整，调整时还需要考虑子树是否不再满足堆条件，if so，自顶向下调整。由于堆是一个按照层次编号的完全树，所以用一个数组作为数据结构。操作堆就是操作数组。</p>
+</li>
+<li><p>Binomial Queues：二项队列，也叫Binomial heap，是一种形状很有特点的树。首先要知道什么是二项树：如图为四个不同的二项树，其规律为：度数为k的二项树有一个根结点，根结点下有k个子女，每个子女分别是度数分别为k-1,k-2,…,2,1,0的二项树的根。度数为k的二项树共有2^{k}个结点，高度为k。在深度d处有<code>{\tbinom  nd}</code>（二项式系数）个结点。二项堆自然就是满足节点相对大小关系的二项树。二项堆的插入很简单，只需要新建一个节点，并合并。合并的对象只能是两个度相同的二项堆：比较二个根结点关键字的大小，其中含小关键字的结点成为结果树的根结点，另一棵树则变成结果树的子树。删除最小的节点就是删除根节点，根节点下的几个子树全部分开。二项堆在各类操作中时间复杂度都为O(logn)，可以说性能很好。其存储结构一般为链表。</p>
+</li>
+</ul>
+<p><img src="http://ww2.sinaimg.cn/large/5e8cb366jw1edr9eqj7s2j20k009xgmb.jpg" alt=""></p>
+<a id="more"></a>
+
+<ul>
+<li>Fibonacci Heaps：如图，斐波那契堆由这样一些小顶堆组成，其中每个节点ADT 如下：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="keyword">struct</span> FibonacciHeapNode {
+       <span class="keyword">int</span> key;       <span class="comment">//结点</span>
+       <span class="keyword">int</span> degree;    <span class="comment">//度</span>
+       FibonacciHeapNode * left;  <span class="comment">//左兄弟</span>
+       FibonacciHeapNode * right; <span class="comment">//右兄弟</span>
+       FibonacciHeapNode * parent; <span class="comment">//父结点</span>
+       FibonacciHeapNode * child;  <span class="comment">//第一个孩子结点</span>
+       <span class="keyword">bool</span> marked;           <span class="comment">//是否被删除第1个孩子</span>
+   };
+</pre></td></tr></table></figure>
+
+<p>并且用min 指向最小的根节点。每个节点有一个指针指向其一个子女，它的所有子女由双向循环链表连接，不同的小顶堆的根节点也是通过这种链表连接，叫做根表。</p>
+<p>插入新元素时，只要将其作为单元素 F 堆，并跟原有堆合并，合并的方式是新 F 堆加入原 F 堆的根表中。</p>
+<p>删除元素时，先把 min 指向的最小节点删除，然后将剩下的小顶堆分开，并按照二项堆组合的方式重新组合。</p>
+<p><img src="http://ww3.sinaimg.cn/large/5e8cb366jw1eduqnjhkqdj20du06074l.jpg" alt=""></p>
+<ul>
+<li>Leftist Heaps：左偏堆，每个节点除了有左右孩子和键值外，还有一个距离。什么是距离呢？ 引用维基百科的话：「当且仅当节点 i 的左子树且右子树为空时，节点被称作外节点（实际上保存在二叉树中的节点都是内节点，外节点是逻辑上存在而无需保存。把一颗二叉树补上全部的外节点，则称为extended binary tree）。节点 i 的距离是节点 i 到它的后代中的最近的外节点所经过的边数。特别的,如果节点 i 本身是外节点,则它的距离为 0;而空节点的距离规定为-1 。」如图。除了堆的性质外，还有一条「节点的左子节点的距离不小于右子节点的距离。」其插入删除等基本操作都是基于合并。怎样合并呢？找到 root 键值最小的那个，用其右子树与其他树合并，若右子树为空，把另外的树直接弄过来，若此时右子树距离比左子树大了，那就交换左右子树；若右子树不空，把右子树摘下来与其他树合并，如此递归进行。删除堆中最小值时，先删除它，再把遗留的几个子树按照前述方法合并。左偏堆合并操作的平摊时间复杂度为O(log n)。</li>
+</ul>
+<p><img src="http://ww4.sinaimg.cn/large/5e8cb366jw1edrakap9umj206203pweg.jpg" alt=""></p>
+<ul>
+<li>Skew Heaps：斜堆，上述左偏堆就是一种特殊的斜堆。斜堆没有距离的概念，其合并过程与左偏堆几乎一样，只是在每次合并之后都要左右子树互换一下（启发规则）。这样往往能导致最后形成的树中左子树比右子树深，所以是斜的。</li>
+</ul>
+<h1 id="Graph_Algorithms">Graph Algorithms</h1>
+<ul>
+<li>Breadth-First Search：广度优先搜索。图可分为有向图和无向图（都可应用本算法），其表示形式有图形、邻接表、临界矩阵，注意图中 Parent 和 Visited 两个数组。</li>
+</ul>
+<p><img src="http://ww2.sinaimg.cn/large/5e8cb366jw1eds3ts9pxkj21140i476d.jpg" alt=""></p>
+<ul>
+<li><p>Depth-First Search：深度优先搜索，基本同上，除了搜索的顺序不同。搜索过程中会涉及到回溯问题，而回溯可以用栈这种数据结构，也可以用递归的这种运行形式。广度优先搜索则不会有回溯的情况。</p>
+</li>
+<li><p>Connected Components：连通分量，对于无向图，就是这样的一个子图：任意两个节点都可以路径可达，再加入该子图之外的节点后就不满足任意可达性了，所以也可以叫做最大连通子图。其实每个独立的无向图都是连通分量。还有一个叫强联通分量，是对应于有向图的，这时就不太容易寻找一个有向图的强连通分量了，因为要保证任意两个节点是互相可达的。Kosaraju算法、Tarjan算法、Gabow算法是目前比较有效的算法。DSV 中用的哪种，我还没看明白，等看完《算法概论》中介绍的那种再说。</p>
+</li>
+</ul>
+<ul>
+<li>Dijkstra’s Shortest Path：用于求解带权有向图（也可求无向图）的单源最短路径。如图，我们用这样一个表格来演示并记录。Vertex 表示图中的节点；Known 表示运行到目前为止，是否确定了该节点的最终最短路径，初始为 F（否）；Cost 表示目前为止从源节点到该节点的最短路径，初始为 INF（无穷大）； Path 是源点经过哪个节点到达的这个节点，初始为-1（无）。算法运行的过程：假设源点为2，此时2为 T，寻找2的直接邻节点，并更新 Cost（如果新 cost 比当前的小就更新，否则不更新），同时更新 Path 为2；然后，在所有F 的节点中，选择当前 Cost 最大的一个，标记为 T，这个节点的全局最短路径就确定下来了，以此作为中间节点，寻找其直接邻节点，并更新 Cost（注意，已经为 T 的不再更新）和 Path；如此循环，直到所有节点都为 T。</li>
+</ul>
+<p><img src="http://ww4.sinaimg.cn/large/5e8cb366jw1eds5aom0dij20tq0dsq3w.jpg" alt=""></p>
+<p>最终得到如下图所示的表格。接下来就是把 Path 表示出来。比如运行到7的时候，7的 path 是5，5的是6，6的是2，所以7的最终 path 是 2 6 5 7.</p>
+<p><img src="http://ww4.sinaimg.cn/large/5e8cb366jw1eds6kkf9paj20an07iaa9.jpg" alt=""></p>
+<ul>
+<li><p>Prim’s Minimum Cost Spanning Tree：Prim 算法，对于给定的无向图，找出最小生成树。最小生成树就是包含图中所有节点和部分边是一个树，并且其权值之和最小。该算法的运行过程就是从源节点出发，选择权值最小的邻近节点，再以此为当前节点，选择未访问的权值最小的邻近节点，如此循环，若到头了，则回溯。总体来说是大 DFS 中包含着小 BFS。具体的运行过程可以使用Dijkstra算法中使用的表格形式。</p>
+</li>
+<li><p>Topological Sort (Using Indegree array)：对于一个DAG，一定存在拓扑排序，使得对于 uv,在拓扑排序中，u 一定在 v 前面。这里使用直观的Kahn算法：有两个集合，L 表示已经排好的，S 表示入度为0的节点；每次从 S 中取出一个节点 n 放入 L 中，并查看从 n 出发的节点中是否有入度减为0的，若有，加入到 S 中，然后再从 S 中取节点，循环。。。如果最后剩下边，说明该图是有环的，不存在拓扑序列，否则最后得到的 L 即拓扑序列。从算法的执行过程来看，它是基于队列的。</p>
+</li>
+<li><p>Topological Sort (Using DFS)：基于 DFS 的拓扑排序，这里 S 是所有<strong>出度</strong>为0的节点的集合。对于每个节点，递归访问以它为尾的所有节点，并标记为 Visited，并按照递归的退出顺序把节点加入到 L 中。这种方法其实也很直观，出度为0的节点，回溯到头一般就是入度为0的节点了。深度优先遍历会用到递归或栈。</p>
+</li>
+<li><p>Floyd-Warshall (all pairs shortest paths)：留着，太复杂了。</p>
+</li>
+<li><p>Kruskal Minimum Cost Spanning Tree Algorithm：Kruskal 算法，对于给定的无向图，找出最小生成树。其方法很简单，就是从所有边中，依次挑选最小的边形成树的一个边，加入到当前的树中，如果这个边使树成为图，就舍弃，寻找次最小的，直到所有的节点都进入这个树中。</p>
+</li>
+</ul>
+<h1 id="Dynamic_Programming">Dynamic Programming</h1>
+<p>Calculating nth Fibonacci number，<br>Making Change，<br>Longest Common Subsequence：动态规划适用于有最优子结构和重叠子问题的问题。最优子结构是指局部最优解能决定全局最优解，这样我们才能把问题分解成子问题来解决。子问题重叠性质是指「在用递归算法自顶向下对问题进行求解时，每次产生的子问题并不总是新问题，有些子问题会被重复计算多次。动态规划算法正是利用了这种子问题的重叠性质，对每一个子问题只计算一次，然后将其计算结果保存在一个表格中，当再次需要计算已经计算过的子问题时，只是在表格中简单地查看一下结果，从而获得较高的效率。<br>」最常用的例子是斐波那契数列。其求解最常用的算法是如下递归：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">fib</span><span class="params">(n)</span></span>
+       <span class="keyword">if</span> n = <span class="number">0</span> <span class="keyword">or</span> n = <span class="number">1</span>
+           <span class="keyword">return</span> <span class="number">1</span>
+       <span class="keyword">return</span> fib(n − <span class="number">1</span>) + fib(n − <span class="number">2</span>)
+</pre></td></tr></table></figure>
+
+<p>虽然通过递归把问题分解为子问题了，但是，递归过程中很多子问题被重叠计算了，比如当n=5时，fib(5)的计算过程如下:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="function">fib(<span class="number">5</span>)</span>
+<span class="function">fib(<span class="number">4</span>)</span> + <span class="function">fib(<span class="number">3</span>)</span>
+(<span class="function">fib(<span class="number">3</span>)</span> + <span class="function">fib(<span class="number">2</span>)</span>) + (<span class="function">fib(<span class="number">2</span>)</span> + <span class="function">fib(<span class="number">1</span>)</span>)
+((<span class="function">fib(<span class="number">2</span>)</span> + <span class="function">fib(<span class="number">1</span>)</span>) + (<span class="function">fib(<span class="number">1</span>)</span> + <span class="function">fib(<span class="number">0</span>)</span>)) + ((<span class="function">fib(<span class="number">1</span>)</span> + <span class="function">fib(<span class="number">0</span>)</span>) + <span class="function">fib(<span class="number">1</span>)</span>)
+(((<span class="function">fib(<span class="number">1</span>)</span> + <span class="function">fib(<span class="number">0</span>)</span>) + <span class="function">fib(<span class="number">1</span>)</span>) + (<span class="function">fib(<span class="number">1</span>)</span> + <span class="function">fib(<span class="number">0</span>)</span>)) + ((<span class="function">fib(<span class="number">1</span>)</span> + <span class="function">fib(<span class="number">0</span>)</span>) + <span class="function">fib(<span class="number">1</span>)</span>)
+</pre></td></tr></table></figure>
+
+<p>改进的方法是，我们可以通过保存已经算出的子问题的解来避免重复计算：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="keyword">array</span> map [<span class="number">0.</span>..n] = { <span class="number">0</span> =&gt; <span class="number">0</span>, <span class="number">1</span> =&gt; <span class="number">1</span> }
+fib( n )
+    <span class="keyword">if</span> ( map m does not contain key n)
+        m[n] := fib(n − <span class="number">1</span>) + fib(n − <span class="number">2</span>)
+    <span class="keyword">return</span> m[n]
+</pre></td></tr></table></figure>
+
+<h1 id="其他">其他</h1>
+<ul>
+<li>Disjoint Sets：并查集，也叫union-find algorithm，因为该数据结构上的主要操作是 find 和 union，还有一个基本的 makeset 操作。</li>
+</ul>
+<p>数据结构是一个树，每个节点除了有值外，还有一个指针指向父节点。一个树就是一个集合，树的根节点代表这个集合。由于只需要一个指针指向父节点，一般用一个数组表示这棵树。</p>
+<p>数据结构说清楚了，接下来谈谈其操作。makeset 的作用是建立一个只含X 的集合。find 的作用是找到 X 的根节点，即找到 X 属于哪个集合。union 的作用是把 x 和 y 代表的集合合并。这三个操作的代码非常简单，但是得到的树会很高很偏，在之后的操作中效率就低了。对此有两种优化方法：路径压缩和按秩合并。下面给出最终代码，在注释处注明其改进：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+</pre></td><td class="code"><pre>
+<span class="keyword">int</span> father[MAX];<span class="comment">//用数组表示树，记录每个节点的父节点索引</span>
+<span class="keyword">int</span> rank[MAX];<span class="comment">//</span>
+
+<span class="comment">/* 初始化集合*/</span>
+<span class="keyword">void</span> Make_Set(<span class="keyword">int</span> x)
+{
+    father[x] = x; <span class="comment">//只有一个元素的集合，父节点是自身，也可指定其他，如-1.</span>
+    rank[x] = <span class="number">0</span>;   <span class="comment">//只有一个节点，秩（深度）为0</span>
+}
+
+<span class="comment">/* 查找x元素所在的集合,回溯时压缩路径*/</span>
+<span class="keyword">int</span> Find_Set(<span class="keyword">int</span> x)
+{
+    <span class="keyword">if</span> (x != father[x])
+        {
+            father[x] = Find_Set(father[x]); <span class="comment">//回溯时把中间经过的节点的父节点都指向根节点，使树扁平化，压缩路径</span>
+        }
+    <span class="keyword">return</span> father[x];
+}
+
+<span class="comment">/* 按秩合并x,y所在的集合 */</span>
+<span class="keyword">void</span> Union(<span class="keyword">int</span> x, <span class="keyword">int</span> y)
+{
+    x = Find_Set(x);
+    y = Find_Set(y);
+    <span class="keyword">if</span> (x == y) <span class="keyword">return</span>;<span class="comment">//在一个集合中，不用合并</span>
+    <span class="keyword">if</span> (rank[x] &gt; rank[y])
+        {
+            father[y] = x;<span class="comment">//总是把秩小的树的根节点指向较大的树的根节点，这样秩不会增加</span>
+        }
+    <span class="keyword">else</span>
+        {
+            <span class="keyword">if</span> (rank[x] == rank[y])
+                {
+                    rank[y]++;
+                }
+            father[x] = y;
+        }
+}
+</pre></td></tr></table></figure>
+
+<p>参考《<a href="http://www.cnblogs.com/cherish_yimi/archive/2009/10/11/1580839.html" target="_blank">并查集—学习详解</a>》和《<a href="http://zh.wikipedia.org/wiki/%E5%B9%B6%E6%9F%A5%E9%9B%86" target="_blank">并查集 - 维基百科，自由的百科全书</a>》。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/机器学习/">机器学习</a>
+  </div>
+
+        
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=3326447" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    <a href="/2014/02/28/wang-shi-bing-bu-ru-yan/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2014/02/22/sampling-methods/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"zippera"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:zipperary.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/English/">English</a><small>2</small></li>
+  
+    <li><a href="/categories/IT杂谈/">IT杂谈</a><small>25</small></li>
+  
+    <li><a href="/categories/Mac/">Mac</a><small>5</small></li>
+  
+    <li><a href="/categories/Ruby/">Ruby</a><small>2</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>19</small></li>
+  
+    <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>15</small></li>
+  
+    <li><a href="/categories/人物/">人物</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>4</small></li>
+  
+    <li><a href="/categories/思维记忆/">思维记忆</a><small>1</small></li>
+  
+    <li><a href="/categories/推荐/">推荐</a><small>1</small></li>
+  
+    <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
+  
+    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+  
+    <li><a href="/categories/电影/">电影</a><small>27</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>32</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">简介</h3>
+<ul class="entry">
+<li>本体：赵伟</li>
+<li>二次元：zippera | moxie</li>
+<li>现状：帝都CS在读研究生</li>
+<li>想交友的朋友请<a href="http://zipperary.com/about">联系我</a>！</li>
+<li>QQ 号：763987114</li>
+<font color="red">Hexo 交流群：287306637</font>
+</ul>
+</div>
+
+
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1586279270&verifier=0c2cdcf8&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><section>
+Theme of <a href="https://github.com/hexojs/hexo-theme-light">Light</a>, Improved by <a href="/">zippera</a> 
+</section>
+<div class="clearfix"></div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
+
+
+<a href="https://github.com/zippera" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png" alt="Fork me on GitHub"></a>

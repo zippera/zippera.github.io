@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>隐马尔科夫模型介绍 | Zippera&#39;s blog</title>
+  <meta name="author" content="zippera">
+  
+  <meta name="description" content="Walk steps step by step">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="隐马尔科夫模型介绍"/>
+  <meta property="og:site_name" content="Zippera&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="http://zipperary.com/atom.xml" title="Zippera&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Zippera&#39;s blog</a></h1>
+  <h2><a href="/">Walk steps step by step</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-15T09:26:30.000Z"><a href="/2013/10/15/an-introduction-to-hmm/">10月 15 2013</a></time>
+      
+      
+  
+    <h1 class="title">隐马尔科夫模型介绍</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>这篇博客是根据我 NLP课程 的一个小作业整理而来的，介绍一下 NLP 领域中非常经典的一个模型，叫做隐马尔可夫模型，简称 HMM。看过吴军老师的《数学之美》的同学应该对这个模型不感到陌生。这次的作业，老师给出一本书<em>Foundations of statistical natural language processing</em>，让我们自己挑选任意一部分的内容，不限字数，写篇文章。前面部分多是介绍语言学的基础知识，我选择了比较偏算法的 HMM。由于 NLP 的课程刚刚开始，远没有讲到这里，老师提供的参考书又是电子版的英文原版，看起来比较费劲，我更多的参考了一些其他资料，文末会列出。</p>
+<p>分割线后是正文。</p>
+<hr>
+<p>HMM（隐马尔可夫模型）是 NLP（自然语言处理）领域中一个基本且常用的模型，可以用在诸如词性标注、中文分词、语音识别等细分的研究方向，在工业中的应用也已经十分广泛。本文将首先介绍 MM（马尔可夫模型），然后着重介绍 HMM 的原理、涉及到的基本问题，并给出比较形象的例子。</p>
+<a id="more"></a>
+
+
+<h3 id="马尔可夫模型">马尔可夫模型</h3>
+<p>提出：1913年由Andrei A. Markov提出，也因此得名。</p>
+<p>模型描述：这里引用网上的一段数学表示，稍后做出解释。</p>
+<p><img src="http://ww3.sinaimg.cn/large/5e8cb366jw1e9m07iqbigj20bi03l0t4.jpg" alt=""></p>
+<p>通俗地解释，随机序列 X 在不同时刻有不同的状态，在 t 时刻的状态受 t 之前所有时刻（t-1,t-2…0）的状态的影响；而在马尔可夫模型中，我们规定，t 时刻的状态只受 t-1时刻状态的影响，也就是不考虑更加之前的状态，这无疑会给我们解决问题带来方便。另外，我们用 P 来表示状态转移概率，亦即从 t-1时刻到 t时刻两个状态转换的可能性大小。</p>
+<p>之所以说「一阶」，是因为某状态只受前一个状态的影响，这也可以被称为2-gram；之所以说「链」，是因为 ai 受到 ai-1的影响，用 i 迭代，就像一个链式的反应。</p>
+<p>这个模型可以更加凝练地表示成一个二元组，形式为（S，A）。其中，S 表示所有可能的状态的集合；A 是一个 n 行 n 列的状态转移概率矩阵，每个元素 aij 表示的是从状态 i 转移到状态 j的概率。</p>
+<p>举个例子：</p>
+<p>假设我们观察天气，通过对历史数据的了解，我们知道只有三种天气状态：{阴，雨，晴}；同时，某天的天气只受前一天天气的影响，我们也从历史数据中得到了一个转移概率组成的矩阵（3*3）。有了这些已知条件，我们就可以预测某天的天气了。</p>
+<p>这里需要注意的是，我们所关心的状态（天气情况）和我们观察到的序列（天气情况）是一致的，给定了后者，前者便得到了。之所以讲这些，是为了引出 HMM，这一点正是 MM 和 HMM 的关键区别所在。</p>
+<h3 id="隐马尔可夫模型">隐马尔可夫模型</h3>
+<p>上面给出了马尔可夫模型，我们可以用它来做简单的预测问题，但是还有一些复杂的问题，用 MM 就束手无策了，下面通过一个简单的例子给出。</p>
+<p>假设有 N 个坛子，每个坛子表示一个状态；有 M 种颜色的小球，每个坛子中不确定会拿出哪种颜色的小球；现在我们依次随记从某个坛子中拿出小球，并记录小球的颜色，得到一个颜色序列；现在把这个观察得来的序列给另外一个人，它只知道颜色的产生顺序，不了解每个颜色分别是从哪个坛子里取出的。</p>
+<p>从这个例子看出，给出了观察序列，我们无法直接得知状态的序列；而上面天气的例子中，给出观察序列（天气），我们直接得到状态序列（天气）。本例中，状态的转移过程对于观察者是隐藏起来的，所以这个过程叫做「隐马尔可夫过程」。</p>
+<p>模型描述：</p>
+<p>HMM可以表示为一个五元组，我们用λ=（S，V，A，B，π）表示。</p>
+<p>S：状态集合，对于上例，就是坛子的集合，共 n 个元素。</p>
+<p>V：观察集合，对于上例，就是小球颜色的集合，共 m个元素。</p>
+<p>A：状态转移矩阵，涵义同 MM 中的 A。</p>
+<p>B：观察值的概率分布，对于上例，就是每个坛子里，取出每种颜色的小球的概率，可以看成一个 n*m 的矩阵。</p>
+<p>π：初始状态概率分布，可以理解为每个状态的先验概率。</p>
+<p>通过马尔可夫过程，可以生成一个符号序列（观察序列），我们用如下方式表示：<br>O = （o1,o2,…ot）</p>
+<p>该过程就是通过上述的五元组产生该序列的，可以简单地表示成下面过程：<br>按照π选择一个初始状态—&gt; 按照 B 选择一个输出值 o—&gt; 按照 A 选择下一个状态…  如此迭代进行，便可得出序列。</p>
+<p>HMM 中有三个基本问题，本文将通过一个直观的例子，提出这三个问题。</p>
+<p>问题描述：有三枚硬币（1，2，3），随机抛掷，记录结果。<br>这里，S 为{1，2，3}；V 为{H，T}（Head or Tail，硬币的正反）；A、B、π也给出，如下：（为了方便，这里引用资料中的截图）</p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1e9m0920ytpj20bi04cwep.jpg" alt=""> </p>
+<p>通过这个直观的例子，我们也能更加清晰地理解 HMM 的五元组代表的意思。</p>
+<p>接下来，我们提出三个问题：</p>
+<ol>
+<li>给定上述模型，观察到的结果（硬币的正反面）为O={H，T，H}的概率是多少？</li>
+<li>若给定上述的观察结果，那么最可能的状态序列（硬币序号）是什么？</li>
+<li>A、B、π未知的情况下，如何根据 O 得到它们？</li>
+</ol>
+<p>问题一是个估算问题，P（O|λ），可用向前算法和向后算法解决；<br>问题二是根据观察序列反向找出最可能的状态序列，是个解码问题，P（O,q|λ），q 是某状态，最常用的是 Viterbi算法；<br>问题三实际上是个参数估计或求解的问题，或者说是个学习问题，通过训练一步步优化参数，找到使得P（O|λ）最大的那个参数，最常用的是 Baum-Welch算法。</p>
+<p>当然，具体的算法描述和实现也是一大块内容，这里不另辟篇幅叙述了。</p>
+<h3 id="总结">总结</h3>
+<p>回顾一下，我们首先介绍了 HMM 的基础—MM；然后通过例子给出了为什么MM 是不够的，为什么需要 HMM；稍后给出了 HMM 的模型描述，并通过硬币的例子，一方面形象化了 HMM，另一方面引出了 HMM的三个基本问题；至于每个问题的解答，需要研究一下上述的几个算法，在此基础上就可以用来解决中文分词、词性标注等领域的一些问题了。尤为重要的是，我最近在研究的一个开源中文分词系统「结巴分词」，在新词预测时就是使用的 Viterbi 算法，最后的效果还是很好的，这个算法应该认真学习。</p>
+<hr>
+<p>参考资料：</p>
+<ol>
+<li>Foundations of statistical natural language processing. Christopher D.<br>Manning, Hinrich Schütze.</li>
+<li>《统计自然语言处理基础》，参考资料条目1的中文版。</li>
+<li>北京大学《计算语言学》第五章课件：<br><a href="http://www.icl.pku.edu.cn/member/chbb/lecture/cl/Computational_Linguistics_05.pdf" target="_blank">http://www.icl.pku.edu.cn/member/chbb/lecture/cl/Computational_Linguistics_05.pdf</a></li>
+<li><a href="http://www.52nlp.cn/hmm-concrete-example-on-wiki" target="_blank">http://www.52nlp.cn/hmm-concrete-example-on-wiki</a></li>
+<li>「结巴分词」：<a href="https://github.com/fxsjy/jieba" target="_blank">https://github.com/fxsjy/jieba</a></li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/机器学习/">机器学习</a>
+  </div>
+
+        
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=3326447" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    <a href="/2013/10/17/3-problems-in-hmm/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2013/10/15/free-call/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"zippera"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:zipperary.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/English/">English</a><small>2</small></li>
+  
+    <li><a href="/categories/IT杂谈/">IT杂谈</a><small>25</small></li>
+  
+    <li><a href="/categories/Mac/">Mac</a><small>5</small></li>
+  
+    <li><a href="/categories/Ruby/">Ruby</a><small>2</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>19</small></li>
+  
+    <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>15</small></li>
+  
+    <li><a href="/categories/人物/">人物</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>4</small></li>
+  
+    <li><a href="/categories/思维记忆/">思维记忆</a><small>1</small></li>
+  
+    <li><a href="/categories/推荐/">推荐</a><small>1</small></li>
+  
+    <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
+  
+    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+  
+    <li><a href="/categories/电影/">电影</a><small>27</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>32</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">简介</h3>
+<ul class="entry">
+<li>本体：赵伟</li>
+<li>二次元：zippera | moxie</li>
+<li>现状：帝都CS在读研究生</li>
+<li>想交友的朋友请<a href="http://zipperary.com/about">联系我</a>！</li>
+<li>QQ 号：763987114</li>
+<font color="red">Hexo 交流群：287306637</font>
+</ul>
+</div>
+
+
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1586279270&verifier=0c2cdcf8&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><section>
+Theme of <a href="https://github.com/hexojs/hexo-theme-light">Light</a>, Improved by <a href="/">zippera</a> 
+</section>
+<div class="clearfix"></div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
+
+
+<a href="https://github.com/zippera" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png" alt="Fork me on GitHub"></a>

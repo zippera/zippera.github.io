@@ -1,0 +1,464 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>中文分词（一） | Zippera&#39;s blog</title>
+  <meta name="author" content="zippera">
+  
+  <meta name="description" content="Walk steps step by step">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="中文分词（一）"/>
+  <meta property="og:site_name" content="Zippera&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="http://zipperary.com/atom.xml" title="Zippera&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Zippera&#39;s blog</a></h1>
+  <h2><a href="/">Walk steps step by step</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-12-25T12:49:20.000Z"><a href="/2013/12/25/chinese-segmentation/">12月 25 2013</a></time>
+      
+      
+  
+    <h1 class="title">中文分词（一）</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <ul>
+<li><a href="http://zipperary.com/2013/12/25/chinese-segmentation/">《中文分词（一）》</a></li>
+<li><a href="http://zipperary.com/2013/12/27/chinese-segmentation-2/">《中文分词（二）》</a></li>
+<li><a href="http://zipperary.com/2013/12/27/chinese-segmentation-3/">《中文分词（三）》</a></li>
+</ul>
+<p>这两天忙 NLP 课程的大作业，我们组的题目是「中文分词」，要求是可以使用任何现有的资料，我们采用的是@TeapDB 的<strong>结巴分词</strong>，项目主页是：<a href="https://github.com/fxsjy/jieba" target="_blank">https://github.com/fxsjy/jieba</a> 。</p>
+<p>今晚刚刚做完 presentation，不知不觉在台上扯了四十分钟，在空调吹暖气烤的屋里出了一身的汗。汗还没干，把内容整理一下：</p>
+<h3 id="为什么要进行中文分词？">为什么要进行中文分词？</h3>
+<ul>
+<li><p>词是最小的能够独立活动的有意义的语言成分。</p>
+</li>
+<li><p>汉语是以字为基本的书写单位，词语之间没有明显的区分标记。</p>
+</li>
+<li><p>正确分词是中文信息处理的基础与关键。</p>
+</li>
+</ul>
+<h3 id="中文分词的难点">中文分词的难点</h3>
+<ol>
+<li><p>交集型歧义：<br>结婚的和尚未结婚的   =&gt;<br>结婚／的／和／尚未／结婚／的<br>结婚／的／和尚／未／结婚／的  </p>
+</li>
+<li><p>OOV(Out of Vocabulary)识别：<br>云计算、创新办、好用</p>
+</li>
+</ol>
+<a id="more"></a>
+
+<h3 id="基于规则的分词：最大匹配">基于规则的分词：最大匹配</h3>
+<p>e.g. “南京市长江大桥”</p>
+<p>词典的最大词长是5</p>
+<p><strong>正向最大匹配：</strong>从左向右，依次扫描。比如”南”，扫描前5个，”南京市长江”，词典中并没有这个词；扫描前4个，”南京市长”，词典中有这个词，Okay。然后从”江”开始，后面一共就剩3个了，但词典中木有，那么缩短，”江大”，也木有，只能是”江”了。依次继续，可以得到”大桥”。最后我们就得到了按照正向最大匹配得到的词序：</p>
+<p>南京市长/江/大桥</p>
+<p><strong>逆向最大匹配：</strong>我们都知道，中文的重心一般在后面，所以按照从右向左的扫描方式，取得的效果会更好一些。分词的方式跟上面是一样的，除了扫描顺序。最后得到的词序是：</p>
+<p>南京市/长江大桥</p>
+<h3 id="基于统计的分词">基于统计的分词</h3>
+<ol>
+<li>基于 DAG(有向无环图)和 Dict(词典)的中文分词。</li>
+<li>基于HMM的 Viterbi 算法</li>
+</ol>
+<p>结巴分词正是使用这种思想。该分词程序的<strong>主要功能</strong>有：</p>
+<ul>
+<li><strong>分词</strong></li>
+<li>关键词提取：TF/IDF</li>
+<li>词性标注（pos）</li>
+<li>Tokenize：返回词语在原文的起始位置</li>
+</ul>
+<p><strong>代码</strong>有：</p>
+<ul>
+<li>Python 版，作者所写</li>
+<li>C++</li>
+<li>Java</li>
+</ul>
+<p>后两种为其他人做的 commit。</p>
+<p>程序的<strong>性能</strong>：</p>
+<ul>
+<li>1.5 MB / Second in Full Mode</li>
+<li>400 KB / Second in Default Mode</li>
+<li>Test Env: Intel(R) Core(TM) i7-2600 CPU @ 3.4GHz；《围城》.txt</li>
+</ul>
+<h3 id="演示">演示</h3>
+<p>输入文本： “这是一个伸手不见五指的黑夜。我叫孙悟空，我爱北京，我爱Python和C++。”</p>
+<p>程序执行结果：</p>
+<p><img src="http://ww4.sinaimg.cn/large/5e8cb366jw1ebw9jdi6mjj20k00egwg1.jpg" alt=""></p>
+<h3 id="基于_DAG_和_Dict_的中文分词">基于 DAG 和 Dict 的中文分词</h3>
+<p>分词步骤：</p>
+<ol>
+<li>根据 dict 生成 trie，提高词典查询速度</li>
+<li>文本预处理，生成中文短语</li>
+<li>生成词图（DAG），并求最大概率路径</li>
+</ol>
+<p>咦，文章不短了，马上下课，今天先到这儿，明天继续！</p>
+<p><em>附我 Presentation 的 ppt： <a href="http://pan.baidu.com/s/1jG1DcFk" target="_blank">点我下载</a></em></p>
+<p>Merry Christmas!</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/机器学习/">机器学习</a>
+  </div>
+
+        
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=3326447" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    <a href="/2013/12/27/chinese-segmentation-2/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2013/12/22/lotr/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"zippera"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:zipperary.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/English/">English</a><small>2</small></li>
+  
+    <li><a href="/categories/IT杂谈/">IT杂谈</a><small>25</small></li>
+  
+    <li><a href="/categories/Mac/">Mac</a><small>5</small></li>
+  
+    <li><a href="/categories/Ruby/">Ruby</a><small>2</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>19</small></li>
+  
+    <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>15</small></li>
+  
+    <li><a href="/categories/人物/">人物</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>4</small></li>
+  
+    <li><a href="/categories/思维记忆/">思维记忆</a><small>1</small></li>
+  
+    <li><a href="/categories/推荐/">推荐</a><small>1</small></li>
+  
+    <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
+  
+    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+  
+    <li><a href="/categories/电影/">电影</a><small>27</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>32</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">简介</h3>
+<ul class="entry">
+<li>本体：赵伟</li>
+<li>二次元：zippera | moxie</li>
+<li>现状：帝都CS在读研究生</li>
+<li>想交友的朋友请<a href="http://zipperary.com/about">联系我</a>！</li>
+<li>QQ 号：763987114</li>
+<font color="red">Hexo 交流群：287306637</font>
+</ul>
+</div>
+
+
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1586279270&verifier=0c2cdcf8&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><section>
+Theme of <a href="https://github.com/hexojs/hexo-theme-light">Light</a>, Improved by <a href="/">zippera</a> 
+</section>
+<div class="clearfix"></div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
+
+
+<a href="https://github.com/zippera" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png" alt="Fork me on GitHub"></a>

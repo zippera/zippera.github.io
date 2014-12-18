@@ -1,0 +1,678 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hexo系列教程：（三）hexo博客的配置、使用 | Zippera&#39;s blog</title>
+  <meta name="author" content="zippera">
+  
+  <meta name="description" content="Walk steps step by step">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="hexo系列教程：（三）hexo博客的配置、使用"/>
+  <meta property="og:site_name" content="Zippera&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="http://zipperary.com/atom.xml" title="Zippera&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Zippera&#39;s blog</a></h1>
+  <h2><a href="/">Walk steps step by step</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-29T09:28:53.000Z"><a href="/2013/05/29/hexo-guide-3/">5月 29 2013</a></time>
+      
+      
+  
+    <h1 class="title">hexo系列教程：（三）hexo博客的配置、使用</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在<a href="http://zipperary.com/2013/05/28/hexo-guide-2/">上一节</a>中，我们在本地和github搭建起了自己的hexo博客站点，但是还未发表过文章，站点的配置还是原来的默认值。在本节，我们来进行个性化的设置，将站点打造成自己的，同时介绍下怎么撰文和发表。</p>
+<p>站点配置用到两个文件，一个是对整站的配置<code>H:\hexo\_config.yml</code>，另一个是对主题的配置<code>H:\hexo\themes\light_config.yml</code>，我们来分别介绍。</p>
+<p><em>H:\hexo\ _config.yml</em><br><a id="more"></a></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+</pre></td><td class="code"><pre><span class="preprocessor"># Hexo Configuration</span>
+<span class="preprocessor">## Docs: http://zespia.tw/hexo/docs/configure.html</span>
+<span class="preprocessor">## Source: https://github.com/tommy351/hexo/</span>
+
+<span class="preprocessor"># Site 这里的配置，哪项配置反映在哪里，可以参考我的博客</span>
+title: Zippera's blog <span class="preprocessor">#站点名，站点左上角</span>
+subtitle: Walk steps <span class="built_in">step</span> by <span class="built_in">step</span> <span class="preprocessor">#副标题，站点左上角</span>
+description: Walk steps <span class="built_in">step</span> by <span class="built_in">step</span> <span class="preprocessor">#给搜索引擎看的，对站点的描述，可以自定义</span>
+author: zippera <span class="preprocessor">#在站点左下角可以看到</span>
+email: <span class="preprocessor">#你的联系邮箱</span>
+language: zh-CN <span class="preprocessor">#中国人嘛，用中文</span>
+
+<span class="preprocessor"># URL #这项暂不配置，绑定域名后，欲创建sitemap.xml需要配置该项</span>
+<span class="preprocessor">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span>
+url: http:<span class="comment">//zipperary.com</span>
+root: /
+permalink: :year/:month/:day/:title/
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+
+<span class="preprocessor"># Writing 文章布局、写作格式的定义，不修改</span>
+new_post_name: :title.md <span class="preprocessor"># File name of new posts</span>
+default_layout: post
+auto_spacing: <span class="literal">false</span> <span class="preprocessor"># Add spaces between asian characters and western characters</span>
+titlecase: <span class="literal">false</span> <span class="preprocessor"># Transform title into titlecase</span>
+max_open_file: <span class="number">100</span>
+filename_case: <span class="number">0</span>
+highlight:
+  enable: <span class="literal">true</span>
+  backtick_code_block: <span class="literal">true</span>
+  line_number: <span class="literal">true</span>
+  tab_replace:
+
+<span class="preprocessor"># Category & Tag</span>
+default_category: uncategorized
+category_map:
+tag_map:
+
+<span class="preprocessor"># Archives 默认值为2，这里都修改为1，相应页面就只会列出标题，而非全文</span>
+<span class="preprocessor">## 2: Enable pagination</span>
+<span class="preprocessor">## 1: Disable pagination</span>
+<span class="preprocessor">## 0: Fully Disable</span>
+archive: <span class="number">1</span>
+category: <span class="number">1</span>
+tag: <span class="number">1</span>
+
+<span class="preprocessor"># Server 不修改</span>
+<span class="preprocessor">## Hexo uses Connect as a server</span>
+<span class="preprocessor">## You can customize the logger format as defined in</span>
+<span class="preprocessor">## http://www.senchalabs.org/connect/logger.html</span>
+port: <span class="number">4000</span>
+logger: <span class="literal">false</span>
+logger_format:
+
+<span class="preprocessor"># Date / Time format 日期格式，不修改</span>
+<span class="preprocessor">## Hexo uses Moment.js to parse and display date</span>
+<span class="preprocessor">## You can customize the date format as defined in</span>
+<span class="preprocessor">## http://momentjs.com/docs/#/displaying/format/</span>
+date_format: MMM D YYYY
+time_format: H:mm:ss
+
+<span class="preprocessor"># Pagination 每页显示文章数，可以自定义，我将10改成了5</span>
+<span class="preprocessor">## Set per_page to 0 to disable pagination</span>
+per_page: <span class="number">5</span>
+pagination_dir: page
+
+<span class="preprocessor"># Disqus Disqus插件，我们会替换成“多说”，不修改</span>
+disqus_shortname:
+
+<span class="preprocessor"># Extensions 这里配置站点所用主题和插件，暂默认，后面会介绍怎么修改</span>
+<span class="preprocessor">## Plugins: https://github.com/tommy351/hexo/wiki/Plugins</span>
+<span class="preprocessor">## Themes: https://github.com/tommy351/hexo/wiki/Themes</span>
+theme: light
+exclude_generator:
+plugins:
+- hexo-generator-feed
+- hexo-generator-sitemap
+
+<span class="preprocessor"># Deployment 站点部署到github要配置，上一节中已经讲过</span>
+<span class="preprocessor">## Docs: http://zespia.tw/hexo/docs/deploy.html</span>
+deploy:
+  type: github
+  repository: https:<span class="comment">//github.com/zippera/zippera.github.io.git</span>
+  branch: master
+</pre></td></tr></table></figure>
+
+<p>现在可以<code>hexo generate</code>，<code>hexo server</code>，打开<code>localhost:4000</code>查看效果了。</p>
+<p><em>H:\hexo\themes\light_config.yml</em></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+</pre></td><td class="code"><pre><span class="label">menu:</span> <span class="preprocessor">#站点右上角导航栏，暂时默认，后面介绍修改</span>
+  首页: /
+  存档: /archives
+  关于: /about
+  ToDo: /todolist
+  
+
+<span class="label">widgets:</span> <span class="preprocessor">#站点右边栏，暂时默认，后面介绍修改和添加</span>
+- search
+- category
+- tagcloud
+- weibo
+- blogroll
+
+
+<span class="label">excerpt_link:</span> 阅读全文 <span class="preprocessor">#替换为中文</span>
+
+<span class="label">plugins:</span> 
+
+
+<span class="label">twitter:</span> <span class="preprocessor">#右边栏要显示twitter展示的话，需要在此设置</span>
+  username: moxie198
+  show_replies: false
+  tweet_count: <span class="number">5</span>
+
+<span class="label">addthis:</span> <span class="preprocessor">#SNS分享，身在天朝，当然用“百度分享”，暂时默认，后面会介绍</span>
+  enable: true
+  pubid:
+  facebook: true
+  twitter: true
+  google: true
+  pinterest: true
+
+<span class="label">fancybox:</span> true <span class="preprocessor">#图片效果，默认</span>
+
+<span class="label">google_analytics:</span> <span class="preprocessor">#要使用google_analytics进行统计的话，这里需要配置ID，暂时默认，后面介绍</span>
+<span class="label">rss:</span>  <span class="preprocessor">#生成RSS，需要配置路径，暂时默认，后面介绍</span>
+</pre></td></tr></table></figure>
+
+<p>上面改动的不多，更多的是介绍了下功能，后面会相继介绍具体的修改方法。</p>
+<p>好了，站点配置好了，我想发表一篇文章，怎么做呢？</p>
+<ol>
+<li><code>hexo new &quot;my new post&quot;</code></li>
+<li>在<code>H:\hexo\source\_posts</code>中打开这个文件（打开方式用“记事本”即可），配置开头。</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>title: my <span class="built_in">new</span> <span class="built_in">post</span> <span class="comment">#可以改成中文的，如“新文章”</span>
+<span class="built_in">date</span>: <span class="number">2013</span>-<span class="number">05</span>-<span class="number">29</span> <span class="number">07</span>:<span class="number">56</span>:<span class="number">29</span> <span class="comment">#发表日期，一般不改动</span>
+categories: blog <span class="comment">#文章文类</span>
+tags: [博客，文章] <span class="comment">#文章标签，多于一项时用这种格式</span>
+<span class="comment">---</span>
+<span class="comment">#这里是正文，用markdown写，使用方法参照我原来的博客[Introduction to markdown](http://zipperary.com/2013/05/22/introduction-to-markdown/)</span>
+</pre></td></tr></table></figure>
+
+<ol>
+<li><code>hexo server</code>，访问<code>localhost:4000</code>预览效果。（退出server用Ctrl+c）</li>
+<li><code>hexo deploy</code>，同步到github。访问网站看看效果。</li>
+</ol>
+<p>现在为止，我们已经搭建起博客，进行一些基本配置，并学会了怎么发表文章。后面会陆续介绍一些高级点的个性化设置，不过在此之前，你可以正常发表博客了。后面的文章你可以不看，有意者请跟随。</p>
+<hr>
+<p>爱打卡-100days-第2天-1111</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/hexo/">hexo</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/hexo/">hexo</a>, <a href="/tags/博客/">博客</a>, <a href="/tags/教程/">教程</a>
+  </div>
+
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=3326447" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    <a href="/2013/05/30/hexo-guide-4/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2013/05/29/potato-working-method/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"zippera"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:zipperary.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/English/">English</a><small>2</small></li>
+  
+    <li><a href="/categories/IT杂谈/">IT杂谈</a><small>25</small></li>
+  
+    <li><a href="/categories/Mac/">Mac</a><small>5</small></li>
+  
+    <li><a href="/categories/Ruby/">Ruby</a><small>2</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>19</small></li>
+  
+    <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>15</small></li>
+  
+    <li><a href="/categories/人物/">人物</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>4</small></li>
+  
+    <li><a href="/categories/思维记忆/">思维记忆</a><small>1</small></li>
+  
+    <li><a href="/categories/推荐/">推荐</a><small>1</small></li>
+  
+    <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
+  
+    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+  
+    <li><a href="/categories/电影/">电影</a><small>27</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>32</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">简介</h3>
+<ul class="entry">
+<li>本体：赵伟</li>
+<li>二次元：zippera | moxie</li>
+<li>现状：帝都CS在读研究生</li>
+<li>想交友的朋友请<a href="http://zipperary.com/about">联系我</a>！</li>
+<li>QQ 号：763987114</li>
+<font color="red">Hexo 交流群：287306637</font>
+</ul>
+</div>
+
+
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1586279270&verifier=0c2cdcf8&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><section>
+Theme of <a href="https://github.com/hexojs/hexo-theme-light">Light</a>, Improved by <a href="/">zippera</a> 
+</section>
+<div class="clearfix"></div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
+
+
+<a href="https://github.com/zippera" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png" alt="Fork me on GitHub"></a>

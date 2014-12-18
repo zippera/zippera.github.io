@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>《苏菲的世界》笔记：三（终结） | Zippera&#39;s blog</title>
+  <meta name="author" content="zippera">
+  
+  <meta name="description" content="Walk steps step by step">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="《苏菲的世界》笔记：三（终结）"/>
+  <meta property="og:site_name" content="Zippera&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="http://zipperary.com/atom.xml" title="Zippera&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Zippera&#39;s blog</a></h1>
+  <h2><a href="/">Walk steps step by step</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-07-25T03:56:40.000Z"><a href="/2013/07/25/su-fei-de-shi-jie-bi-ji-san/">7月 25 2013</a></time>
+      
+      
+  
+    <h1 class="title">《苏菲的世界》笔记：三（终结）</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://whitenaos.files.wordpress.com/2010/10/r1075510.jpg" alt=""></p>
+<a id="more"></a>
+
+<ul>
+<li><a href="http://zipperary.com/2013/07/23/su-fei-de-shi-jie-bi-ji-yi/">《苏菲的世界》笔记：一》</a></li>
+<li><a href="http://zipperary.com/2013/07/24/su-fei-de-shi-jie-bi-ji-er/">《苏菲的世界》笔记：二》</a></li>
+<li><a href="http://zipperary.com/2013/07/25/su-fei-de-shi-jie-bi-ji-san/">《苏菲的世界》笔记：三（终结）》</a></li>
+</ul>
+<p>三十、启蒙</p>
+<ul>
+<li>启蒙运动的思想：（法国）（孟德斯鸠、卢梭、伏尔泰）反抗权威（每一个人都必须自行找寻问题的答案）、理性主义（道德、信仰是人的理性中固有的）、启蒙运动（教育学、百科全书，人性进步）、文化上的乐观态度（非理性和无知迟早会被文明的人性取代）、回归自然（过度文明不好）、自然宗教（上帝是目的因和最初推动者，只以自然法则不以超自然形式现身；世界太有条理了，不可能不存在上帝）、人权（自由平等博爱） </li>
+<li>英国人通常说「这是常识」，法国人说「这很明显」；英国人经验，法国人理性且更重实践（依照自己的哲学生活）。</li>
+</ul>
+<p>三十一、康德</p>
+<ul>
+<li>德国，基督教徒。精通别人的哲学，同时有一套自己的哲学。</li>
+<li>时间、空间是两种「直观形式」，先于经验。是人感知的方式，天生的条件，不是物质世界的属性，人所感官的所有事物都被看做时间与空间里的现象。 </li>
+<li>因果律：与休谟相反，康德认为因为人类理性决定了感知事物因果的能力和特性（人喜欢追究原因，婴儿理性还未充分发展不算），因此因果律是绝对的、永恒的。所谓自然法则其实是人类认知的法则（基于人对事物的认知，人永远不可知事物本身），而理性能运作的范围超过的人类认知理解的程度，所以缺乏透过感官而来的知识材料的问题（我们是什么、是否有不朽灵魂、上帝是否存等），理性无从运作，是无法得到确切答案的，因此总有不同看法，应该交给信仰。而为了道德，必须假定上帝存在。 </li>
+<li>人类对世界的观念受两种因素左右：一个是透过感官知道的外在情况，知识的原料；一个是人类内在的情况，如时空、因果律等，知识的形式。</li>
+<li>伦理学：辨别是非的能力和因果律一样是人的理性与生俱来的，本质意义是尊重一个人本身，而不将其当做实现某种目的的手段，可以理解为良心。作为物质形成的生物，我们受因果律支配；同时作为一个理性的存在，我们只有追随实践理性并因此得以做道德上的抉择时，我们才有自由意志可言。康德终结了理性主义和经验主义的僵局。 只有纯粹基于道德做的事才是道德行为，「义务伦理观」；取决于是否出自善意，不是行动结果，「善意的伦理学」。</li>
+</ul>
+<p>三十一、浪漫主义（书中有两个三十一…）</p>
+<ul>
+<li>欧洲最后一个伟大的文化纪元，欧洲人最后一次对生命的「共同进路」。十八世纪末到十九世纪中。</li>
+<li>感情、想象、经验、渴望，批评过于理性的做法。渴望遥不可及的事物的心态。职责就是体验生活。向往大自然和大自然的神秘，大自然是大我。受到美的感动而忘记一切时，比较容易感受到自我，上帝创造世界一样创造自己的世界。</li>
+<li>个人可以以自己的方式随意阐释生命，自我崇拜，歌颂天才。</li>
+<li>艺术对人类认知的重要性。可以是我们接近「无以言喻」的经验，上帝。</li>
+<li>谢林：大自然的全部，包括灵魂与物质世界，都是一个“绝对存在”（或世界精神）的表现，自然是可见的精神，精神是看不见的自然。研究自然科学和进入内心作诗是一体两面。世界在“上帝之内”，上帝意识到世界的一部分，大自然也有一部分代表上帝不为人知的部分。（就像作者与作品以及作品里人物的关系） </li>
+<li>作者打破幻想提醒读者操纵者是他的做法叫“浪漫主义的反讽”。</li>
+<li>赫德：世间不止一种普遍理性，各个时期和各个民族都有其个性和灵魂，要认同其他文化。-&gt;民族浪漫主义 。</li>
+<li>费希特：和艺术作品源自艺术家一样，大自然源自更高、无意识的想象力（可称作上帝）。 </li>
+</ul>
+<p>三十二、黑格尔</p>
+<ul>
+<li>「世界精神」实为人类理念的综合，人类的生命、思想、文化。真理是主观的，人类理性之外没有任何真理或知识。人类理性随历史发展而变化，不存在永恒的哲学标准，必须参照其历史背景。历史就是「世界精神」逐渐实现自己的故事。</li>
+<li>哲学的发展过程是辩证模式的。个人与社会的关系也是辩证的，浪漫主义追求个人主义，但理性必须通过人际互动才能彰显，人不能舍弃社会。只有世界精神而非个人可以发现自我，三个阶段：意识到自我在个人中的存在（主观精神）-&gt;自我在家庭、社会、国家的人际互动中达到更高的意识（客观精神）-&gt;在艺术、宗教、哲学中达到最高形式的自我实现（绝对精神）。世界精神最先在哲学中发现它的自我。黑格尔是庞大哲学体系的最后一个大家，之后走上存在哲学和行动哲学道路。 </li>
+<li>辩证法：正-反-合（例：笛卡尔-休谟-康德）。对一个道理寻找缺失，称为“否定的思考”，找到了缺点，同时也会保存优点，历史决定是非（合）（对的观点会流传下来）。两个观念总是存在辩证式的紧张关系，事实总会有相反的事物，因此描述事实就必须同时描述相反的事物。辩证的紧张关系能导致自发性的行动，并因此造成突然的改变。 </li>
+<li>男女不同，犹如动物和植物的不同。</li>
+<li>个人必须在社会、国家中找到定位。</li>
+</ul>
+<p>三十三、祁克果</p>
+<ul>
+<li>存在主义者。每个人都是独一无二的重要个体，世间唯一重要的事是每个人“自己的存在”，唯有通过重要的选择才能和自我存在关联。真正重要的真理是属于个人的，即每个人都必须独自回答的（上帝是否存在，他是否爱我），而由理性可知的事情是不重要的（1+1=2）。所以宗教信仰重要，但又无法用理性去解释。 </li>
+<li>人生三阶段：美感阶段（从美感角度看待现实，完全活在感官的世界中，只重视是否有趣，如典型浪漫主义者）&lt;-&gt;焦虑空虚-&gt;道德阶段（对生命抱认真态度，始终一贯做符合道德的抉择，重视是非对错）&lt;-&gt;厌倦-&gt;宗教阶段（选择信仰，不选择美感的愉悦和理性要求的责任） </li>
+</ul>
+<p>三十四、马克思</p>
+<ul>
+<li>自然主义：除了大自然和感官世界，别无他物。只相信自然现象，而不信任何理性假设或圣灵启示。（马克思、达尔文、弗洛伊德）</li>
+<li>马克思：哲学不仅诠释世界，也应用来改变世界。历史唯物主义，物质变化是推进历史的力量，物质决定精神关系。社会基础决定上层结构，同时二者有辩证的互动。社会基础的三个阶层：生产条件（自然条件）、生产工具（技术设备）、生产关系（分工和财产分配）。是非观念是社会基础的产物，尤其是那个社会的统治阶级决定的，因为人类历史就是阶级斗争史。人在劳动时与自然有互动的辩证关系（互相改造），而资本主义社会让劳动变成为他人工作，并被剥削剩余价值。资本主义的矛盾（生产力越来越强，劳动者购买力越来越弱）将使其灭亡，无产阶级革命专政。马克思有经济学错误，同时没有重视人对大自然的掠夺。他之后分流为社会民主主义（西欧渐进和平式）和列宁主义（暴力）。 </li>
+</ul>
+<p>三十五、达尔文（精彩，全章） </p>
+<ul>
+<li>（copy）达尔文：青年时期的环球探险，安第斯山内陆的海洋古生物化石，加拉帕戈斯群岛的物种隔离。《物种起源》。进化论：动植物都是从原始生物进化而来，进化是自然淘汰差异个体的结果。个体差异的原因是遗传与突变。远古无氧环境和无臭氧遮挡宇宙射线才能让第一个DNA细胞形成（氧气氧化性太强），因此现今世上所有生命都是同源的，也不会有新的生命形成。但进化似乎并非完全偶然，而是朝着复杂神经、大脑的方向，眼睛这样的精密是仅仅物竞天择也难以解释。 </li>
+</ul>
+<p>三十六、佛洛依德（精彩，全章）</p>
+<ul>
+<li>（copy）人与环境有不断的紧张关系，这种冲突存在于人的驱策力、需要和社会要求之间。驱策力是指人的非理性冲动（例如从婴儿开始就有的性冲动），在无从查觉得情况下主宰人的行动，而非由理性。人刚出生时，会用直接无羞耻的方式满足身心需求，这种快乐原则称为“本我”。长大过程中学会调整快乐原则来迁就现实环境原则，发展出了具有调节功能的“自我”。从小到大接受的道德要求（例如良心、对性的罪恶感）也成为内心一部分，称为“超我”。三个“我”之间的冲突经验是精神官能症之源，弗洛伊德通过溯源冲突来治愈。</li>
+<li>潜意识：人类的意识只占心灵很小一部分，大部分是因为与意识或超我冲突而被压抑的经验想法，即潜意识。被压抑的想法经验总试图重新进入意识，因此会有口误、谎称动机把事情“合理化”（不愿承认真正动机）、投射（把内心试图压抑的特点转移到别人身上）的现象。压抑过强易患精神疾病，排除压抑管制的潜意识自由联想是治疗之道。 </li>
+<li>解梦：《梦的解析》。了解自己潜意识的最佳途径是梦境。梦反映愿望，孩童的梦直接，成人的梦经过压抑伪装（但比平日弱）。梦境（显梦）和最近的事有关，但有一个更深层的意识无法察觉的意义（潜梦意念），最后梦境以伪装的方式满足人被压抑的愿望。 </li>
+<li>灵感：潜意识进入了意识。20世纪的超现实主义艺术来自于向潜意识寻求灵感，力图排除理性的阻塞。但之后也要有理智来加以筛选，否则世界会因偶然冲动而毁灭。 </li>
+</ul>
+<p>三十七、我们这个时代</p>
+<ul>
+<li>存在主义。</li>
+<li>尼采：「上帝已死」。重视生命和这个世界本身，不必对历史和宗教“奴隶式道德”以观念世界过于注意。希望对所有价值重新评价，使强者的生命力不受弱者拖累。 </li>
+<li>（copy）萨特：无神论的存在主义，以人类为出发点。人是唯一意识到自己存在的生物，人的存在比其他事物的存在更重要。“存在先于本质”，人没有天生的本性，也没有不变的本性，追求广泛的生命的“意识”是没用的。这不同于虚无主义（没有一件事情有意义，怎样都可以），人必须创造自我的意义，寻求每个问题自己的答案。人在一个没有意义的世界里会感到疏离（同黑格尔），人没有选择是否来到这个世界的自由，但是自由的个体，要不断地选择，并为做的每件事负责。不存在永恒价值和规范，使得我们的选择更有意义。逃避选择是自我欺骗。意识本身在感知某件事物前是不存在的，因为意识总会意识到某件事物，这个事物固然由环境提供，但也由我们自己选择决定我们要感知什么，并虚无化与我们无关的事物，例如病人只关注救护车，等人时候只关注人没来。 </li>
+<li>西蒙波娃：男女不存在天性和价值的差别。</li>
+<li>荒谬主义：描绘和观众每日一样的琐碎真实环境中，角色默默接受荒谬的超现实情境却不惊讶，来使观众检讨并追求较为真实而有意义的生命。超写实主义。</li>
+<li>生态哲学：西方文明以人类为万物主宰的思想形态是错的，会对地球造成致命伤害。注意研究印度、北美原住民等文化的观念思想。</li>
+<li>地理大发现时代让世界扩大，20世纪的科技和通讯进步让世界缩小。在变革的时代许多毫无真实经验依据的学说（如占星学）大行其道，以满足解闷的需求。所谓灵媒，除了骗子外，都是自己潜意识的“灵媒”。也有许多现象是现在无法理解的，应开放探索而非武断否定，始终抱有批判性的思考态度。 </li>
+<li>宇宙大爆炸，人生如星尘。我们每个人都来自宇宙大爆炸伊始的物质，是一百多亿年前熊熊燃烧的大火所爆出来的一点火花。</li>
+</ul>
+<p><em>参考：<a href="http://book.douban.com/review/5805285/" target="_blank">http://book.douban.com/review/5805285/</a></em></p>
+<hr>
+<p>爱打卡-100days-第58天-1111</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/读书笔记/">读书笔记</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/哲学/">哲学</a>
+  </div>
+
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=3326447" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    <a href="/2013/07/26/python-pachong-qiu-bai/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2013/07/24/su-fei-de-shi-jie-bi-ji-er/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"zippera"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:zipperary.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/English/">English</a><small>2</small></li>
+  
+    <li><a href="/categories/IT杂谈/">IT杂谈</a><small>25</small></li>
+  
+    <li><a href="/categories/Mac/">Mac</a><small>5</small></li>
+  
+    <li><a href="/categories/Ruby/">Ruby</a><small>2</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>19</small></li>
+  
+    <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>15</small></li>
+  
+    <li><a href="/categories/人物/">人物</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>4</small></li>
+  
+    <li><a href="/categories/思维记忆/">思维记忆</a><small>1</small></li>
+  
+    <li><a href="/categories/推荐/">推荐</a><small>1</small></li>
+  
+    <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
+  
+    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+  
+    <li><a href="/categories/电影/">电影</a><small>27</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>32</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">简介</h3>
+<ul class="entry">
+<li>本体：赵伟</li>
+<li>二次元：zippera | moxie</li>
+<li>现状：帝都CS在读研究生</li>
+<li>想交友的朋友请<a href="http://zipperary.com/about">联系我</a>！</li>
+<li>QQ 号：763987114</li>
+<font color="red">Hexo 交流群：287306637</font>
+</ul>
+</div>
+
+
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1586279270&verifier=0c2cdcf8&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><section>
+Theme of <a href="https://github.com/hexojs/hexo-theme-light">Light</a>, Improved by <a href="/">zippera</a> 
+</section>
+<div class="clearfix"></div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
+
+
+<a href="https://github.com/zippera" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png" alt="Fork me on GitHub"></a>

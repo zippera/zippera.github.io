@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据结构与算法笔记：一 | Zippera&#39;s blog</title>
+  <meta name="author" content="zippera">
+  
+  <meta name="description" content="Walk steps step by step">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="数据结构与算法笔记：一"/>
+  <meta property="og:site_name" content="Zippera&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="http://zipperary.com/atom.xml" title="Zippera&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Zippera&#39;s blog</a></h1>
+  <h2><a href="/">Walk steps step by step</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-01-04T11:59:17.000Z"><a href="/2014/01/04/dsv-notes/">1月 4 2014</a></time>
+      
+      
+  
+    <h1 class="title">数据结构与算法笔记：一</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="http://zipperary.com/2014/01/04/dsv-notes/">数据结构与算法笔记：一 | Zippera’s blog</a></p>
+<p><a href="http://zipperary.com/2014/01/06/dsv-notes-2/">数据结构与算法笔记：二 | Zippera’s blog</a></p>
+<p><a href="http://zipperary.com/2014/02/23/dsv-notes-3/">数据结构与算法笔记：三（大结局） | Zippera’s blog</a></p>
+<hr>
+<p>这两天在看一个很不错的资源，通过将常见的数据结构和算法可视化为动画或图画的形式，让学习者直观了解这些数据结构的结构形式与常用操作，以及常用算法的代码执行过程，非常受教。</p>
+<p>这些知识大部分都有所涉猎或者在课堂上学过，但直观的观察执行过程有助于加深理解。这里简要做些笔记。打算先把内容都看完，然后写代码练习。</p>
+<p>网站地址：<a href="http://www.cs.usfca.edu/~galles/visualization/Algorithms.html" target="_blank">http://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></p>
+<a id="more"></a>
+
+<h3 id="Basics">Basics</h3>
+<ul>
+<li><p>Stack: Array Implementation： 数组从前往后插入，从后往前删除，用 top 指针指示栈顶（待插入位置）。</p>
+</li>
+<li><p>Stack: Linked List Implementation Top： 指针指向非空的链头元素，每次插入都从 top指向的链头位置插入，删除也是从链头。</p>
+</li>
+<li><p>Queues: Array Implementation： 数组，head 指向队首元素（在左边），tail 指向队尾元素后面的待插入位置（在右边），插入元素在 tail 处，删除元素在 head 处，两个指针都是从左往右走。</p>
+</li>
+<li><p>Queues: Linked List Implementation： head 指向队首元素（在左边），tail 指向队尾元素（在右边），从 tail 插入，从 head 删除。</p>
+</li>
+</ul>
+<h3 id="Recursion">Recursion</h3>
+<ul>
+<li><p>Factorial： 求 n 的阶乘。函数if 分支给出分解终止条件；else 分支给出分解函数（自调用）和回溯（整合）的递推式。用 Python 写的。简单、经典。</p>
+</li>
+<li><p>Reversing a String： 翻转字符串。过程同上，关键是分解方案。</p>
+</li>
+<li><p>N-Queens Problem： n 阶皇后问题：给出 n*n 的棋盘，放上 n 个皇后，使得任意两个横着竖着斜着都不相邻。这个问题之所以用到递归，是因为在试探性（确定性试探，有固定顺序）地放置过程中，如果走入死胡同就需要回溯，倒退到之前的某一步。本质上是图的深度优先搜索策略。Python 代码有点复杂，需要研究并练习。</p>
+</li>
+</ul>
+<h3 id="Indexing">Indexing</h3>
+<ul>
+<li><p>Binary Search Trees： 二叉查找树，简单好用。对于每一个节点，左子树任意节点都比他小，右大。中序遍历是一个升序序列。要会插入、删除和查找操作。复杂度为 O(h)。</p>
+</li>
+<li><p>AVL Trees (Balanced binary search trees)： 平衡二叉树，首先是二叉查找树，然后满足平衡条件。平衡就是说任意节点的左右子树深度不得超过1，否则就需要旋转变换。这里最重要的知识点就是在插入、删除时，不满足条件时需要进行旋转操作。有三种形式：左旋、右旋、双旋。插入和删除时的旋转是不同的。平衡，保证了树的查找深度可以更小。</p>
+</li>
+<li><p>Red-Black Trees： 红黑树，首先也是二叉查找树。然后根据一些规则，保证从跟节点，走到每个叶子节点，经过的黑色节点数相通。这也是保证「平衡」和较小深度的一种方法。<br>红黑树五个性质：1. 只有红黑。2. 根黑。 3. 叶（NULL）黑。 4. 红点黑儿子。5. 条条大路同黑数。<br>插入过程中，新插入的节点N总是红色的。然后根据其父亲节点P和叔父节点U的情况，进行适当的旋转和变色：P 红 N 红，右右，单旋；P 红 N 红，右左，双旋；P 红 U 红 N 红，黑色下沉一级。<br>删除时，先找到替换节点，直接替换，如果不满足结构，则调整。</p>
+</li>
+<li><p>Splay Trees： 伸展树，除了二叉查找树的性质，最新访问的节点总是调整到根节点处。这是基于查找的时间和空间局部性原理，可用于 cache。那么，关键之处就在调整了。三种：<br>zig-step: p为 root，只需简单旋转。<br>zig-zig step：有 g p n，且 p n 都是左或都是右，那么，先旋 g p，再旋 n。<br>zig-zag step: 有 g p n，且 p n 不同为左或右，那么先 n p，再 g。</p>
+</li>
+<li><p>Open Hash Tables (Closed Addressing)： 同一个位置上，用链表链接多个节点。对于 strings 的 hash，如’hello’，先32位0与’o’的 ascii 求和；结果左移四位，用0补齐；左数11-14位，与’0000’异或；结果与’l’的 ascii 求和…最后的结果，求出10进制，然后hash 到某位置。</p>
+</li>
+<li><p>Closed Hash Tables (Open Addressing)： 区别于上面那个，某位置被占后，不可再添加新的元素，应该用再探测法找到其他位置。再探测法包括：线性探测（依次往后找空位），二次探测（1，4，9…）和再 hash（用 hash2）。</p>
+</li>
+<li><p>Closed Hash Tables, using buckets： 每连续三个位置为一组（bucket），编号。hash 时，先 hash 到对应的组，如果第一个被占，则用第二个，否则第三个；如果三个都已经被占，则用最后面的额外 overflow 区。</p>
+</li>
+<li><p>B Trees： 就是有些书上说的 B-树，英文是 B-tree，是多路查找树，也是平衡树，用于磁盘之类的存储结构。B 树在数据结构一书中是着重学习过的，主要知识点是 m 阶B 树的性质、插入后的分裂操作和删除后的合并操作。</p>
+</li>
+<li><p>B+ Trees： 跟 B 树挺像，但有些不同：每层包括所有元素，每层的节点之间有链表链接，有更好的索引性能。在数据结构学习中，这种结构不是重点。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/机器学习/">机器学习</a>
+  </div>
+
+        
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=3326447" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    <a href="/2014/01/06/dsv-notes-2/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2014/01/02/li-dai-jing-ji-bian-ge-de-shi-3/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"zippera"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:zipperary.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/English/">English</a><small>2</small></li>
+  
+    <li><a href="/categories/IT杂谈/">IT杂谈</a><small>25</small></li>
+  
+    <li><a href="/categories/Mac/">Mac</a><small>5</small></li>
+  
+    <li><a href="/categories/Ruby/">Ruby</a><small>2</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>19</small></li>
+  
+    <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>15</small></li>
+  
+    <li><a href="/categories/人物/">人物</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>4</small></li>
+  
+    <li><a href="/categories/思维记忆/">思维记忆</a><small>1</small></li>
+  
+    <li><a href="/categories/推荐/">推荐</a><small>1</small></li>
+  
+    <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
+  
+    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+  
+    <li><a href="/categories/电影/">电影</a><small>27</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>32</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">简介</h3>
+<ul class="entry">
+<li>本体：赵伟</li>
+<li>二次元：zippera | moxie</li>
+<li>现状：帝都CS在读研究生</li>
+<li>想交友的朋友请<a href="http://zipperary.com/about">联系我</a>！</li>
+<li>QQ 号：763987114</li>
+<font color="red">Hexo 交流群：287306637</font>
+</ul>
+</div>
+
+
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1586279270&verifier=0c2cdcf8&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><section>
+Theme of <a href="https://github.com/hexojs/hexo-theme-light">Light</a>, Improved by <a href="/">zippera</a> 
+</section>
+<div class="clearfix"></div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
+
+
+<a href="https://github.com/zippera" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png" alt="Fork me on GitHub"></a>
