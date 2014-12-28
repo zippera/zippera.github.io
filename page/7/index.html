@@ -219,6 +219,65 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2014-05-08T08:10:29.000Z"><a href="/2014/05/08/ali-data-mining/">5月 8 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/05/08/ali-data-mining/">阿里数据挖掘</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>前段时间阿里巴巴组织了一个大数据的竞赛，全国高校积极响应，报名者、参与者、提交者众多，最好成绩也一直在刷新当中。初赛选出 Top500 进入复赛，其他人就炮灰了。</p>
+<p>虽然是搞图像的，但念在未来图像不太好就业，而大数据是现在及未来的热门，正巧在修习一门《数据挖掘》课程，就把阿里这个题目作为大作业的题目了。</p>
+<h3 id="题目介绍">题目介绍</h3>
+<p>题目大意是这样的：</p>
+<blockquote>
+<p>给定 4.15-7.15 这四个月的用户数据作为训练数据，大概18万条。然后预测下一个月哪些用户会购买哪些品牌。数据提交到阿里的竞赛平台，阿里会给出准确率、召回率和 F1值。</p>
+</blockquote>
+<p>数据的说明如图：</p>
+<p><img src="http://ww4.sinaimg.cn/large/5e8cb366jw1eg6xzalotrj20j805jjs2.jpg" alt=""></p>
+<p>准确率、召回率就不解释了，大多数预测性的实验都以此作为评价指标。阿里用这两个值计算一个综合的评价指标 F1 作为排名依据。</p>
+<p><img src="http://ww1.sinaimg.cn/large/5e8cb366jw1eg6y25tsnij204601jt8j.jpg" alt=""></p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/05/08/ali-data-mining/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2014-05-07T12:16:22.000Z"><a href="/2014/05/07/motive-of-power/">5月 7 2014</a></time>
       
       
@@ -357,85 +416,6 @@
 
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2014-04-21T02:22:44.000Z"><a href="/2014/04/21/js-callback/">4月 21 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/04/21/js-callback/">理解 javascript 回调函数</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>最近在看 express,满眼看去，到处是以函数作为参数的回调函数的使用。如果这个概念理解不了，nodejs、express 的代码就会看得一塌糊涂。比如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>app.use(<span class="function"><span class="keyword">function</span><span class="params">(req, res, next)</span> {</span>
-    <span class="keyword">var</span> err = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Not Found'</span>);
-    err.status = <span class="number">404</span>;
-    next(err);
-});
-</pre></td></tr></table></figure>
-
-<p><code>app</code>是对象，<code>use</code>是方法，方法的参数是一个带参的匿名函数，函数体直接在后面给出了。这段代码怎么理解呢？我们先来了解<em>回调函数</em>这个概念。</p>
-<p>首先要了解，在 js 中，函数也是对象，可以赋值给变量，可以作为参数放在函数的参数列表中。比如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="keyword">var</span> doSomething = <span class="function"><span class="keyword">function</span><span class="params">(a,b)</span>
-{</span>
-	<span class="keyword">return</span> a + b;
-}
-</pre></td></tr></table></figure>
-
-<p>这段代码的意思是定义一个匿名函数，这个匿名函数除了没有名字之外，其他跟普通的函数没有什么两样。然后把匿名函数赋值给变量<code>doSomething</code>。接下来我们调用：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>console.log(doSomething(<span class="number">2</span>,<span class="number">3</span>));
-</pre></td></tr></table></figure>
-
-<p>这样会输出<code>5</code>。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2014/04/21/js-callback/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -487,7 +467,7 @@
   
     <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
   
-    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+    <li><a href="/categories/生活/">生活</a><small>54</small></li>
   
     <li><a href="/categories/电影/">电影</a><small>27</small></li>
   

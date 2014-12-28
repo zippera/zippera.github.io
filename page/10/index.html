@@ -219,6 +219,56 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2014-03-17T15:26:11.000Z"><a href="/2014/03/17/writting-on/">3月 17 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/17/writting-on/">吃着火锅唱着歌，博客不停歇</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>昨天跟 Ada 去「3W」coffee 参加「老池老友记」，一个技术交流会，主角是 Mac 君池建强，领衔配角是 Fenng、小道消息冯大辉，绿叶配角有三表和道哥。道哥就是写了《白帽子讲网络安全》的那个道哥，少年班出身，天才，帅哥，口齿伶俐，为人热肠。哦，忘了介绍主角了，不好意思。</p>
+<p>池建强以 Mac 君著称，用 Mac 的 IT 从业者几乎不会不知道他吧，他的微信公众号是 Mactalk。插播一句，这几位嘉宾都是自媒体，冯大辉有「小道消息」，三表有「三表龙门阵」，道哥有「道哥黑板报」，各位可斟酌关注。这次交流会的主题是科技与写作，背后涌动的经济因素是老池要在北京签收推销他的这本《人生元编程》。我也是 Mac 用户，从老池那里有过受益，follow 过他的 mac tips。后来发现 google 更好使，就把老池挪做他用了，什么用呢，微信听众。老池给我的感觉是，每一篇文章你都能发现机智的地方，在我眼里是有趣的文章，在我关注的微信公众号中，除了「北大清华讲座」，对老池的关注度是最高的。同样作为一个业余开外的写着，十分欣赏老池的文字，他的这次写作交流会，更不可不参加了。老池在台上讲了讲对于写作的感想，比如为什么写，怎样写。听在我的耳朵里，最后留下的一句呐喊是来自我的内心的：「我要继续写！」。因此，刚泡了脚，吃了柚子，在此畅聊。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/17/writting-on/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2014-03-09T08:34:22.000Z"><a href="/2014/03/09/ba-wang-bie-ji/">3月 9 2014</a></time>
       
       
@@ -408,66 +458,6 @@ Undefined symbols for architecture x86_64:
 
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2014-02-23T02:37:01.000Z"><a href="/2014/02/23/dsv-notes-3/">2月 23 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/02/23/dsv-notes-3/">数据结构与算法笔记：三（大结局）</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><a href="http://zipperary.com/2014/01/04/dsv-notes/">数据结构与算法笔记：一 | Zippera’s blog</a></p>
-<p><a href="http://zipperary.com/2014/01/06/dsv-notes-2/">数据结构与算法笔记：二 | Zippera’s blog</a></p>
-<p><a href="http://zipperary.com/2014/02/23/dsv-notes-3/">数据结构与算法笔记：三（大结局） | Zippera’s blog</a></p>
-<hr>
-<h1 id="Heap-like_Data_Structures">Heap-like Data Structures</h1>
-<ul>
-<li><p>Heaps：小顶堆（二叉树，完全树），每个节点都比它的左右子树小。按照层级从左到右插入节点，然后自下向上调整大小。删除最小值的时候，直接删除根节点（一直是最小的），然后把最后一个节点移到根节点，然后自顶向下调整大小。若给出一个已经建立好的完全树，想调整为堆，则需要自底向上、从右到左地逐层调整，调整时还需要考虑子树是否不再满足堆条件，if so，自顶向下调整。由于堆是一个按照层次编号的完全树，所以用一个数组作为数据结构。操作堆就是操作数组。</p>
-</li>
-<li><p>Binomial Queues：二项队列，也叫Binomial heap，是一种形状很有特点的树。首先要知道什么是二项树：如图为四个不同的二项树，其规律为：度数为k的二项树有一个根结点，根结点下有k个子女，每个子女分别是度数分别为k-1,k-2,…,2,1,0的二项树的根。度数为k的二项树共有2^{k}个结点，高度为k。在深度d处有<code>{\tbinom  nd}</code>（二项式系数）个结点。二项堆自然就是满足节点相对大小关系的二项树。二项堆的插入很简单，只需要新建一个节点，并合并。合并的对象只能是两个度相同的二项堆：比较二个根结点关键字的大小，其中含小关键字的结点成为结果树的根结点，另一棵树则变成结果树的子树。删除最小的节点就是删除根节点，根节点下的几个子树全部分开。二项堆在各类操作中时间复杂度都为O(logn)，可以说性能很好。其存储结构一般为链表。</p>
-</li>
-</ul>
-<p><img src="http://ww2.sinaimg.cn/large/5e8cb366jw1edr9eqj7s2j20k009xgmb.jpg" alt=""></p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2014/02/23/dsv-notes-3/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -519,7 +509,7 @@ Undefined symbols for architecture x86_64:
   
     <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
   
-    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+    <li><a href="/categories/生活/">生活</a><small>54</small></li>
   
     <li><a href="/categories/电影/">电影</a><small>27</small></li>
   

@@ -219,6 +219,86 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-06-01T23:17:28.000Z"><a href="/2013/06/02/hexo-guide-5/">6月 2 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/02/hexo-guide-5/">hexo系列教程：（五）hexo博客的优化技巧续</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>继续介绍hexo博客的优化和使用。</p>
+<h3 id="添加RSS">添加RSS</h3>
+<p>hexo提供了RSS的生成插件，需要手动安装和设置。步骤如下：</p>
+<ol>
+<li>安装RSS插件到本地：<code>npm install hexo-generator-feed</code></li>
+<li>开启RSS功能：编辑<code>hexo/_config.yml</code>，添加如下代码：</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>plugins:
+<span class="subst">-</span> hexo<span class="attribute">-generator</span><span class="attribute">-feed</span>
+</pre></td></tr></table></figure>
+
+<ol>
+<li>在站点添加链接：<br>在<code>themes/light/_config.yml</code>中，编辑 <code>rss: /atom.xml</code><br>在<code>themes/light/layout/_partial/header.ejs</code>中，<code>&lt;ul&gt;&lt;/ul&gt;</code>之间，添加一样代码<code>&lt;li&gt; &lt;a href=&quot;/atom.xml&quot;&gt;RSS&lt;/a&gt; &lt;/li&gt;</code></li>
+</ol>
+<h3 id="添加sitemap">添加sitemap</h3>
+<p>同样的，我们使用hexo提供的插件，方法与添加RSS类似。</p>
+<ol>
+<li>安装sitemap到本地：<code>npm install hexo-generator-sitemap</code></li>
+<li>开启sitemap功能：编辑<code>hexo/_config.yml</code>，添加如下代码：</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>plugins:
+<span class="subst">-</span> hexo<span class="attribute">-generator</span><span class="attribute">-sitemap</span>
+</pre></td></tr></table></figure>
+
+<ol>
+<li>访问<code>zipperary/sitemap.xml</code>即可看到站点地图。不过，sitemap的初衷是给搜索引擎看的，为了提高搜索引擎对自己站点的收录效果，我们最好手动到google和百度等搜索引擎提交sitemap.xml。</li>
+</ol>
+<h3 id="设置百度统计、Google_Analytics">设置百度统计、Google Analytics</h3>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/06/02/hexo-guide-5/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-06-01T13:33:33.000Z"><a href="/2013/06/01/lost-in-novels/">6月 1 2013</a></time>
       
       
@@ -408,56 +488,6 @@
 
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-29T09:28:53.000Z"><a href="/2013/05/29/hexo-guide-3/">5月 29 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/29/hexo-guide-3/">hexo系列教程：（三）hexo博客的配置、使用</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>在<a href="http://zipperary.com/2013/05/28/hexo-guide-2/">上一节</a>中，我们在本地和github搭建起了自己的hexo博客站点，但是还未发表过文章，站点的配置还是原来的默认值。在本节，我们来进行个性化的设置，将站点打造成自己的，同时介绍下怎么撰文和发表。</p>
-<p>站点配置用到两个文件，一个是对整站的配置<code>H:\hexo\_config.yml</code>，另一个是对主题的配置<code>H:\hexo\themes\light_config.yml</code>，我们来分别介绍。</p>
-<p><em>H:\hexo\ _config.yml</em><br>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/05/29/hexo-guide-3/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -509,7 +539,7 @@
   
     <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
   
-    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+    <li><a href="/categories/生活/">生活</a><small>54</small></li>
   
     <li><a href="/categories/电影/">电影</a><small>27</small></li>
   

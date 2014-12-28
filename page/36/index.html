@@ -219,6 +219,86 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-08-12T05:37:42.000Z"><a href="/2013/08/12/traverse-in-python/">8月 12 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/08/12/traverse-in-python/">python中文件遍历的几种方法</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>今天写一个在windows下批量修改文件名的python脚本，用到文件的遍历。用python进行文件遍历有多种方法，这里列举并说明一下。</p>
+<h3 id="os-path-walk()">os.path.walk()</h3>
+<p>这是一个传统的用法。</p>
+<p>walk(root,callable,args)方法有三个参数：要遍历的目录，回调函数，回调函数的参数（元组形式）。</p>
+<p>调用的过程是遍历目录下的文件或目录，每遍历一个目录，调用回调函数，并把args作为参数传递给回调函数。</p>
+<p>回调函数定义时也有三个参数，比如示例中的func中的三个参数，分别为walk传来的参数、目录的路径、目录下的文件列表（只有文件名，不是完整路径）。请看示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="keyword">import</span> os
+s = os.sep	<span class="comment">#根据unix或win，s为\或/</span>
+root = <span class="string">"d:"</span> + s + <span class="string">"ll"</span> + s	<span class="comment">#要遍历的目录</span>
+
+<span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(args,dire,fis)</span>:</span>	<span class="comment">#回调函数的定义</span>
+    <span class="keyword">for</span> f <span class="keyword">in</span> fis:
+        fname = os.path.splitext(f)		<span class="comment">#分割文件名为名字和扩展名的二元组</span>
+        new = fname[<span class="number">0</span>] + <span class="string">'b'</span> + fname[<span class="number">1</span>]		<span class="comment">#改名字</span>
+        os.rename(os.path.join(dire,f),os.path.join(dire,new))	<span class="comment">#重命名</span>
+
+os.path.walk(root,func,())	<span class="comment">#遍历</span>
+</pre></td></tr></table></figure>
+
+<p>这种方法在使用时有个问题，不能递归遍历下一层（这点我还不确定，欢迎指正）。</p>
+<p>python的高级版本中加入了os.walk()，比这个好用。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/08/12/traverse-in-python/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-08-11T12:04:29.000Z"><a href="/2013/08/11/learn-and-tired/">8月 11 2013</a></time>
       
       
@@ -350,56 +430,6 @@
 
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-08-08T14:14:03.000Z"><a href="/2013/08/08/reading-docs/">8月 8 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/08/08/reading-docs/">关于阅读英文文档的一点想法</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>学习编程免不了阅读英文文档，每种编程技术都会有一个官方文档，这是每个技术人员都要学会使用的东西，既全面又正式。</p>
-<p>早前学习python的时候，看了《Learn Python the Hard Way》，虽然看完了，但不太爽，个人不太喜欢这种散漫式的教程，而是偏喜欢中国教科书那种归纳好的形式。这几天开始狠心踏实地学python，计划阅读官方的原始Tutorial和标准库参考。找到了一个<a href="https://docspy3zh.readthedocs.org/en/latest/tutorial/index.html" target="_blank">翻译文档</a>，入门教程部分已经翻译完毕，标准参考库基本还是原封未动。我规定自己每天看一两章中文版的入门教程和一两章英文版的标准参考库。可是看过之后，我感觉这种方式不太合适。中文版本的翻译质量堪忧，很多语句都不通顺，看起来比较费劲，而且由于官方文档的正式特点，看起来非常枯燥。英文的参考文档，由于本来就对很多概念不理解，文档中又频繁遇到这样的术语，这样的话，虽然看过去了，但理解的程度也不深。这个方法不好使。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/08/08/reading-docs/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -451,7 +481,7 @@
   
     <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
   
-    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+    <li><a href="/categories/生活/">生活</a><small>54</small></li>
   
     <li><a href="/categories/电影/">电影</a><small>27</small></li>
   

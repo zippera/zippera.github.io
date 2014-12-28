@@ -219,6 +219,66 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2014-02-23T02:37:01.000Z"><a href="/2014/02/23/dsv-notes-3/">2月 23 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/02/23/dsv-notes-3/">数据结构与算法笔记：三（大结局）</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="http://zipperary.com/2014/01/04/dsv-notes/">数据结构与算法笔记：一 | Zippera’s blog</a></p>
+<p><a href="http://zipperary.com/2014/01/06/dsv-notes-2/">数据结构与算法笔记：二 | Zippera’s blog</a></p>
+<p><a href="http://zipperary.com/2014/02/23/dsv-notes-3/">数据结构与算法笔记：三（大结局） | Zippera’s blog</a></p>
+<hr>
+<h1 id="Heap-like_Data_Structures">Heap-like Data Structures</h1>
+<ul>
+<li><p>Heaps：小顶堆（二叉树，完全树），每个节点都比它的左右子树小。按照层级从左到右插入节点，然后自下向上调整大小。删除最小值的时候，直接删除根节点（一直是最小的），然后把最后一个节点移到根节点，然后自顶向下调整大小。若给出一个已经建立好的完全树，想调整为堆，则需要自底向上、从右到左地逐层调整，调整时还需要考虑子树是否不再满足堆条件，if so，自顶向下调整。由于堆是一个按照层次编号的完全树，所以用一个数组作为数据结构。操作堆就是操作数组。</p>
+</li>
+<li><p>Binomial Queues：二项队列，也叫Binomial heap，是一种形状很有特点的树。首先要知道什么是二项树：如图为四个不同的二项树，其规律为：度数为k的二项树有一个根结点，根结点下有k个子女，每个子女分别是度数分别为k-1,k-2,…,2,1,0的二项树的根。度数为k的二项树共有2^{k}个结点，高度为k。在深度d处有<code>{\tbinom  nd}</code>（二项式系数）个结点。二项堆自然就是满足节点相对大小关系的二项树。二项堆的插入很简单，只需要新建一个节点，并合并。合并的对象只能是两个度相同的二项堆：比较二个根结点关键字的大小，其中含小关键字的结点成为结果树的根结点，另一棵树则变成结果树的子树。删除最小的节点就是删除根节点，根节点下的几个子树全部分开。二项堆在各类操作中时间复杂度都为O(logn)，可以说性能很好。其存储结构一般为链表。</p>
+</li>
+</ul>
+<p><img src="http://ww2.sinaimg.cn/large/5e8cb366jw1edr9eqj7s2j20k009xgmb.jpg" alt=""></p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/02/23/dsv-notes-3/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2014-02-22T11:27:25.000Z"><a href="/2014/02/22/sampling-methods/">2月 22 2014</a></time>
       
       
@@ -391,57 +451,6 @@
 
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2014-02-01T00:29:13.000Z"><a href="/2014/02/01/blade/">2月 1 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/02/01/blade/">《刀锋战士》三部曲</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>《刀锋战士》是一部经典的吸血鬼电影，与很多吸血鬼题材的影片不同，这个系列的正邪双方不再是吸血鬼与狼人，而是吸血鬼与吸血鬼的变种 Blade。</p>
-<p>Blade 的母亲在怀孕期间被吸血鬼咬伤感染，Blade 在娘胎中也受到感染，基因发生奇特突变，成了一个半人半吸血鬼的全新变种。他拥有吸血鬼的力量，如速度、力量、不死不老、夜视，同时克服了吸血鬼的弱点，如怕光。但是，对于血液的依赖他始终无法摆脱。Blade 自小跟着 Whistler 长大，后者帮 Blade 制造了强大的武器、人造血清，两人合力捕杀吸血鬼。</p>
-<p>第一部：反派是 Frost，一个有野心的年轻吸血鬼。与墨守陈规的吸血鬼议会不同，他一直希望这个种族克服吸血鬼固有的弱点从而变得更加强大，并积极寻找方案。他最终找到的方案是用 Blade 的血，联合各位长老，进行血祭，召唤出血王，这样他就会变得无比强大。可惜最后功败垂成，Blade 被偷偷救出，二人决战，最终 Blade 将一管强大的药素注入 Frost 体内，后者身体膨胀，最后爆裂而死。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2014/02/01/blade/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -493,7 +502,7 @@
   
     <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
   
-    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+    <li><a href="/categories/生活/">生活</a><small>54</small></li>
   
     <li><a href="/categories/电影/">电影</a><small>27</small></li>
   

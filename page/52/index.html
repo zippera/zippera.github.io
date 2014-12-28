@@ -219,6 +219,93 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-06-10T09:30:55.000Z"><a href="/2013/06/10/k-means-algorithm/">6月 10 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/10/k-means-algorithm/">k-means algorithm</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>最近在学习『机器学习』这门课，使用的斯坦福大学Andrew Ng在<strong>Coursera</strong>的在线课程。机器学习主要包括<strong>有监督学习</strong>和<strong>无监督学习</strong>。我的学习进度到了后者。今天学习的是无监督学习中最常见、最普遍、最基础的一类问题——<strong>clustering</strong>。</p>
+<p><strong>首先说说什么是有监督学习和无监督学习。</strong>  </p>
+<p>给出一个数据集合，如果对于集合中的每个数据，不仅有该数据的特征值向量，而且每个数据都进行了类型标记，我们把这个集合叫做训练集（training set）。然后我们通过一些算法进行学习。学习的目的是，找到一个判别函数，给定一个新的数据，这个判别函数能输出这个数据的所属分类。找到这样的判别函数的过程，就叫做有监督学习。这里的监督，指的是训练集中的每个数据都进行了类别标记。  </p>
+<p>与此相反，对于无监督学习，每个数据并没有进行类别标记，我们只知道它的特征向量，并不知道所属类别。</p>
+<p>所谓<strong>clustering（聚类）</strong>，就是给定一个数据集合，集合大小为m，每个数据都有特征向量x，我们通过某种算法，将这批数据瓜分成k组，每个数据分别属于某一组。</p>
+<p>下面直观地说明一下什么是聚类问题，以及聚类的流程。</p>
+<p><img src="/img/kmeans.png" alt=""></p>
+<p>左上角的图中，绿点表示我们的数据集合，横、纵坐标分别是数据的特征值向量分量。例如，数据表示衬衫的尺寸（L/M/S），横、纵坐标分别表示height和weight。我们的目的是将这批数据分为k组（比如3组，L/M/S）。</p>
+<p><strong>聚类的过程</strong>如下：</p>
+<ol>
+<li>随机选择两个location，作为<strong>class centroid</strong>(种子)。如左上图中蓝色和红色x。</li>
+<li>对于数据集合中的每个数据点，分别计算到两个种子的距离，并互相比较，如果距离蓝色种子近则标记为蓝色，否则标记为红色。如右上图。这个过程叫class assignment。</li>
+<li>计算每一临时组的中心点（average），并作为这一组新的种子。如左下图，种子移动到了中心点。</li>
+<li>重复2、3，直到种子不再变动。</li>
+</ol>
+<p>在<strong>有监督学习</strong>中，有个<strong>cost function</strong>，用J表示。学习的过程，就是不断调整参数，使得J最小。在<strong>无监督学习</strong>中，也有类似的cost function，在k-means中，我们把它叫做<strong>distortion cost function</strong>。如图：</p>
+<p><img src="/img/opob.png" alt=""></p>
+<p>式子右边，表示的是每个点到它所属分组的种子的距离平均值，也就是要最小化这个距离。这里的参数，就是种子的位置和每个数据所属分组。</p>
+<p><strong>k-means算法的几个问题</strong></p>
+<ol>
+<li><p>如何选择k的大小？</p>
+<p>Andrew Ng说并没有最好的办法。但有以下3个方法可以考虑：</p>
+<ul>
+<li>观察数据分布大致情况，manually set the number k.</li>
+<li><p>Elbow method。如图：<br><img src="/img/elbow.png" alt=""><br>我们对k取不用的值，分别计算相应的J（cost function），绘制图像，转弯最急的那点就是elbow（类似人的胳膊肘）。缺点是，有些根本找不到明确的elbow点，如第二个图。</p>
+</li>
+<li><p>purpose。我们进行聚类，一般都是要服务于某个目的或用途。因此，可以根据具体的用途确定k的大小。比如对于衬衫，是分为3类好还是分为5类好，要看哪一个能更好地服务于我们的应用。</p>
+</li>
+</ul>
+</li>
+<li><p>如何确定k个种子的初始位置？</p>
+<p>Ng教授给出以下建议：</p>
+<ol>
+<li>K &lt; m，组数要比数据集合的大小小。</li>
+<li>从数据集合中，随机选取k个。</li>
+<li>这k个数据就是初始的k个种子。</li>
+</ol>
+<p>由于种子的初始位置对于聚类结果影响很大，不同的初试位置聚类的效果好坏也不同。我们可以进行多次聚类，每次选择不同的初始种子，然后选择J最小的那次聚类。</p>
+</li>
+</ol>
+<p>k-means算法的演示地址：<a href="http://home.deib.polimi.it/matteucc/Clustering/tutorial_html/AppletKM.html" target="_blank">K-means - Interactive demo</a></p>
+<hr>
+<p>爱打卡-100days-第14天-1111</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-06-09T02:26:09.000Z"><a href="/2013/06/09/xiao-li-fei-dao/">6月 9 2013</a></time>
       
       
@@ -360,100 +447,6 @@
 
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-06-06T00:03:21.000Z"><a href="/2013/06/06/markdown-extras/">6月 6 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/06/06/markdown-extras/">markdown 番外篇</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>开博后写过一篇<a href="http://zipperary.com/2013/05/22/introduction-to-markdown/">Introduction to markdown</a>，给出了几个介绍markdown的教程。这几个教程或是简明易懂，或是全面规范，可以作为很好的入门教材或查阅手册。</p>
-<p>在实际的使用当中，我发现有些用法不是这些教程里能够找到的，或者教程里没有进行应有的强调导致使用时容易出错。本文就对这样的问题进行汇总，并会不定期更新。</p>
-<ol>
-<li><p>删除线。</p>
-<p>方法：在要划删除线的文本前后添加<code>~~</code></p>
-<p>示例：<code>~~看《冰与火之歌》~~</code></p>
-<p>解析为： <del>看冰与火之歌</del></p>
-</li>
-<li><p>代码块中html代码显示不正常，<code>&lt;、&gt;</code>被解析为<code>&amp;gt; &amp;lt;</code></p>
-<p>原因：markdown是一个语法规范，具体的解析可以使用不同的程序，而不同程序对规范的完成度也未必相同。hexo 所用的 marked 解析程序，无法对代码块中<code>&lt;、&gt;</code>做正确解析，需要人工矫正。</p>
-<p>方法：标明语言类型html</p>
-<p>示例： </p>
-<p><img src="/img/kk.png" alt=""></p>
-<p>解析为：</p>
-<p><img src="/img/kkk.png" alt=""></p>
-</li>
-<li><p>有序列表。</p>
-<p>问题：有序列表每项中包含若干段落时，这几个列表项得不到正确解析。</p>
-<p>方法：在每个列表项中各段落之前加一个空格。</p>
-<p>示例：</p>
-</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre><span class="bullet">1. </span>foo
-
- foo
- 
-<span class="bullet">2. </span>bar
-
- bar
-</pre></td></tr></table></figure>
-
-
-<p> 解析为：</p>
-<ol>
-<li><p>foo</p>
-<p>foo</p>
-</li>
-<li><p>bar</p>
-<p>bar</p>
-</li>
-</ol>
-<hr>
-<p>爱打卡-100days-第10天-1111</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -505,7 +498,7 @@
   
     <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
   
-    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+    <li><a href="/categories/生活/">生活</a><small>54</small></li>
   
     <li><a href="/categories/电影/">电影</a><small>27</small></li>
   

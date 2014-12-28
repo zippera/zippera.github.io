@@ -219,6 +219,59 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2014-01-16T03:05:59.000Z"><a href="/2014/01/16/matrix-multiply-with-hadoop/">1月 16 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/01/16/matrix-multiply-with-hadoop/">理解 MapReduce</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>所谓大数据时代，大数据带来了巨大的好处，也带来了巨大的挑战，其中之一就是大数据的存储和计算。如新浪微博的巨大用户群，若想用矩阵存储用户之间的关系，矩阵的大小是惊人的，不仅传统的存储方式不再适用，在进行一些矩阵运算（如乘法）时更是无能为力了，这时候就需要我们的 MapReduce 上场啦。</p>
+<p>MapReduce 是 Google 提出的概念，由于论文中木有提到实现细节，大家只能根据论文所述理论自己实现了。其中最火的是当年雅虎牵头做的开源项目 Hadoop，目前已经得到了非常广泛的应用（如亚马逊、百度）。尽管有这么多顶尖人才在不断优化，但据说 Hadoop 的性能目前还不及 Google 的十分之一。Whatever，大家现在能用的只有 Hadoop 了，而且一般也够用了。</p>
+<p>MapReduce 本质是上很简单，就是把原始问题分解成易解的小问题，分发给不同的节点（computer）进行处理，再收集处理后的结果，汇总运算一下，得到最终结果。像极了人工智能中的 And/Or。原理虽简单，MapReduce 的最大贡献还是在于 Scalability,Fault-tolerance 以及对并发和分布式的管理。</p>
+<p>在 MapReduce 中，data（可以存储在文件系统，也可数据库） 被主节点计算机（master node） 分配给不同的子节点计算机(worker nodes)进行并行处理，这些 worker nodes 被称为 cluster 或 grid。</p>
+<p>下面结合一个矩阵乘法的例子进行说明。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/01/16/matrix-multiply-with-hadoop/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2014-01-14T08:19:15.000Z"><a href="/2014/01/14/entropy-and-classification/">1月 14 2014</a></time>
       
       
@@ -381,58 +434,6 @@
 
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2014-01-08T08:13:47.000Z"><a href="/2014/01/08/pr-mindmap/">1月 8 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/01/08/pr-mindmap/">模式识别课思维导图</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>这几天准备考试，没有额外时间学习其他东西，所以偷个懒，把今天做的模式识别课程的结构图拿出来分享一下。</p>
-<p>仅仅是结构图，没有细部信息。首先copy 课件，画出英文的导图，然后逐条翻译（小伙伴的要求）。最后小伙伴对此进行了校正和着色，对比之下，我的初稿太土鳖了。</p>
-<p>使用的软件的是 Mindjet MindManager14，导出为图片。</p>
-<p><img src="http://ww4.sinaimg.cn/large/5e8cb366jw1ecc7cdzpgej21kw1ri4d9.jpg" alt=""></p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2014/01/08/pr-mindmap/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -484,7 +485,7 @@
   
     <li><a href="/categories/机器学习/">机器学习</a><small>30</small></li>
   
-    <li><a href="/categories/生活/">生活</a><small>53</small></li>
+    <li><a href="/categories/生活/">生活</a><small>54</small></li>
   
     <li><a href="/categories/电影/">电影</a><small>27</small></li>
   
